@@ -26,10 +26,6 @@ const productSchema = new Schema({
     images: {
         type: Array
     },
-    createdDate: {
-        type: Date,
-        default: Date.now
-    },
     brand: {
         type: String,
         required: true
@@ -39,6 +35,10 @@ const productSchema = new Schema({
         required: true
     },
     productType: {
+        type: String,
+        required: true
+    },
+    productSubType: {
         type: String,
         required: true
     },
@@ -58,6 +58,8 @@ const productSchema = new Schema({
         type: String,
         required: true
     }
+  }, {
+    timestamps: true
   })
 
 export const Product = models.Product || model('Product', productSchema)

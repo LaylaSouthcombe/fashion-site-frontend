@@ -1,8 +1,15 @@
-export default function FeaturedProducts({products}) {
-    console.log(products)
+import FeaturedProductTile from "@/components/FeaturedProductTile"
+
+export default function FeaturedProducts({featuredProducts}) {
+    console.log(featuredProducts)
     return (
         <div>Featured products
-            <div>{products.name}</div>
+            {featuredProducts?.length > 0 ? 
+            featuredProducts.map((product, i) => (
+                <FeaturedProductTile key={i} {...product}/>
+            ))
+            : null}
+            {/* <div>{products.name}</div> */}
         </div>
     )
 }

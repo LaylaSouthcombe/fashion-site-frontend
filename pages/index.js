@@ -11,8 +11,8 @@ import Footer from "@/layout/Footer/Footer"
 import {Product} from "@/models/Product"
 import { mongooseConnect } from "@/lib/mongoose"
 
-export default function HomePage({products}) {
-  console.log(products)
+export default function HomePage({featuredProducts}) {
+  // console.log(featuredProducts)
   return (
     <div>
       <Header/>
@@ -20,7 +20,7 @@ export default function HomePage({products}) {
       <BrandsCarousel/>
       <CustomerExperience/>
       <CurratedPicks/>
-      <FeaturedProducts products={products}/>
+      <FeaturedProducts featuredProducts={featuredProducts}/>
       <BannerAd/>
       <NewsletterSubscribe/>
       <Footer/>
@@ -29,10 +29,14 @@ export default function HomePage({products}) {
 }
 
 export async function getServerSideProps() {
-  const featuredProductId = '644d4e13e87daf05bfe2effd'
+  // const productId = '644d4e13e87daf05bfe2effd'
   await mongooseConnect()
-  const products = await Product.findById(featuredProductId)
+  // const product = await Product.findById(productId)
+  const featuredProducts = await Product.find({}, null, {sort: {'_id': -1}, limit: 4})
   return {
-    props: {products: JSON.parse(JSON.stringify(products))}
+    props: {
+      featuredProducts: JSON.parse(JSON.stringify(featuredProducts)),
+      //product
+    }
   }
 }
