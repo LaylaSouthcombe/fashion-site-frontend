@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components"
-import HeaderCentre from "@/components/Header/HeaderCentre";
+import HeaderCentre from "@/layout/Header/HeaderCentre";
 
 const MainHeader = styled.header`
   background-color: #222;
