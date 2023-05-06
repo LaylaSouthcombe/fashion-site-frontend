@@ -71,6 +71,13 @@ export default function CheckoutPage() {
         addProduct(id)
     }
 
+    let total = 0
+
+    for(const productId of checkoutProducts){
+        const price = products.find(p => p._id === productId)?.price || 0
+        total += price
+    }
+
     return (
         <div>
             <Header/>
@@ -111,6 +118,11 @@ export default function CheckoutPage() {
                                             </td>
                                         </tr>
                                     ))}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{total}</td>
+                                    </tr>
                                 </tbody>
                             </CheckoutTable>
                         </Box>
