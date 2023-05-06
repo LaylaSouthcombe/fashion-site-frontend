@@ -4,13 +4,13 @@ export const CheckoutContext = createContext({})
 
 export function CheckoutContextProvider({children})  {
 
-    const ls = typeof window !== "undefined" ? localStorage : null
+    const ls = typeof window !== "undefined" ? window.localStorage : null
     
     const [checkoutProducts, setCheckoutProducts] = useState([])
     
     useEffect(() =>{
         if(checkoutProducts?.length > 0){
-            ls.setItem('checkout', JSON.stringify(checkoutProducts))
+            ls?.setItem('checkout', JSON.stringify(checkoutProducts))
         }
     }, [checkoutProducts])
 
