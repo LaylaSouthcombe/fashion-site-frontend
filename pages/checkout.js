@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import Header from "@/layout/Header/Header"
 import { CheckoutContext } from "@/components/CheckoutContext"
+import Input from "@/components/Input"
 import styled from "styled-components"
 import axios from "axios"
 
@@ -128,8 +129,8 @@ export default function CheckoutPage() {
                         </Box>
                         <Box>
                             <p>Order information</p>
-                            <input type="text" placeholder="address"/>
-                            <input type="text" placeholder="address 2"/>
+                            <Input type="text" placeholder="address"/>
+                            <Input type="text" placeholder="address 2"/>
                             <button>Continue to payment</button>
                         </Box>
                     </>
