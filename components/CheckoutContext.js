@@ -24,8 +24,20 @@ export function CheckoutContextProvider({children})  {
         setCheckoutProducts(prev => [...prev, productId])
     }
 
+    const removeProduct = (productId) => {
+        setCheckoutProducts(prev => {
+            const idPos = prev.indexOf(productId)
+            if(idPos !== -1) {
+                return prev.filter((value, i) => 
+                    i !== idPos
+                )
+            }
+            return prev
+        })
+    }
+
     return (
-        <CheckoutContext.Provider value={{checkoutProducts, setCheckoutProducts, addProduct}}>
+        <CheckoutContext.Provider value={{checkoutProducts, setCheckoutProducts, addProduct, removeProduct}}>
             {children}
         </CheckoutContext.Provider>
     )

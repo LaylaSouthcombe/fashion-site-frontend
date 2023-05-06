@@ -51,7 +51,7 @@ const CheckoutTable = styled.table`
 
 export default function CheckoutPage() {
 
-    const {checkoutProducts} = useContext(CheckoutContext)
+    const {checkoutProducts, addProduct, removeProduct} = useContext(CheckoutContext)
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -62,6 +62,14 @@ export default function CheckoutPage() {
                 })
         }
     },[checkoutProducts])
+
+    const lessOfThisProduct = (id) => {
+        removeProduct(id)
+    }
+
+    const moreOfThisProduct = (id) => {
+        addProduct(id)
+    }
 
     return (
         <div>
@@ -94,7 +102,9 @@ export default function CheckoutPage() {
                                                 {product.name}
                                             </ProductInfoCell>
                                             <td>
+                                                <button onClick={() => lessOfThisProduct(product._id)}>-</button>
                                                 {checkoutProducts.filter(id => id === product._id).length}
+                                                <button onClick={() => moreOfThisProduct(product._id)}>+</button>
                                             </td>
                                             <td>
                                                 {checkoutProducts.filter(id => id === product._id).length * product.price}
