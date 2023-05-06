@@ -18,6 +18,37 @@ const Box = styled.div`
     border-radius: 10px;
     padding: 30px;
 `
+
+const ProductInfoCell = styled.td`
+    img {
+        max-width: 150px;
+        max-height: 150px;
+    }
+`
+
+const ProductImageBox = styled.div`
+    max-width: 150px;
+    max-height: 150px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+`
+
+const CheckoutTable = styled.table`
+    width: 100%;
+    th {
+        text-align: left;
+        text-transform: uppercase;
+        color: #ccc;
+        font-weight: 600;
+        font-size: 0.7rem;
+    }
+    td {
+        border-top: 1px solid lightgrey;
+    }
+`
+
 export default function CheckoutPage() {
 
     const {checkoutProducts} = useContext(CheckoutContext)
@@ -45,7 +76,7 @@ export default function CheckoutPage() {
                     <>
                         <Box>
                             <div>Your basket</div>
-                            <table>
+                            <CheckoutTable>
                                 <thead>
                                     <tr>
                                         <th>Product</th>
@@ -56,19 +87,22 @@ export default function CheckoutPage() {
                                 <tbody>
                                     {products.map((product, i) => (
                                         <tr key={"product" + i}>
-                                            <td>
+                                            <ProductInfoCell>
+                                                <ProductImageBox>
+                                                    <img src={product.images[0]} alt="product image" />
+                                                </ProductImageBox>
                                                 {product.name}
-                                            </td>
+                                            </ProductInfoCell>
                                             <td>
                                                 {checkoutProducts.filter(id => id === product._id).length}
                                             </td>
                                             <td>
-                                                {product.price}
+                                                {checkoutProducts.filter(id => id === product._id).length * product.price}
                                             </td>
                                         </tr>
                                     ))}
                                 </tbody>
-                            </table>
+                            </CheckoutTable>
                         </Box>
                         <Box>
                             <p>Order information</p>
