@@ -2,7 +2,8 @@ import { CheckoutContextProvider } from "@/components/CheckoutContext"
 import {createGlobalStyle} from "styled-components"
 
 const GlobalStyles = createGlobalStyle`
-  body {
+  * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
   }

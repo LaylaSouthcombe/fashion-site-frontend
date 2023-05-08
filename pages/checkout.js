@@ -50,10 +50,24 @@ const CheckoutTable = styled.table`
     }
 `
 
+const CityHolder = styled.div`
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    justify-content: space-between;
+`
+
 export default function CheckoutPage() {
 
     const {checkoutProducts, addProduct, removeProduct} = useContext(CheckoutContext)
     const [products, setProducts] = useState([])
+
+    const [name, setName] = useState('')    
+    const [email, setEmail] = useState('')    
+    const [streetAddress, setStreetAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [postalCode, setPostalCode] = useState('')
+    const [country, setCountry] = useState('')
 
     useEffect(() => {
         if(checkoutProducts?.length > 0){
@@ -61,6 +75,8 @@ export default function CheckoutPage() {
                 .then(response => {
                     setProducts(response.data)
                 })
+        } else {
+            setProducts([])
         }
     },[checkoutProducts])
 
@@ -129,9 +145,44 @@ export default function CheckoutPage() {
                         </Box>
                         <Box>
                             <p>Order information</p>
-                            <Input type="text" placeholder="address"/>
-                            <Input type="text" placeholder="address 2"/>
-                            <button>Continue to payment</button>
+                            <form method="post" action="/api/payment">
+                                <Input type="text" 
+                                placeholder="Name" 
+                                value={name}
+                                name="name" 
+                                onChange={(e) => setName(e.target.value)}/>
+                                <Input type="text" 
+                                placeholder="Email" 
+                                value={email}
+                                name="email" 
+                                onChange={(e) => setEmail(e.target.value)}/>
+                                <Input type="text" 
+                                placeholder="Street address" 
+                                value={streetAddress}
+                                name="streetAddress" 
+                                onChange={(e) => setStreetAddress(e.target.value)}/>
+                                <CityHolder>
+                                    <Input type="text" 
+                                    placeholder="City" 
+                                    value={city}
+                                    name="city" 
+                                    onChange={(e) => setCity(e.target.value)}/>
+                                    <Input type="text" 
+                                    placeholder="Postal code" 
+                                    value={postalCode}
+                                    name="postalCode" 
+                                    onChange={(e) => setPostalCode(e.target.value)}/>
+                                </CityHolder>
+                                <Input type="text" 
+                                placeholder="Country" 
+                                value={country}
+                                name="country" 
+                                onChange={(e) => setCountry(e.target.value)}/>
+                                <button type="submit">Continue to payment</button>
+                                <input type="hidden"
+                                name="products" 
+                                value={checkoutProducts.join(',')}/>
+                            </form>
                         </Box>
                     </>
                     }
