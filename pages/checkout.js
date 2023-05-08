@@ -88,13 +88,34 @@ export default function CheckoutPage() {
         addProduct(id)
     }
 
+    const goToPayment = async () => {
+        const response = await axios.post('/api/payment', {
+            name,email,streetAddress,city,country,postalCode, checkoutProducts
+        })
+        if(response.data.url){
+            window.location = response.data.url
+        }
+    }
+
     let total = 0
 
     for(const productId of checkoutProducts){
         const price = products.find(p => p._id === productId)?.price || 0
         total += price
     }
-
+    if(window.location.href.includes('success')){
+        return(
+            <>
+                <Header/>
+                <ColumnsWrapper>
+                    <Box>
+                        <h1>Thanks for your order!</h1>
+                        <p>We will email you when your order is dispatched</p>
+                    </Box>
+                </ColumnsWrapper>
+            </>
+        )
+    }
     return (
         <div>
             <Header/>
@@ -145,7 +166,6 @@ export default function CheckoutPage() {
                         </Box>
                         <Box>
                             <p>Order information</p>
-                            <form method="post" action="/api/payment">
                                 <Input type="text" 
                                 placeholder="Name" 
                                 value={name}
@@ -178,11 +198,11 @@ export default function CheckoutPage() {
                                 value={country}
                                 name="country" 
                                 onChange={(e) => setCountry(e.target.value)}/>
-                                <button type="submit">Continue to payment</button>
+                                <button type="submit"
+                                onClick={goToPayment}>Continue to payment</button>
                                 <input type="hidden"
                                 name="products" 
                                 value={checkoutProducts.join(',')}/>
-                            </form>
                         </Box>
                     </>
                     }
