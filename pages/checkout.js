@@ -59,7 +59,7 @@ const CityHolder = styled.div`
 
 export default function CheckoutPage() {
 
-    const {checkoutProducts, addProduct, removeProduct} = useContext(CheckoutContext)
+    const {checkoutProducts, addProduct, removeProduct, clearCheckout} = useContext(CheckoutContext)
     const [products, setProducts] = useState([])
 
     const [name, setName] = useState('')    
@@ -68,6 +68,7 @@ export default function CheckoutPage() {
     const [city, setCity] = useState('')
     const [postalCode, setPostalCode] = useState('')
     const [country, setCountry] = useState('')
+    const [isSuccess, setIsSuccess] = useState(false)
 
     useEffect(() => {
         if(checkoutProducts?.length > 0){
@@ -79,6 +80,17 @@ export default function CheckoutPage() {
             setProducts([])
         }
     },[checkoutProducts])
+
+    useEffect(() => {
+        console.log('hi')
+        if(typeof window === 'undefined'){
+            return
+        }
+        if(window?.location.href.includes('success')){
+            setIsSuccess(true)
+            clearCheckout()
+        }
+    }, [])
 
     const lessOfThisProduct = (id) => {
         removeProduct(id)
@@ -103,7 +115,7 @@ export default function CheckoutPage() {
         const price = products.find(p => p._id === productId)?.price || 0
         total += price
     }
-    if(window.location.href.includes('success')){
+    if(isSuccess){
         return(
             <>
                 <Header/>

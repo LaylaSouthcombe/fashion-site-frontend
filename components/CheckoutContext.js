@@ -36,8 +36,13 @@ export function CheckoutContextProvider({children})  {
         })
     }
 
+    const clearCheckout = () => {
+        console.log('clearing checkout')
+        setCheckoutProducts([])
+    }
+
     return (
-        <CheckoutContext.Provider value={{checkoutProducts, setCheckoutProducts, addProduct, removeProduct}}>
+        <CheckoutContext.Provider value={{checkoutProducts, setCheckoutProducts, addProduct, removeProduct, clearCheckout}}>
             {children}
         </CheckoutContext.Provider>
     )
