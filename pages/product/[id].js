@@ -1,6 +1,7 @@
 import Header from "@/layout/Header/Header"
 import { mongooseConnect } from "@/lib/mongoose"
 import { Product } from "@/models/Product"
+import ProductImagesCarousel from "@/components/ProductImagesCarousel"
 
 export default function ProductPage({product}){
     console.log(product)
@@ -8,6 +9,7 @@ export default function ProductPage({product}){
         <>
             <Header/>
             <h1>{product.name}</h1>
+            <ProductImagesCarousel images={product.images}/>
         </>
     )
 }
