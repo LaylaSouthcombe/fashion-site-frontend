@@ -12,6 +12,7 @@ export default function ProductPage({product}){
             <p>{product.price}</p>
             <ProductImagesCarousel images={product.images}/>
             <p>{product.brand}</p>
+            <p>{product.productSummary}</p>
         </>
     )
 }
