@@ -14,6 +14,7 @@ export default function ProductPage({product}){
             <p>{product.brand}</p>
             <p>{product.productSummary}</p>
             <p>{product.name}</p>
+            <p>{product.name}</p>
         </>
     )
 }
