@@ -1,7 +1,7 @@
 import FeaturedProductTile from "@/components/FeaturedProductTile"
 
 export default function FeaturedProducts({featuredProducts}) {
-    console.log(featuredProducts)
+    // console.log(featuredProducts)
     return (
         <div>Featured products
             {featuredProducts?.length > 0 ? 

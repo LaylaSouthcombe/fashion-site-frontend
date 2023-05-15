@@ -39,6 +39,7 @@ export function CheckoutContextProvider({children})  {
     const clearCheckout = () => {
         console.log('clearing checkout')
         setCheckoutProducts([])
+        ls?.removeItem('checkout')
     }
 
     return (
