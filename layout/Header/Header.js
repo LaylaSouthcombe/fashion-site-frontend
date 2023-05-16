@@ -5,7 +5,8 @@ import { useContext } from "react";
 import { CheckoutContext } from "@/components/CheckoutContext";
 
 const MainHeader = styled.header`
-  background-color: #222;
+  background-color: white;
+  height: 20vh;
 `
 
 const Wrapper = styled.div`
@@ -23,12 +24,23 @@ const StyledNav = styled.nav`
     gap: 15px;
 `
 
+const CenteredDiv = styled.div`
+    text-align: center;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    background-color: black;
+`
+
 export default function Header() {
 
     const {checkoutProducts} = useContext(CheckoutContext)
 
     return (
         <MainHeader>
+                    <CenteredDiv>
+                        Sign up and GET 20% OFF for your first order
+                    </CenteredDiv>
             <HeaderCentre>
                 <Wrapper>
                     <div className="logo">Logo</div>
