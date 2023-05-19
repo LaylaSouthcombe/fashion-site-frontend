@@ -10,7 +10,6 @@ const HeroImageDiv = styled.div`
     img {
         width: 100%;
     }
-    background-color: black;
 `
 
 export default function HomeHero() {
