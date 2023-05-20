@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import adidas from '../images/brandIcons/adidas.png'
 import calvinKlein from '../images/brandIcons/calvinKlein.png'
-import chanel from '../images/brandIcons/chanel.png'
+import gucci from '../images/brandIcons/gucci.png'
 import essentials from '../images/brandIcons/essentials.png'
 import guess from '../images/brandIcons/guess.png'
 import northFace from '../images/brandIcons/northFace.png'
@@ -13,8 +13,8 @@ export default function BrandsBanner(){
     const brands = [
         { url: 'adidas', image: adidas},
         { url: 'calvin-klein', image: calvinKlein},
-        { url: 'chanel', image: chanel},
         { url: 'essentials', image: essentials},
+        { url: 'gucci', image: gucci},
         { url: 'guess', image: guess},
         { url: 'north-face', image: northFace},
         { url: 'palace', image: palace},
