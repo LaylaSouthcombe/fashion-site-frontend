@@ -25,6 +25,7 @@ export default function BrandsBanner(){
         width: 90%;
         margin: 40px auto;
     `
+
     const BrandTitle = styled.h3`
         padding: 10px 40px;
         font-weight: normal;
@@ -33,15 +34,22 @@ export default function BrandsBanner(){
 
     const BrandsGrid = styled.div`
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 25px;
         width: 100%;
-        padding: 20px;
+        padding: 10px 20px;
+
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(8, 1fr);
+            padding: 20px;
+        }
     `
 
     const BrandBox = styled.a`
         height: 50px;
         width: 80%;
         margin: 0 auto;
+        padding: 5px;
         display: flex;
         justify-content: center;
         img {
