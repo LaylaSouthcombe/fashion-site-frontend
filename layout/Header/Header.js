@@ -50,7 +50,7 @@ export default function Header() {
                         <NavLink href="/clothing">Clothing</NavLink>
                         <NavLink href="/shoes">Shoes</NavLink>
                         <NavLink href="/bags">Bags</NavLink>
-                        <NavLink href="/jewellry-watches">Jewellry and Watches</NavLink>
+                        <NavLink href="/jewellery-watches">Jewellry and Watches</NavLink>
                         <NavLink href="/accessories">Accessories</NavLink>
                     </StyledNav>
                     <Wrapper>
