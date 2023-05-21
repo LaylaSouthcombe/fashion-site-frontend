@@ -10,6 +10,7 @@ const ExperienceContainer = styled.div`
     width: 90%;
     margin: 40px auto;
     padding: 20px 0px;
+    max-width: 1000px;
 `
 
 const ExperienceTitle = styled.div`

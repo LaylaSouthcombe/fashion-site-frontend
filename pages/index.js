@@ -1,5 +1,5 @@
 import Header from "@/layout/Header/Header"
-import CurratedPicks from "@/components/CurratedPicks"
+import CuratedPicks from "@/components/CuratedPicks"
 import HomeHero from "@/components/HomeHero"
 import BrandsCarousel from "@/components/BrandsBanner"
 import CustomerExperience from "@/components/CustomerExperience"
@@ -19,7 +19,7 @@ export default function HomePage({featuredProducts}) {
       <HomeHero/>
       <BrandsCarousel/>
       <CustomerExperience/>
-      <CurratedPicks/>
+      <CuratedPicks/>
       <FeaturedProducts featuredProducts={featuredProducts}/>
       <BannerAd/>
       <NewsletterSubscribe/>
