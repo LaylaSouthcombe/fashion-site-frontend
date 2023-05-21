@@ -51,11 +51,11 @@ const CuratedLink = styled(Link)`
     position: absolute;
     bottom: 10%;
     left: 10%;
-    padding: 10px 15px;
+    padding: 8px 12px;
     margin: 15px;
     border-radius: 10px;
     background-color: white;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     text-decoration: none;
     color: black;
     width: 65%;
@@ -65,13 +65,18 @@ const CuratedLink = styled(Link)`
     img {
         width: 12.5%;
     }
+    @media (min-width: 570px) {
+        font-size: 0.75rem;
+        padding: 10px 15px;
+    }
     @media (min-width: 768px) {
         font-size: 0.65rem;
+        padding: 10px 15px;
     }
     @media (min-width: 860px) {
         font-size: 0.75rem;
     }
-    @media (min-width: 860px) {
+    @media (min-width: 930px) {
         font-size: 0.85rem;
     }
 `
