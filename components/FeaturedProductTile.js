@@ -1,7 +1,24 @@
 import { useContext } from "react"
 import { CheckoutContext } from "@/components/CheckoutContext"
+import styled from "styled-components"
 
-export default function FeaturedProductTile({_id, name, colour, category, productType}) {
+
+const ProductTile = styled.div`
+    padding: 10px;
+    margin: 10px;
+`
+
+const ProductImage = styled.img`
+    border-radius: 20px;
+    width: 100%;
+`
+
+const ProductInfo = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
+export default function FeaturedProductTile({_id, name, price, images}) {
     const url = `/product/${_id}`
     const {addProduct} = useContext(CheckoutContext)
     
@@ -11,9 +28,16 @@ export default function FeaturedProductTile({_id, name, colour, category, produc
     
     return (
         <>
-            <div>{name}</div>
-            <div>{colour}</div>
-            <button onClick={() => addProductToCheckout()}>Add to checkout</button>
+        <ProductTile>
+            <ProductImage src={images[0]}/>
+            <ProductInfo>
+                <div>
+                    <div>{name}</div>
+                    <div>{price}</div>
+                </div>
+                <button onClick={() => addProductToCheckout()}>Add to checkout</button>
+            </ProductInfo>
+        </ProductTile>
         </>
     )
 }
