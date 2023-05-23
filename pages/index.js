@@ -8,7 +8,10 @@ import BannerAd from "@/components/BannerAd"
 import NewsletterSubscribe from "@/layout/NewsletterSubscribe"
 import Footer from "@/layout/Footer/Footer"
 
-import {Product} from "@/models/Product"
+// import {Product} from "@/models/Product"
+import {Featured} from "@/models/Featured"
+
+
 import { mongooseConnect } from "@/lib/mongoose"
 
 export default function HomePage({featuredProducts}) {
@@ -32,7 +35,8 @@ export async function getServerSideProps() {
   // const productId = '644d4e13e87daf05bfe2effd'
   await mongooseConnect()
   // const product = await Product.findById(productId)
-  const featuredProducts = await Product.find({}, null, {sort: {'_id': -1}, limit: 4})
+  // const featuredProducts = await Product.find({}, null, {sort: {'_id': -1}, limit: 4})
+  const featuredProducts = await Featured.find({})
   return {
     props: {
       featuredProducts: JSON.parse(JSON.stringify(featuredProducts)),

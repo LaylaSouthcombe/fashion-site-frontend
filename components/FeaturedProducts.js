@@ -1,5 +1,5 @@
 import FeaturedProductTile from "@/components/FeaturedProductTile"
-
+import Image from "next/image"
 export default function FeaturedProducts({featuredProducts}) {
     // console.log(featuredProducts)
     return (
@@ -9,7 +9,6 @@ export default function FeaturedProducts({featuredProducts}) {
                 <FeaturedProductTile key={i} {...product}/>
             ))
             : null}
-            {/* <div>{products.name}</div> */}
         </div>
     )
 }
