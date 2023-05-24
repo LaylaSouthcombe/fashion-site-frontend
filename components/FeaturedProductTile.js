@@ -1,5 +1,4 @@
-import { useContext } from "react"
-import { CheckoutContext } from "@/components/CheckoutContext"
+import {SmallAddToCartBtn} from "@/components/SmallAddToCartBtn"
 import styled from "styled-components"
 
 
@@ -20,11 +19,6 @@ const ProductInfo = styled.div`
 
 export default function FeaturedProductTile({_id, name, price, images}) {
     const url = `/product/${_id}`
-    const {addProduct} = useContext(CheckoutContext)
-    
-    const addProductToCheckout = () => {
-        addProduct(_id)
-    }
     
     return (
         <>
@@ -35,7 +29,7 @@ export default function FeaturedProductTile({_id, name, price, images}) {
                     <div>{name}</div>
                     <div>{price}</div>
                 </div>
-                <button onClick={() => addProductToCheckout()}>Add to checkout</button>
+                <SmallAddToCartBtn id={_id}/>
             </ProductInfo>
         </ProductTile>
         </>
