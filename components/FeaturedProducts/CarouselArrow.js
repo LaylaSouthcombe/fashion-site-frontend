@@ -20,13 +20,9 @@ const StyledArrow = styled.svg`
 
 
 export default function Arrow(props) {
-    const disabled = props.disabled ? " arrow--disabled" : ""
     return (
       <StyledArrow
         onClick={props.onClick}
-        className={`arrow ${
-          props.left ? "arrow--left" : "arrow--right"
-        } ${disabled}`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         direction={props.left ? 'left' : 'right'}

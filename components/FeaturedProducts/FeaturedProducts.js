@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from "react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-
-import FeaturedProductTile from "@/components/FeaturedProductTile"
-import CarouselArrow from "@/components/CarouselArrow"
 import styled from "styled-components";
+
+import FeaturedProductTile from "@/components/FeaturedProducts/FeaturedProductTile"
+import CarouselArrow from "@/components/FeaturedProducts/CarouselArrow"
+import CarouselBar from "@/components/FeaturedProducts/CarouselBar"
 
 const FeaturedTitle = styled.h2`
     width: 80%;
@@ -58,6 +59,31 @@ export default function FeaturedProducts({featuredProducts}) {
             }
         }
     })
+    
+    const [percentageSlideNumber, setPercentageSlideNumber] = useState(0)
+    
+    const increasePercentage = () => {
+        if(currentSlide <
+            instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView){
+            setPercentageSlideNumber(prev => prev += 1)
+        }
+    }
+
+    const decreasePercentage = () => {
+        if(currentSlide !== 0){
+            setPercentageSlideNumber(prev => prev -= 1)
+        }
+    }
+
+    const slideRightAndIncreaseProgress = (e) => {
+        e.stopPropagation() || instanceRef.current?.next()
+        increasePercentage()
+    }
+
+    const slideLeftAndDecreaseProgress = (e) => {
+        e.stopPropagation() || instanceRef.current?.prev()
+        decreasePercentage()
+    }
 
     return (
         <>
@@ -69,7 +95,7 @@ export default function FeaturedProducts({featuredProducts}) {
                             <CarouselArrow
                             left
                             onClick={(e) =>
-                                e.stopPropagation() || instanceRef.current?.prev()
+                                slideLeftAndDecreaseProgress(e)
                             }
                             disabled={currentSlide === 0}
                             />
@@ -90,16 +116,19 @@ export default function FeaturedProducts({featuredProducts}) {
                         <>
                             <CarouselArrow
                             onClick={(e) =>
-                                e.stopPropagation() || instanceRef.current?.next()
+                                slideRightAndIncreaseProgress(e)
                             }
                             disabled={
-                                currentSlide ===
-                                instanceRef.current.track.details.slides.length - 1
-                            }
+                                currentSlide >=
+                                instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView
+                              }
                             />
                         </>
                     ) : null}
                 </CarouselWrapper>
+                {loaded && instanceRef.current ? (
+                <CarouselBar percentageSlideNumber={percentageSlideNumber} slideLength={instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView + 1}/>
+                ) : null}
             </section>
         </>
     )
