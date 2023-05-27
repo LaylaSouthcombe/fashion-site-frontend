@@ -6,17 +6,22 @@ import FeaturedProductTile from "@/components/FeaturedProductTile"
 import CarouselArrow from "@/components/CarouselArrow"
 import styled from "styled-components";
 
+const FeaturedTitle = styled.h2`
+    width: 80%;
+    margin: 0 auto;
+`
+
 const CarouselWrapper = styled.div`
     width: 90%;
+    margin: 0 auto; 
     align-items: center;
     display: flex;
-    margin: 0 auto; 
 `
 
 const CarouselInnerWrapper = styled.div`
     position: relative;
-    margin: 0 auto;  
     width: 90%;
+    margin: 0 auto;
 `
 
 export default function FeaturedProducts({featuredProducts}) {
@@ -57,7 +62,7 @@ export default function FeaturedProducts({featuredProducts}) {
     return (
         <>
             <section>
-                <h2>Featured products</h2>
+                <FeaturedTitle>Featured products</FeaturedTitle>
                 <CarouselWrapper className="navigation-wrapper">
                     {loaded && instanceRef.current ? (
                         <>

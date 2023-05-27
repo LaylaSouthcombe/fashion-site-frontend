@@ -18,7 +18,7 @@ const CheckoutButton = styled.div`
     }
 `
 
-export default function SmallAddToCartBtn({id}) {
+export default function AddToCartBtn({id}) {
     
     const {addProduct} = useContext(CheckoutContext)
     
