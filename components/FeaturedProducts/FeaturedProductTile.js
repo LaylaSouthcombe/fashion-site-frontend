@@ -26,6 +26,7 @@ const ProductInfo = styled.div`
 
 const ProductBrand = styled.p`
     font-size: 1rem;
+    text-transform: uppercase;
 `
 
 const ProductName = styled.p`
