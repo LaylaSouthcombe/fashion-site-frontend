@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import emailIcon from '../images/icons/mail.png'
 import Image from "next/image"
+import { useState } from "react"
 
 const SubscribeContainer = styled.div`
     width: 65%;
@@ -77,16 +78,33 @@ const SubscribeTerms = styled.p`
     color: grey;
 `
 
+const SubscribeConfirmation = styled.div`
+    width: 80%;
+    padding: 1.25rem 0 1.1rem 0;
+    h2 {
+        font-size: 1.5rem;
+    }
+`
+
 export default function NewsletterSubscribe() {
+
+    const [subscribed, setSubscribed] = useState(false)
+
     return (
         <SubscribeContainer>
             <SubscribeLargeText>Subscribe to our newsletter to get updates on our latest collections</SubscribeLargeText>
             <SmallSubscribeText>Get 20% off your first order by subscribing to our newsletter</SmallSubscribeText>
+            {!subscribed ? 
             <SubscribeInputArea>
                 <SubscribeEmailInput placeholder=" Enter your email"/>
                 <PlaceholderEmailIcon><Image src={emailIcon} alt="email icon"/></PlaceholderEmailIcon>
-                <SubscribeButton>Subscribe</SubscribeButton>
+                <SubscribeButton onClick={() => setSubscribed(true)}>Subscribe</SubscribeButton>
             </SubscribeInputArea>
+            :
+            <SubscribeConfirmation>
+                <SubscribeLargeText>Thanks for subscribing!</SubscribeLargeText>
+            </SubscribeConfirmation>
+            }
             <SubscribeTerms>You are able to unsubscribe at any time</SubscribeTerms>
         </SubscribeContainer>
     )
