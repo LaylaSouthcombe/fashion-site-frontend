@@ -2,13 +2,13 @@ import styled from 'styled-components'
 import Image from 'next/image'
 
 import adidas from '../images/brandIcons/adidas.png'
-import calvinKlein from '../images/brandIcons/calvinKlein.png'
+import nike from '../images/brandIcons/nike.png'
 import gucci from '../images/brandIcons/gucci.png'
 import essentials from '../images/brandIcons/essentials.png'
-import guess from '../images/brandIcons/guess.png'
+import offwhite from '../images/brandIcons/offwhite.png'
 import northFace from '../images/brandIcons/northFace.png'
-import palace from '../images/brandIcons/palace.png'
-import supreme from '../images/brandIcons/supreme.png'
+import carhartt from '../images/brandIcons/carhartt.png'
+import acnestudios from '../images/brandIcons/acnestudios.png'
 
 const BrandsContainer = styled.div`
     width: 90%;
@@ -43,21 +43,23 @@ const BrandBox = styled.a`
     display: flex;
     justify-content: center;
     img {
-            width: auto;
-            height: 100%;
+        width: auto;
+        height: 100%;
+        max-width: 70px;
+        object-fit: contain;
     }
 `
 
 export default function BrandsBanner(){
     const brands = [
         { url: 'adidas', image: adidas},
-        { url: 'calvin-klein', image: calvinKlein},
+        { url: 'offwhite', image: offwhite},
+        { url: 'nike', image: nike},
         { url: 'essentials', image: essentials},
+        { url: 'carhartt', image: carhartt},
         { url: 'gucci', image: gucci},
-        { url: 'guess', image: guess},
+        { url: 'acnestudios', image: acnestudios},
         { url: 'north-face', image: northFace},
-        { url: 'palace', image: palace},
-        { url: 'supreme', image: supreme}
     ]
 
     return (

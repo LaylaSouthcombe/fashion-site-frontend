@@ -28,7 +28,6 @@ const RuneLogoArea = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* padding: 0 0 2rem 2rem; */
     padding-bottom: 2rem;
     width: 75%;
 `
@@ -69,10 +68,6 @@ const FooterLinks = styled.div`
     @media (min-width: 768px) {
         padding-bottom: 1rem;
     }
-`
-
-const FooterLinkColumn = styled.div`
-    /* margin: 0.25rem; */
 `
 
 const FooterPayments = styled.div`
@@ -129,31 +124,31 @@ export default function Footer() {
                 </RuneLogoArea>
                 <FooterInfoSection>
                     <FooterLinks>
-                        <FooterLinkColumn>
+                        <div>
                             <FooterTitle>SHOP</FooterTitle>
                             <FooterText>All Collections</FooterText>
                             <FooterText>Winter Edition</FooterText>
                             <FooterText>Sale</FooterText>
-                        </FooterLinkColumn>
-                        <FooterLinkColumn>
+                        </div>
+                        <div>
                             <FooterTitle>COMPANY</FooterTitle>
                             <FooterText>About Us</FooterText>
                             <FooterText>Contact</FooterText>
                             <FooterText>Affiliates</FooterText>
-                        </FooterLinkColumn>
-                        <FooterLinkColumn>
+                        </div>
+                        <div>
                             <FooterTitle>SUPPORT</FooterTitle>
                             <FooterText>FAQs</FooterText>
                             <FooterText>Cookie Policy</FooterText>
                             <FooterText>Terms of Use</FooterText>
-                        </FooterLinkColumn>
+                        </div>
                     </FooterLinks>
                     <div>
                         <FooterTitle>PAYMENT METHODS</FooterTitle>
                         <FooterPayments>
-                            <Image src={Mastercard}/>
-                            <Image src={Visa}/>
-                            <Image src={Paypal}/>
+                            <Image src={Mastercard} alt="mastercard logo"/>
+                            <Image src={Visa} alt="visa logo"/>
+                            <Image src={Paypal} alt="paypal logo"/>
                         </FooterPayments>
                     </div>
                 </FooterInfoSection>
