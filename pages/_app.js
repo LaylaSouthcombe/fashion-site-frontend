@@ -15,6 +15,8 @@ const GlobalStyles = createGlobalStyle`
   }
   :root {
     --main-dark-blue: #1D242C;
+    --main-light-blue: #EAEEF2;
+    --main-blue: #A2A8AD;
   }
 `
 
