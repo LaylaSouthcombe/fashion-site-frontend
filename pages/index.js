@@ -5,7 +5,7 @@ import BrandsCarousel from "@/components/BrandsBanner"
 import CustomerExperience from "@/components/CustomerExperience"
 import FeaturedProducts from "@/components/FeaturedProducts/FeaturedProducts"
 import BannerAd from "@/components/BannerAd"
-import NewsletterSubscribe from "@/layout/NewsletterSubscribe"
+import NewsletterSubscribe from "@/components/NewsletterSubscribe"
 import Footer from "@/layout/Footer/Footer"
 
 // import {Product} from "@/models/Product"

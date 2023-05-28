@@ -29,7 +29,7 @@ const CenteredDiv = styled.div`
     color: white;
     padding: 10px;
     width: 100%;
-    background-color: black;
+    background-color: var(--main-dark-blue);
 `
 
 export default function Header() {

@@ -10,7 +10,7 @@ const BarWrapper = styled.div`
 
 const ProgressBar = styled.div`
     width: ${props => props.percentageWidth > 0 ? `${props.percentageWidth + '%'}` : '0%'};
-    background-color: black;
+    background-color: var(--main-dark-blue);
     height: 100%;
     border-radius: 5px;
 `

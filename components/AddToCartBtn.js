@@ -5,7 +5,7 @@ import addToCart from '../images/icons/add-cart.png'
 import Image from "next/image"
 
 const CheckoutButton = styled.div`
-    background-color: black;
+    background-color: var(--main-dark-blue);
     display: flex;
     border-radius: 5px;
     justify-content: center;

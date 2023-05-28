@@ -7,7 +7,7 @@ const StyledArrow = styled.svg`
   top: 40%;
   transform: translateY(-40%);
   -webkit-transform: translateY(-40%); */
-  fill: black;
+  fill: var(--main-dark-blue);
   cursor: pointer;
   ${props => props.direction === 'left' && css`
     left: -10px;

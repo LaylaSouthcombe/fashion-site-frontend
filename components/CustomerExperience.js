@@ -30,7 +30,7 @@ const ExperienceTitle = styled.div`
         grid-template-columns: 1fr 1fr;
 
         p {
-            border-left: 2px solid black;
+            border-left: 2px solid var(--main-dark-blue);
         }
     }
 

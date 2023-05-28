@@ -7,7 +7,7 @@ const BannerAdContainer = styled.div`
     margin: 5rem auto;
     display: grid;
     grid-template-columns: 1fr;
-    background-color: #1D242C;
+    background-color: var(--main-dark-blue);
     border-radius: 10px;
     height: fit-content;
     @media (min-width: 768px) {

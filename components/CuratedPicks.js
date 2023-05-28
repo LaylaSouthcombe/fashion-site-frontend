@@ -57,7 +57,7 @@ const CuratedLink = styled(Link)`
     background-color: white;
     font-size: 0.7rem;
     text-decoration: none;
-    color: black;
+    color: var(--main-dark-blue);
     width: 65%;
     display: flex;
     justify-content: space-between;

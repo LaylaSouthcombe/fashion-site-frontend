@@ -9,7 +9,7 @@ const ProductTile = styled.div`
 
 const ProductTileContent = styled(Link)`
     text-decoration: none;
-    color: black;
+    color: var(--main-dark-blue);
     display: flex;
     flex-direction: column;
     height: 100%;
