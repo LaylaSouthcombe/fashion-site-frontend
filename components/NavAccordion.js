@@ -33,7 +33,12 @@ const theme = createTheme({
                         margin: 0
                     }
                 },
-                
+                expandIconWrapper: {
+                    marginRight: '2rem',
+                    "&.Mui-expanded": {
+                        marginRight: '2rem'
+                    }
+                }
             },
         },
         MuiAccordionDetails: {
@@ -59,7 +64,7 @@ const theme = createTheme({
                     padding: '0rem 1rem'
                 },
             },
-        },
+        }
     },
 });
 

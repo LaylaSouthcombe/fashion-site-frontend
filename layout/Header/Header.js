@@ -71,8 +71,16 @@ const SideNavPlusOverlay = styled.div`
     width: 100%;
     position: absolute;
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-
+    grid-template-columns: 0.2fr 0.8fr;
+    @media (min-width: 420px) {
+        grid-template-columns: 0.5fr 1fr;
+    }
+    @media (min-width: 520px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (min-width: 620px) {
+        grid-template-columns: 1.5fr 1fr;
+    }
 `
 
 const SideNavOverlay = styled.div`
