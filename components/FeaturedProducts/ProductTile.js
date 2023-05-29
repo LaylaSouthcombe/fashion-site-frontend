@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Link from "next/link"
 
-const ProductTile = styled.div`
+const ProductTileContainer = styled.div`
     padding: 0.5rem 1.5rem;
     margin: 0.75rem auto 0.75rem auto;
     height: 95%;
@@ -49,12 +49,12 @@ const ProductPrice = styled.div`
     align-items: flex-end;
 `
 
-export default function FeaturedProductTile({product:{_id, name, price, brand,  images}}) {
+export default function ProductTile({product:{_id, name, price, brand,  images}}) {
     const url = `/product/${_id}`
 
     return (
         <>
-            <ProductTile>
+            <ProductTileContainer>
                 <ProductTileContent href={url}>
                     <ProductImage src={images[0]}/>
                     <ProductInfo>
@@ -63,7 +63,7 @@ export default function FeaturedProductTile({product:{_id, name, price, brand,  
                     </ProductInfo>
                     <ProductPrice>£{price.toLocaleString()}</ProductPrice>
                 </ProductTileContent>
-            </ProductTile>
+            </ProductTileContainer>
         </>
     )
 }

@@ -3,7 +3,7 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import styled from "styled-components";
 
-import FeaturedProductTile from "@/components/FeaturedProducts/FeaturedProductTile"
+import ProductTile from "@/components/FeaturedProducts/ProductTile"
 import CarouselArrow from "@/components/FeaturedProducts/CarouselArrow"
 import CarouselBar from "@/components/FeaturedProducts/CarouselBar"
 
@@ -106,7 +106,7 @@ export default function FeaturedProducts({featuredProducts}) {
                             {featuredProducts?.length > 0 ? 
                                 featuredProducts.map((product, i) => (
                                     <div key={i} className="keen-slider__slide">
-                                        <FeaturedProductTile key={i} product={product}/>
+                                        <ProductTile key={i} product={product}/>
                                     </div>
                                 ))
                                 : null}
