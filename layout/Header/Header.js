@@ -10,6 +10,7 @@ import Image from "next/image";
 import menuBars from '../../images/icons/menuBars.png'
 import menuCross from '../../images/icons/menuCross.png'
 import RuneLogo from '../../images/logos/runeLogo.png'
+import cart from '../../images/icons/cart.png'
 
 const MainHeader = styled.header`
   background-color: white;
@@ -41,6 +42,12 @@ const NavLink = styled(Link)`
     @media (min-width: 900px) {
         font-size: 0.9rem;
     }
+`
+
+const CartLink = styled(Link)`
+    text-decoration: none;
+    display: flex;
+    gap: 2px;
 `
 
 const StyledNav = styled.nav`
@@ -150,6 +157,21 @@ const DesktopNavLinks = styled.ul`
     }
 `
 
+const CartImage = styled.div`
+    width: 20px;
+    img {
+        width: 100%;
+        height: auto;
+    }
+`
+
+const CartNumber = styled.div`
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 15px;
+    background-color: var(--main-dark-blue);
+`
+
 export default function Header() {
     const {checkoutProducts} = useContext(CheckoutContext)
     
@@ -192,7 +214,18 @@ export default function Header() {
                             ><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
                         )
                     })}
-                    <li><NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink></li>
+                    <li>
+                        <CartLink href="/checkout">
+                            <CartImage>
+                                <Image src={cart}/>  
+                            </CartImage>
+                        {checkoutProducts?.length > 0 ? 
+                            <CartNumber>
+                            </CartNumber>
+                        :
+                        null}
+                        </CartLink>
+                    </li>
                 </DesktopNavLinks>
                 <NavDropDown section={navDropDownSection}/>
             </StyledNav>
