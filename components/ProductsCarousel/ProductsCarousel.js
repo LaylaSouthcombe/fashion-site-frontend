@@ -1,16 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import styled from "styled-components";
 
-import ProductTile from "@/components/FeaturedProducts/ProductTile"
-import CarouselArrow from "@/components/FeaturedProducts/CarouselArrow"
-import CarouselBar from "@/components/FeaturedProducts/CarouselBar"
-
-const FeaturedTitle = styled.h2`
-    width: 80%;
-    margin: 0 auto;
-`
+import ProductTile from "@/components/ProductsCarousel/ProductTile"
+import CarouselArrow from "@/components/ProductsCarousel/CarouselArrow"
+import CarouselBar from "@/components/ProductsCarousel/CarouselBar"
 
 const CarouselWrapper = styled.div`
     width: 90%;
@@ -25,8 +20,7 @@ const CarouselInnerWrapper = styled.div`
     margin: 0 auto;
 `
 
-export default function FeaturedProducts({featuredProducts}) {
-    
+export default function ProductsCarousel({products}){
     const [currentSlide, setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const [sliderRef, instanceRef] = useKeenSlider({
@@ -87,9 +81,7 @@ export default function FeaturedProducts({featuredProducts}) {
 
     return (
         <>
-            <section>
-                <FeaturedTitle>Featured products</FeaturedTitle>
-                <CarouselWrapper className="navigation-wrapper">
+        <CarouselWrapper className="navigation-wrapper">
                     {loaded && instanceRef.current ? (
                         <>
                             <CarouselArrow
@@ -103,8 +95,8 @@ export default function FeaturedProducts({featuredProducts}) {
                     ) : null}
                     <CarouselInnerWrapper>
                         <div ref={sliderRef} className="keen-slider">
-                            {featuredProducts?.length > 0 ? 
-                                featuredProducts.map((product, i) => (
+                            {products?.length > 0 ? 
+                                products.map((product, i) => (
                                     <div key={i} className="keen-slider__slide">
                                         <ProductTile key={i} product={product}/>
                                     </div>
@@ -129,7 +121,6 @@ export default function FeaturedProducts({featuredProducts}) {
                 {loaded && instanceRef.current ? (
                 <CarouselBar percentageSlideNumber={percentageSlideNumber} slideLength={instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView + 1}/>
                 ) : null}
-            </section>
         </>
     )
 }

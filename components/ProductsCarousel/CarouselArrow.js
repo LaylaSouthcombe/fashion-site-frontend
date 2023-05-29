@@ -1,12 +1,8 @@
 import styled, {css} from "styled-components"
 
 const StyledArrow = styled.svg`
-    width: 30px;
+  width: 30px;
   height: 30px;
-  /* position: absolute;
-  top: 40%;
-  transform: translateY(-40%);
-  -webkit-transform: translateY(-40%); */
   fill: var(--main-dark-blue);
   cursor: pointer;
   ${props => props.direction === 'left' && css`

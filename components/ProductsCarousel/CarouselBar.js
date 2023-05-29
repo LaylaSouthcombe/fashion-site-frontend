@@ -13,6 +13,7 @@ const ProgressBar = styled.div`
     background-color: var(--main-dark-blue);
     height: 100%;
     border-radius: 5px;
+    margin-top: 0.75rem;
 `
 
 export default function CarouselBar({percentageSlideNumber, slideLength}){

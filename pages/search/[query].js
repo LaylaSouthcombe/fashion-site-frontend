@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { mongooseConnect } from "@/lib/mongoose"
 import { Product } from "@/models/Product"
-import ProductTile from "@/components/FeaturedProducts/ProductTile"
+import ProductTile from "@/components/ProductsCarousel/ProductTile"
 import styled from "styled-components"
 
 
@@ -44,7 +44,7 @@ export async function getServerSideProps(context){
             }
           }
         }
-      }]).limit(10)
+    }]).limit(10)
     return {
         props: {
             products: JSON.parse(JSON.stringify(products))
