@@ -62,6 +62,9 @@ const SideNavArea = styled.div`
     position: relative;
     width: 100%;
     display: flex;
+    @media (min-width: 768px) {
+        display: none;
+    }
 `
 
 const SideNavPlusOverlay = styled.div`
@@ -111,25 +114,24 @@ const SideNavButton = styled.div`
 `
 
 const SideNavLinks = styled.ul`
-    padding: 1rem;
+    padding: 1rem 0rem;
     li {
         list-style: none;
-        padding: 0.5rem;
+        padding: 0.5rem 0rem;
     }
-
-    /* .MuiAccordion-root {
-        background-color: none !important;
-    } */
+    li.homeLink {
+        margin: 0rem 1rem 0.5rem 1rem;
+    }
+    li.checkoutLink {
+        margin: 0rem 1rem;
+    }
 `
 
 export default function Header() {
     const {checkoutProducts} = useContext(CheckoutContext)
     
-    
     const [showNavbar, setShowNavbar] = useState(false);
     
-    
-
     const handleShowNavbar = () => {
         const body = document.querySelector('body')
         setShowNavbar(!showNavbar)
@@ -141,8 +143,15 @@ export default function Header() {
         
     }
 
+    const [expanded, setExpanded] = useState('');
+
+    const handleChange = (panel) => (event, newExpanded) => {
+        console.log(panel)
+        console.log(expanded)
+        setExpanded(newExpanded ? panel : false);
+    };
+
     const navigationOptions = [
-        { link: "/", label: "Home", childLinks: []},
         { link: "/brands", label: "Brands", childLinks: [
             {link: "/clothing", label: "All clothing"}, 
             {link: "/clothing/jackets", label: "Jackets"}, 
@@ -184,8 +193,9 @@ export default function Header() {
                 <Wrapper>
                     <HeaderCentre>
                         <LargeLogo>
-                            <Image src={RuneLogo}/>
-                        </LargeLogo>                    
+                            <Image src={RuneLogo} alt="Rune logo"/>
+                        </LargeLogo>
+                        <li><NavLink href="/" className="homeLink">Home</NavLink> </li>            
                         {navigationOptions.map((navItem, i) => {
                             return (
                                 <NavLink href={navItem.link} key={"mainNav" + i}>{navItem.label}</NavLink>
@@ -197,7 +207,7 @@ export default function Header() {
                     </StyledNav>
                     <SideNavArea>
                         <LargeLogo>
-                            <Image src={RuneLogo}/>
+                            <Image src={RuneLogo} alt="Rune logo"/>
                         </LargeLogo>
                     
                         {showNavbar ? 
@@ -206,29 +216,29 @@ export default function Header() {
                                 <SideNavOverlay></SideNavOverlay>
                                 <SideNav>
                                 <SmallLogo>
-                            <Image src={RuneLogo}/>
+                            <Image src={RuneLogo} alt="Rune logo"/>
                         </SmallLogo>
                         <SideNavLinks>
-
-                                    {navigationOptions.map((navItem, i) => {
-                                        if(navItem.childLinks.length === 0){
-                                            return (
-                                                <>
-                                                    <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
-                                                </>
-                                            )
-                                        } else {
-                                            return (
-                                                <>
-                                                    <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks}/></li>
-                                                    
-                                                </>
-                                            )
-                                        }
-                                        }) }
-                                        <li>
-                                            <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
-                                        </li>
+                        <li className="homeLink"><NavLink href="/">Home</NavLink> </li>
+                            {navigationOptions.map((navItem, i) => {
+                                if(navItem.childLinks.length === 0){
+                                    return (
+                                        <>
+                                            <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                                        </>
+                                    )
+                                } else {
+                                    return (
+                                        <>
+                                            <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks} accordionNumber={i+1} expanded={expanded} handleChange={handleChange}/></li>
+                                            
+                                        </>
+                                    )
+                                }
+                                }) }
+                                <li className="checkoutLink">
+                                    <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
+                                </li>
                                         
                         </SideNavLinks>
                                 </SideNav>
