@@ -3,6 +3,7 @@ import styled from "styled-components"
 import HeaderCentre from "@/layout/Header/HeaderCentre";
 import { useContext, useState } from "react";
 import { CheckoutContext } from "@/components/CheckoutContext";
+import NavAccordion from "@/components/NavAccordion";
 import Image from "next/image";
 
 import menuBars from '../../images/icons/menuBars.png'
@@ -38,7 +39,6 @@ const SmallLogo = styled.div`
 `
 
 const NavLink = styled(Link)`
-    color: aquamarine;
     text-decoration: none;
 `
 
@@ -88,7 +88,7 @@ const SideNav = styled.nav`
     @media (min-width: 768px) {
         display: none;
     }
-    background-color: grey;
+    background-color: var(--main-light-blue);
     width: 100%;
     height: 100vh;
     overflow: scroll;
@@ -116,6 +116,10 @@ const SideNavLinks = styled.ul`
         list-style: none;
         padding: 0.5rem;
     }
+
+    /* .MuiAccordion-root {
+        background-color: none !important;
+    } */
 `
 
 export default function Header() {
@@ -138,13 +142,37 @@ export default function Header() {
     }
 
     const navigationOptions = [
-        { link: "/", label: "Home"},
-        { link: "/brands", label: "Brands"},
-        { link: "/clothing", label: "Clothing"},
-        { link: "/shoes", label: "Shoes"},
-        { link: "/bags", label: "Bags"},
-        { link: "/jewellery-watches", label: "Jewellry and Watches"},
-        { link: "/accessories", label: "Accessories"},
+        { link: "/", label: "Home", childLinks: []},
+        { link: "/brands", label: "Brands", childLinks: [
+            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/jackets", label: "Jackets"}, 
+            {link: "/clothing/trousers", label: "Trousers"}
+        ]},
+        { link: "/clothing", label: "Clothing", childLinks: [
+            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/jackets", label: "Jackets"}, 
+            {link: "/clothing/trousers", label: "Trousers"}
+        ]},
+        { link: "/shoes", label: "Shoes", childLinks: [
+            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/jackets", label: "Jackets"}, 
+            {link: "/clothing/trousers", label: "Trousers"}
+        ]},
+        { link: "/bags", label: "Bags", childLinks: [
+            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/jackets", label: "Jackets"}, 
+            {link: "/clothing/trousers", label: "Trousers"}
+        ]},
+        { link: "/jewellery-watches", label: "Jewellry and Watches", childLinks: [
+            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/jackets", label: "Jackets"}, 
+            {link: "/clothing/trousers", label: "Trousers"}
+        ]},
+        { link: "/accessories", label: "Accessories", childLinks: [
+            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/jackets", label: "Jackets"}, 
+            {link: "/clothing/trousers", label: "Trousers"}
+        ]},
     ]
 
     return (
@@ -183,14 +211,25 @@ export default function Header() {
                         <SideNavLinks>
 
                                     {navigationOptions.map((navItem, i) => {
+                                        if(navItem.childLinks.length === 0){
                                             return (
-                                                <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
-                                                
+                                                <>
+                                                    <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                                                </>
                                             )
+                                        } else {
+                                            return (
+                                                <>
+                                                    <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks}/></li>
+                                                    
+                                                </>
+                                            )
+                                        }
                                         }) }
                                         <li>
                                             <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
                                         </li>
+                                        
                         </SideNavLinks>
                                 </SideNav>
                             </SideNavPlusOverlay>

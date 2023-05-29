@@ -17,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
     --main-dark-blue: #1D242C;
     --main-light-blue: #EAEEF2;
     --main-blue: #A2A8AD;
+    --main-lightish-blue: #dcdfe3;
   }
   ::-webkit-scrollbar {
     display: none;
