@@ -1,35 +1,30 @@
 import Link from "next/link";
 import styled from "styled-components"
-import HeaderCentre from "@/layout/Header/HeaderCentre";
+import NavDropDown from "@/layout/Header/NavDropDown";
 import { useContext, useState } from "react";
 import { CheckoutContext } from "@/components/CheckoutContext";
 import NavAccordion from "@/components/NavAccordion";
+import {shortNavData} from './NavData'
 import Image from "next/image";
 
 import menuBars from '../../images/icons/menuBars.png'
 import menuCross from '../../images/icons/menuCross.png'
 import RuneLogo from '../../images/logos/runeLogo.png'
 
-
 const MainHeader = styled.header`
   background-color: white;
-  height: 20vh;
 `
 
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-`
-
-const LargeLogo = styled.div`
+const LargeLogo = styled.a`
+    max-width: 100px;
+    padding: 1rem;
     img {
         width: 100%;
         height: auto;
     }
 `
 
-const SmallLogo = styled.div`
+const SmallLogo = styled.a`
     width: 20%;
     img {
         width: 100%;
@@ -40,22 +35,31 @@ const SmallLogo = styled.div`
 
 const NavLink = styled(Link)`
     text-decoration: none;
+    @media (min-width: 768px) {
+        font-size: 0.85rem;
+    }
+    @media (min-width: 900px) {
+        font-size: 0.9rem;
+    }
 `
 
 const StyledNav = styled.nav`
     display: none;
     gap: 15px;
+    justify-content: space-between;
+    position: relative;
     @media (min-width: 768px) {
         display: flex;
     }
 `
 
-const CenteredDiv = styled.div`
+const SubscribeBanner = styled.div`
     text-align: center;
     color: white;
     padding: 10px;
     width: 100%;
     background-color: var(--main-dark-blue);
+    font-size: 0.85rem;
 `
 
 const SideNavArea = styled.div`
@@ -127,8 +131,19 @@ const SideNavLinks = styled.ul`
         list-style: none;
         padding: 0.5rem 0rem;
     }
-    li.homeLink {
-        margin: 0rem 1rem 0.5rem 1rem;
+    li.checkoutLink {
+        margin: 0rem 1rem;
+    }
+`
+
+const DesktopNavLinks = styled.ul`
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 0.9rem;
+    li {
+        list-style: none;
+        padding: 0.5rem 0.5rem;
     }
     li.checkoutLink {
         margin: 0rem 1rem;
@@ -154,81 +169,47 @@ export default function Header() {
     const [expanded, setExpanded] = useState('');
 
     const handleChange = (panel) => (event, newExpanded) => {
-        console.log(panel)
-        console.log(expanded)
         setExpanded(newExpanded ? panel : false);
     };
 
-    const navigationOptions = [
-        { link: "/brands", label: "Brands", childLinks: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
-        ]},
-        { link: "/clothing", label: "Clothing", childLinks: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
-        ]},
-        { link: "/shoes", label: "Shoes", childLinks: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
-        ]},
-        { link: "/bags", label: "Bags", childLinks: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
-        ]},
-        { link: "/jewellery-watches", label: "Jewellry and Watches", childLinks: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
-        ]},
-        { link: "/accessories", label: "Accessories", childLinks: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
-        ]},
-    ]
+    const [navDropDownSection, setNavDropDownSection] = useState()
 
     return (
         <MainHeader>
-            <CenteredDiv>
+            <SubscribeBanner>
                 Sign up and GET 20% OFF for your first order
-            </CenteredDiv>
+            </SubscribeBanner>
             <StyledNav>
-                <Wrapper>
-                    <HeaderCentre>
-                        <LargeLogo>
-                            <Image src={RuneLogo} alt="Rune logo"/>
-                        </LargeLogo>
-                        <li><NavLink href="/" className="homeLink">Home</NavLink> </li>            
-                        {navigationOptions.map((navItem, i) => {
-                            return (
-                                <NavLink href={navItem.link} key={"mainNav" + i}>{navItem.label}</NavLink>
-                            )
-                        })}
-                        <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
-                    </HeaderCentre>
-                    </Wrapper>
-                    </StyledNav>
-                    <SideNavArea>
-                        <LargeLogo>
-                            <Image src={RuneLogo} alt="Rune logo"/>
-                        </LargeLogo>
-                    
-                        {showNavbar ? 
-                        <>
-                            <SideNavPlusOverlay>
-                                <SideNavOverlay></SideNavOverlay>
-                                <SideNav>
-                                <SmallLogo>
+                <LargeLogo href="/">
+                    <Image src={RuneLogo} alt="Rune logo"/>
+                </LargeLogo>
+                <DesktopNavLinks> 
+                    {shortNavData.map((navItem, i) => {
+                        return (
+                            <li key={"mainNav" + i} 
+                            onMouseEnter={() => setNavDropDownSection(navItem.label)}
+                            onMouseLeave={() => setNavDropDownSection()}
+                            ><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                        )
+                    })}
+                    <li><NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink></li>
+                </DesktopNavLinks>
+                <NavDropDown section={navDropDownSection}/>
+            </StyledNav>
+            <SideNavArea>
+                <LargeLogo href="/">
+                    <Image src={RuneLogo} alt="Rune logo"/>
+                </LargeLogo>
+                {showNavbar ? 
+                <>
+                    <SideNavPlusOverlay>
+                        <SideNavOverlay></SideNavOverlay>
+                        <SideNav>
+                        <SmallLogo href="/">
                             <Image src={RuneLogo} alt="Rune logo"/>
                         </SmallLogo>
                         <SideNavLinks>
-                        <li className="homeLink"><NavLink href="/">Home</NavLink> </li>
-                            {navigationOptions.map((navItem, i) => {
+                            {shortNavData.map((navItem, i) => {
                                 if(navItem.childLinks.length === 0){
                                     return (
                                         <>
@@ -247,19 +228,15 @@ export default function Header() {
                                 <li className="checkoutLink">
                                     <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
                                 </li>
-                                        
-                        </SideNavLinks>
-                                </SideNav>
-                            </SideNavPlusOverlay>
-                        </>
-                        : null}
-                    
-                    <SideNavButton>
-                        <Image src={showNavbar ? menuCross : menuBars} alt="hamburger menu icon" onClick={() => handleShowNavbar()}/>
-                    </SideNavButton>
-                    </SideNavArea>
-                
-            
+                            </SideNavLinks>
+                        </SideNav>
+                    </SideNavPlusOverlay>
+                </>
+                : null}
+                <SideNavButton>
+                    <Image src={showNavbar ? menuCross : menuBars} alt="hamburger menu icon" onClick={() => handleShowNavbar()}/>
+                </SideNavButton>
+            </SideNavArea>
         </MainHeader>
     )
 }

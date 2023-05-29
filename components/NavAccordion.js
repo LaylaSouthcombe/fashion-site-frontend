@@ -82,7 +82,7 @@ export default function NavAccordion({accordionNumber, label, childLinks, expand
                         <Typography>{label}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                    {childLinks.map((link, i) => {
+                        {childLinks.map((link, i) => {
                             return (
                                 <li key={"childLink" + i}>
                                     <ChildNavLink href={link.link}>
