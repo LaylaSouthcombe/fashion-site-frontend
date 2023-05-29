@@ -18,6 +18,12 @@ const GlobalStyles = createGlobalStyle`
     --main-light-blue: #EAEEF2;
     --main-blue: #A2A8AD;
   }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  body {
+    -ms-overflow-style: none;
+  }
 `
 
 export default function App({ Component, pageProps }) {

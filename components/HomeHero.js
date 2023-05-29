@@ -4,13 +4,12 @@ import HomeHeroImageSmall from '../images/HomeHeroImageSmall.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import arrow from '../images/curatedPicks/right-arrow.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const HeroImageDiv = styled.div`
     position: relative;
     width: 100%;
     object-fit: contain;
-    overflow: hidden;
     img {
         width: 100%;
         height: auto;
@@ -85,13 +84,16 @@ const HeroButton = styled(Link)`
 
 export default function HomeHero() {
 
-    const [windowSize, setWindowSize] = useState(window.innerWidth)
+    const [windowSize, setWindowSize] = useState(typeof window !== 'undefined' ? window?.innerWidth : null)
 
     const handleResize = () => {
         setWindowSize(window.innerWidth)
     }
 
-    window.addEventListener('resize', handleResize)
+    useEffect(() => {
+        typeof window !== 'undefined' ? window.addEventListener('resize', handleResize) : null
+    }, [])
+    
 
     return (
         <HeroImageDiv>
