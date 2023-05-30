@@ -106,6 +106,8 @@ export default function BrandsPage({products}){
     },[])
     return (
         <>
+        <Header/>
+        
             <BrandMainTitle>Brands</BrandMainTitle>
             <BrandsContainer>
                 {brandsLoaded ? 
@@ -129,6 +131,7 @@ export default function BrandsPage({products}){
                     })
                 : null}
             </BrandsContainer>
+            <Footer/>
         </>
     )
 }

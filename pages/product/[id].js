@@ -15,13 +15,15 @@ export default function ProductPage({product, moreLikeThisProducts}){
     console.log(moreLikeThisProducts)
     return (
         <>
-            <h1>{product.name}</h1>
-            <p>{product.price}</p>
-            <ProductImagesCarousel images={product.images}/>
-            <p>{product.brand}</p>
-            <p>{product.productSummary}</p>
-            <MoreLikeThisTitle>Similar items</MoreLikeThisTitle>
-            <ProductsCarousel products={moreLikeThisProducts}/>
+            <Header/>
+                <h1>{product.name}</h1>
+                <p>{product.price}</p>
+                <ProductImagesCarousel images={product.images}/>
+                <p>{product.brand}</p>
+                <p>{product.productSummary}</p>
+                <MoreLikeThisTitle>Similar items</MoreLikeThisTitle>
+                <ProductsCarousel products={moreLikeThisProducts}/>
+            <Footer/>
         </>
     )
 }

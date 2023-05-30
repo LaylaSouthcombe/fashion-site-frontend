@@ -1,3 +1,5 @@
+import Header from "@/layout/Header/Header"
+import Footer from "@/layout/Footer/Footer"
 import { useEffect } from "react"
 import { mongooseConnect } from "@/lib/mongoose"
 import { Product } from "@/models/Product"
@@ -14,6 +16,8 @@ export default function SearchResults({products}) {
     console.log(products)
     return (
         <>
+        <Header/>
+        
             <ProductGrid>
                 {products !== undefined ? 
                     products.map((product, i) => {
@@ -24,6 +28,7 @@ export default function SearchResults({products}) {
                 : 
                 null}
             </ProductGrid>
+            <Footer/>
         </>
         
     )

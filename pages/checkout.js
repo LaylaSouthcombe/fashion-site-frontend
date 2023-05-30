@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import Header from "@/layout/Header/Header"
+import Footer from "@/layout/Footer/Footer"
 import { CheckoutContext } from "@/components/CheckoutContext"
 import Input from "@/components/Input"
 import styled from "styled-components"
@@ -129,6 +130,8 @@ export default function CheckoutPage() {
     }
     return (
         <div>
+            <Header/>
+        
             <ColumnsWrapper>
                     {!checkoutProducts?.length || !products?.length > 0 ?
                     <Box>
@@ -217,6 +220,7 @@ export default function CheckoutPage() {
                     </>
                     }
             </ColumnsWrapper>
+            <Footer/>
         </div>
     )
 }

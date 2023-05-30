@@ -1,4 +1,5 @@
 import Header from "@/layout/Header/Header"
+import Footer from "@/layout/Footer/Footer"
 import CuratedPicks from "@/components/CuratedPicks"
 import HomeHero from "@/components/HomeHero"
 import BrandsCarousel from "@/components/BrandsBanner"
@@ -6,7 +7,6 @@ import CustomerExperience from "@/components/CustomerExperience"
 import FeaturedProducts from "@/components/FeaturedProducts"
 import BannerAd from "@/components/BannerAd"
 import NewsletterSubscribe from "@/components/NewsletterSubscribe"
-import Footer from "@/layout/Footer/Footer"
 
 // import {Product} from "@/models/Product"
 import {Featured} from "@/models/Featured"
@@ -18,6 +18,7 @@ export default function HomePage({featuredProducts}) {
   // console.log(featuredProducts)
   return (
     <div>
+      <Header/>
       <HomeHero/>
       <BrandsCarousel/>
       <CustomerExperience/>
@@ -25,6 +26,7 @@ export default function HomePage({featuredProducts}) {
       <FeaturedProducts featuredProducts={featuredProducts}/>
       <BannerAd/>
       <NewsletterSubscribe/>
+      <Footer/>
     </div>
   )
 }
