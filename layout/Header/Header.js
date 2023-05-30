@@ -172,6 +172,15 @@ const CartNumber = styled.div`
     background-color: var(--main-dark-blue);
 `
 
+const BackgroundOverlay = styled.div`
+    background-color: var(--main-dark-blue);
+    opacity: 0.5;
+    display: ${props => props.overlayDisplay};
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+`
+
 export default function Header() {
     const {checkoutProducts} = useContext(CheckoutContext)
     
@@ -185,7 +194,6 @@ export default function Header() {
         } else {
             body.style.overflow = 'hidden'
         }
-        
     }
 
     const [expanded, setExpanded] = useState('');
@@ -195,81 +203,97 @@ export default function Header() {
     };
 
     const [navDropDownSection, setNavDropDownSection] = useState()
+    const [overlayDisplay, setOverlayDisplay] = useState('none')
+    const openDesktopMenu = (navLabel) => {
+        const body = document.querySelector('body')
+        body.style.overflow = 'hidden'
+        setNavDropDownSection(navLabel)
+        setOverlayDisplay('block')
+    }
+
+    const closeDesktopMenu = () => {
+        const body = document.querySelector('body')
+        body.style.overflow = 'visible'
+        setNavDropDownSection()
+        setOverlayDisplay('none')
+    }
 
     return (
-        <MainHeader>
-            <SubscribeBanner>
-                Sign up and GET 20% OFF for your first order
-            </SubscribeBanner>
-            <StyledNav>
-                <LargeLogo href="/">
-                    <Image src={RuneLogo} alt="Rune logo"/>
-                </LargeLogo>
-                <DesktopNavLinks> 
-                    {shortNavData.map((navItem, i) => {
-                        return (
-                            <li key={"mainNav" + i} 
-                            onMouseEnter={() => setNavDropDownSection(navItem.label)}
-                            onMouseLeave={() => setNavDropDownSection()}
-                            ><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
-                        )
-                    })}
-                    <li>
-                        <CartLink href="/checkout">
-                            <CartImage>
-                                <Image src={cart}/>  
-                            </CartImage>
-                        {checkoutProducts?.length > 0 ? 
-                            <CartNumber>
-                            </CartNumber>
-                        :
-                        null}
-                        </CartLink>
-                    </li>
-                </DesktopNavLinks>
-                <NavDropDown section={navDropDownSection}/>
-            </StyledNav>
-            <SideNavArea>
-                <LargeLogo href="/">
-                    <Image src={RuneLogo} alt="Rune logo"/>
-                </LargeLogo>
-                {showNavbar ? 
-                <>
-                    <SideNavPlusOverlay>
-                        <SideNavOverlay></SideNavOverlay>
-                        <SideNav>
-                        <SmallLogo href="/">
-                            <Image src={RuneLogo} alt="Rune logo"/>
-                        </SmallLogo>
-                        <SideNavLinks>
-                            {shortNavData.map((navItem, i) => {
-                                if(navItem.childLinks.length === 0){
-                                    return (
-                                        <>
-                                            <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
-                                        </>
-                                    )
-                                } else {
-                                    return (
-                                        <>
-                                            <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks} accordionNumber={i+1} expanded={expanded} handleChange={handleChange}/></li>
-                                            
-                                        </>
-                                    )
-                                }
-                                }) }
-                                <li className="checkoutLink">
-                                    <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
-                                </li>
-                            </SideNavLinks>
-                        </SideNav>
-                    </SideNavPlusOverlay>
-                </>
-                : null}
-                <SideNavButton>
-                    <Image src={showNavbar ? menuCross : menuBars} alt="hamburger menu icon" onClick={() => handleShowNavbar()}/>
-                </SideNavButton>
-            </SideNavArea>
-        </MainHeader>
+        <>
+            <MainHeader>
+                <SubscribeBanner>
+                    Sign up and GET 20% OFF for your first order
+                </SubscribeBanner>
+                <StyledNav>
+                    <LargeLogo href="/">
+                        <Image src={RuneLogo} alt="Rune logo"/>
+                    </LargeLogo>
+                    <DesktopNavLinks> 
+                        {shortNavData.map((navItem, i) => {
+                            return (
+                                <li key={"mainNav" + i} 
+                                onMouseEnter={() => openDesktopMenu(navItem.label)}
+                                ><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                            )
+                        })}
+                        <li>
+                            <CartLink href="/checkout">
+                                <CartImage>
+                                    <Image src={cart}/>  
+                                </CartImage>
+                            {checkoutProducts?.length > 0 ? 
+                                <CartNumber>
+                                </CartNumber>
+                            :
+                            null}
+                            </CartLink>
+                        </li>
+                    </DesktopNavLinks>
+                    <NavDropDown section={navDropDownSection} closeDesktopMenu={closeDesktopMenu}/>
+                </StyledNav>
+                <SideNavArea>
+                    <LargeLogo href="/">
+                        <Image src={RuneLogo} alt="Rune logo"/>
+                    </LargeLogo>
+                    {showNavbar ? 
+                    <>
+                        <SideNavPlusOverlay>
+                            <SideNavOverlay></SideNavOverlay>
+                            <SideNav>
+                            <SmallLogo href="/">
+                                <Image src={RuneLogo} alt="Rune logo"/>
+                            </SmallLogo>
+                            <SideNavLinks>
+                                {shortNavData.map((navItem, i) => {
+                                    if(navItem.childLinks.length === 0){
+                                        return (
+                                            <>
+                                                <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                                            </>
+                                        )
+                                    } else {
+                                        return (
+                                            <>
+                                                <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks} accordionNumber={i+1} expanded={expanded} handleChange={handleChange}/></li>
+                                                
+                                            </>
+                                        )
+                                    }
+                                    }) }
+                                    <li className="checkoutLink">
+                                        <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
+                                    </li>
+                                </SideNavLinks>
+                            </SideNav>
+                        </SideNavPlusOverlay>
+                    </>
+                    : null}
+                    <SideNavButton>
+                        <Image src={showNavbar ? menuCross : menuBars} alt="hamburger menu icon" onClick={() => handleShowNavbar()}/>
+                    </SideNavButton>
+                </SideNavArea>
+            </MainHeader>
+            <BackgroundOverlay overlayDisplay={overlayDisplay}></BackgroundOverlay>
+        </>
     )
 }

@@ -9,7 +9,6 @@ export default function BrandPage({products}){
     return(
         <>
         <Header/>
-        
         {products?.length ? 
         <ProductsGrid products={products}/>
         : null

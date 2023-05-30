@@ -36,12 +36,12 @@ const ColumnItem = styled.li`
     }
 `
 
-export default function NavDropDown({section}) {
-
+export default function NavDropDown({section, closeDesktopMenu}) {
+    
     return (
         <>
             {section !== undefined ? 
-                <DropdownContainer>
+                <DropdownContainer onMouseLeave={() => closeDesktopMenu()}>
                     {navData[section].childLinks.map((column, i) => {
                         return (
                             <>
