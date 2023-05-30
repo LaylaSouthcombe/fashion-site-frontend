@@ -118,7 +118,6 @@ export default function CheckoutPage() {
     if(isSuccess){
         return(
             <>
-                <Header/>
                 <ColumnsWrapper>
                     <Box>
                         <h1>Thanks for your order!</h1>
@@ -130,7 +129,6 @@ export default function CheckoutPage() {
     }
     return (
         <div>
-            <Header/>
             <ColumnsWrapper>
                     {!checkoutProducts?.length || !products?.length > 0 ?
                     <Box>

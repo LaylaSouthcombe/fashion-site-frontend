@@ -18,7 +18,6 @@ export default function HomePage({featuredProducts}) {
   // console.log(featuredProducts)
   return (
     <div>
-      <Header/>
       <HomeHero/>
       <BrandsCarousel/>
       <CustomerExperience/>
@@ -26,7 +25,6 @@ export default function HomePage({featuredProducts}) {
       <FeaturedProducts featuredProducts={featuredProducts}/>
       <BannerAd/>
       <NewsletterSubscribe/>
-      <Footer/>
     </div>
   )
 }

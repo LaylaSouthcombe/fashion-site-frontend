@@ -7,7 +7,6 @@ export default function ShoesPage({products}){
     console.log({products})
     return(
         <>
-        <Header/>
         {products?.length ? 
         <ProductsGrid products={products}/>
         : null
