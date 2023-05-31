@@ -1,8 +1,8 @@
 const shortNavData = [
     { link: "/brands", label: "Brands", childLinks: [
         {link: "/brands", label: "All brands"}, 
-        {link: "/brands/off-white", label: "Off White"}, 
-        {link: "/brands/nike", label: "Nike"}
+        {link: "/brand/off-white", label: "Off White"}, 
+        {link: "/brand/nike", label: "Nike"}
     ]},
     { link: "/clothing", label: "Clothing", childLinks: [
         {link: "/clothing", label: "All clothing"}, 
@@ -35,18 +35,18 @@ const navData = {
     Brands: { link: "/brands", label: "Brands", childLinks: [
         {title: 'title', listItems: [
             {link: "/brands", label: "All brands"}, 
-            {link: "/brands/off-white", label: "Off White"}, 
-            {link: "/brands/nike", label: "Nike"}
+            {link: "/brand/off-white", label: "Off White"}, 
+            {link: "/brand/nike", label: "Nike"}
         ]},
         {title: 'title', listItems: [
             {link: "/brands", label: "All brands"}, 
-            {link: "/brands/off-white", label: "Off White"}, 
-            {link: "/brands/nike", label: "Nike"}
+            {link: "/brand/off-white", label: "Off White"}, 
+            {link: "/brand/nike", label: "Nike"}
         ]},
         {title: 'title', listItems: [
             {link: "/brands", label: "All brands"}, 
-            {link: "/brands/off-white", label: "Off White"}, 
-            {link: "/brands/nike", label: "Nike"}
+            {link: "/brand/off-white", label: "Off White"}, 
+            {link: "/brand/nike", label: "Nike"}
         ]}
     ]
     },
