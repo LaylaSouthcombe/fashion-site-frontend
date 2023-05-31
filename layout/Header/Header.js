@@ -220,24 +220,16 @@ export default function Header() {
         setExpanded(newExpanded ? panel : false);
     };
 
-    const [navDropDownSection, setNavDropDownSection] = useState()
-    const [overlayDisplay, setOverlayDisplay] = useState('none')
-    const [navDropDownOpen, setNavDropDownOpen] = useState(false)
-    const openDesktopMenu = (navLabel) => {
+    const openDesktopMenu = () => {
         const body = document.querySelector('body')
         body.style.overflow = 'hidden'
-        // setNavDropDownSection(navLabel)
-        setOverlayDisplay('block')
-        // setNavDropDownOpen(true)
     }
 
     const closeDesktopMenu = () => {
         const body = document.querySelector('body')
         body.style.overflow = 'visible'
-        // setNavDropDownSection()
-        setOverlayDisplay('none')
-        // setNavDropDownOpen(false)
     }
+    
 
     return (
         <>
@@ -255,7 +247,7 @@ export default function Header() {
                                 <>
                                     <MainNavItem key={"mainNav" + i}>
                                         <NavLink href={navItem.link}>{navItem.label}</NavLink>
-                                        <NavDropDown section={navItem.label} navOpen={navDropDownOpen} openDesktopMenu={openDesktopMenu} closeDesktopMenu={closeDesktopMenu}/>
+                                        <NavDropDown section={navItem.label}  openDesktopMenu={openDesktopMenu} closeDesktopMenu={closeDesktopMenu}/>
                                     </MainNavItem>
                                     <BackgroundOverlay></BackgroundOverlay>
                                 </>
@@ -264,7 +256,7 @@ export default function Header() {
                         <li>
                             <CartLink href="/checkout">
                                 <CartImage>
-                                    <Image src={cart}/>  
+                                    <Image src={cart} alt="cart icon"/>  
                                 </CartImage>
                             {checkoutProducts?.length > 0 ? 
                                 <CartNumber>
@@ -274,7 +266,6 @@ export default function Header() {
                             </CartLink>
                         </li>
                     </DesktopNavLinks>
-                    {/* <NavDropDown section={navDropDownSection} closeDesktopMenu={closeDesktopMenu}/> */}
                 </StyledNav>
                 <SideNavArea>
                     <LargeLogo href="/">

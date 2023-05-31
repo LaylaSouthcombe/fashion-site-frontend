@@ -6,7 +6,7 @@ import ProductsGrid from "@/components/ProductsGrid"
 import { useState, useEffect } from "react"
 import styled from "styled-components"
 import Link from "next/link"
-
+import BannerAd from "@/components/BannerAd"
 
 const BrandsContainer = styled.section`
     width: 100%;
@@ -131,6 +131,7 @@ export default function BrandsPage({products}){
                     })
                 : null}
             </BrandsContainer>
+            <BannerAd/>
             <Footer/>
         </>
     )
