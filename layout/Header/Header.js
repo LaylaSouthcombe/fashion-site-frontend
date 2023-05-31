@@ -144,7 +144,7 @@ const SideNavLinks = styled.ul`
 `
 
 const DesktopNavLinks = styled.ul`
-    padding: 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     display: flex;
     flex-direction: row;
     font-size: 0.9rem;
@@ -154,6 +154,21 @@ const DesktopNavLinks = styled.ul`
     }
     li.checkoutLink {
         margin: 0rem 1rem;
+    }
+`
+
+const MainNavItem = styled.li`
+    :hover > div {
+        display: grid;
+    }
+    :hover + div[class^='Header__BackgroundOverlay'], :hover + div[class*=' Header__BackgroundOverlay']{
+        display: block;
+    }
+    :hover > a {
+        text-decoration: underline;
+        text-decoration-color: var(--main-dark-blue);
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
     }
 `
 
@@ -175,7 +190,10 @@ const CartNumber = styled.div`
 const BackgroundOverlay = styled.div`
     background-color: var(--main-dark-blue);
     opacity: 0.5;
-    display: ${props => props.overlayDisplay};
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
     height: 100vh;
     position: absolute;
@@ -204,18 +222,21 @@ export default function Header() {
 
     const [navDropDownSection, setNavDropDownSection] = useState()
     const [overlayDisplay, setOverlayDisplay] = useState('none')
+    const [navDropDownOpen, setNavDropDownOpen] = useState(false)
     const openDesktopMenu = (navLabel) => {
         const body = document.querySelector('body')
         body.style.overflow = 'hidden'
-        setNavDropDownSection(navLabel)
+        // setNavDropDownSection(navLabel)
         setOverlayDisplay('block')
+        // setNavDropDownOpen(true)
     }
 
     const closeDesktopMenu = () => {
         const body = document.querySelector('body')
         body.style.overflow = 'visible'
-        setNavDropDownSection()
+        // setNavDropDownSection()
         setOverlayDisplay('none')
+        // setNavDropDownOpen(false)
     }
 
     return (
@@ -228,12 +249,16 @@ export default function Header() {
                     <LargeLogo href="/">
                         <Image src={RuneLogo} alt="Rune logo"/>
                     </LargeLogo>
-                    <DesktopNavLinks> 
+                    <DesktopNavLinks onMouseExit={(() => closeDesktopMenu())}> 
                         {shortNavData.map((navItem, i) => {
                             return (
-                                <li key={"mainNav" + i} 
-                                onMouseEnter={() => openDesktopMenu(navItem.label)}
-                                ><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                                <>
+                                    <MainNavItem key={"mainNav" + i}>
+                                        <NavLink href={navItem.link}>{navItem.label}</NavLink>
+                                        <NavDropDown section={navItem.label} navOpen={navDropDownOpen} openDesktopMenu={openDesktopMenu} closeDesktopMenu={closeDesktopMenu}/>
+                                    </MainNavItem>
+                                    <BackgroundOverlay></BackgroundOverlay>
+                                </>
                             )
                         })}
                         <li>
@@ -249,7 +274,7 @@ export default function Header() {
                             </CartLink>
                         </li>
                     </DesktopNavLinks>
-                    <NavDropDown section={navDropDownSection} closeDesktopMenu={closeDesktopMenu}/>
+                    {/* <NavDropDown section={navDropDownSection} closeDesktopMenu={closeDesktopMenu}/> */}
                 </StyledNav>
                 <SideNavArea>
                     <LargeLogo href="/">
@@ -293,7 +318,7 @@ export default function Header() {
                     </SideNavButton>
                 </SideNavArea>
             </MainHeader>
-            <BackgroundOverlay overlayDisplay={overlayDisplay}></BackgroundOverlay>
+            
         </>
     )
 }

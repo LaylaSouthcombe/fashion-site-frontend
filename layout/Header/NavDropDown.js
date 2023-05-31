@@ -6,8 +6,10 @@ const DropdownContainer = styled.div`
     position: absolute;
     background-color: var(--main-light-blue);
     top: 100%;
+    left: 0;
     z-index: 100;
-    display: grid;
+    display: none;
+    /* display: ${props => props.navOpen ? 'grid' : 'none'}; */
     grid-template-columns: repeat(3, 1fr);
     padding: 1rem 3rem;
 
@@ -15,6 +17,7 @@ const DropdownContainer = styled.div`
         border-right: 2px solid var(--main-lightish-blue);
         border-left: 2px solid var(--main-lightish-blue);
     }
+
 `
 
 const DropDownColumn = styled.ul`
@@ -36,12 +39,12 @@ const ColumnItem = styled.li`
     }
 `
 
-export default function NavDropDown({section, closeDesktopMenu}) {
-    
+export default function NavDropDown({section, openDesktopMenu, closeDesktopMenu}) {
+    console.log(section)
     return (
         <>
             {section !== undefined ? 
-                <DropdownContainer onMouseLeave={() => closeDesktopMenu()}>
+                <DropdownContainer onMouseEnter={() => openDesktopMenu()} onMouseLeave={() => closeDesktopMenu()}>
                     {navData[section].childLinks.map((column, i) => {
                         return (
                             <>

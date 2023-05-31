@@ -1,8 +1,8 @@
 const shortNavData = [
     { link: "/brands", label: "Brands", childLinks: [
-        {link: "/clothing", label: "All clothing"}, 
-        {link: "/clothing/jackets", label: "Jackets"}, 
-        {link: "/clothing/trousers", label: "Trousers"}
+        {link: "/brands", label: "All brands"}, 
+        {link: "/brands/off-white", label: "Off White"}, 
+        {link: "/brands/nike", label: "Nike"}
     ]},
     { link: "/clothing", label: "Clothing", childLinks: [
         {link: "/clothing", label: "All clothing"}, 
@@ -10,43 +10,43 @@ const shortNavData = [
         {link: "/clothing/trousers", label: "Trousers"}
     ]},
     { link: "/shoes", label: "Shoes", childLinks: [
-        {link: "/clothing", label: "All clothing"}, 
-        {link: "/clothing/jackets", label: "Jackets"}, 
-        {link: "/clothing/trousers", label: "Trousers"}
+        {link: "/shoes", label: "All shoes"}, 
+        {link: "/shoes/trainers", label: "Trainers"}, 
+        {link: "/shoes/sandals", label: "Sandals"}
     ]},
     { link: "/bags", label: "Bags", childLinks: [
-        {link: "/clothing", label: "All clothing"}, 
-        {link: "/clothing/jackets", label: "Jackets"}, 
-        {link: "/clothing/trousers", label: "Trousers"}
+        {link: "/bags", label: "All bags"}, 
+        {link: "/bags/rucksack", label: "Rucksacks"}, 
+        {link: "/bags/handbags", label: "Handbags"}
     ]},
     { link: "/jewellery-watches", label: "Jewellry and Watches", childLinks: [
-        {link: "/clothing", label: "All clothing"}, 
-        {link: "/clothing/jackets", label: "Jackets"}, 
-        {link: "/clothing/trousers", label: "Trousers"}
+        {link: "/jewellery-watches", label: "All clothing"}, 
+        {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
+        {link: "/jewellery-watches/watches", label: "Watches"}
     ]},
     { link: "/accessories", label: "Accessories", childLinks: [
-        {link: "/clothing", label: "All clothing"}, 
-        {link: "/clothing/jackets", label: "Jackets"}, 
-        {link: "/clothing/trousers", label: "Trousers"}
+        {link: "/accessories", label: "All accessories"}, 
+        {link: "/accessories/hats", label: "Hats"}, 
+        {link: "/accessories/belts", label: "Belts"}
     ]},
 ]
 
 const navData = {
     Brands: { link: "/brands", label: "Brands", childLinks: [
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/brands", label: "All brands"}, 
+            {link: "/brands/off-white", label: "Off White"}, 
+            {link: "/brands/nike", label: "Nike"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/brands", label: "All brands"}, 
+            {link: "/brands/off-white", label: "Off White"}, 
+            {link: "/brands/nike", label: "Nike"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/brands", label: "All brands"}, 
+            {link: "/brands/off-white", label: "Off White"}, 
+            {link: "/brands/nike", label: "Nike"}
         ]}
     ]
     },
@@ -70,73 +70,73 @@ const navData = {
     },
     Shoes: { link: "/shoes", label: "Shoes", childLinks: [
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/shoes", label: "All shoes"}, 
+            {link: "/shoes/trainers", label: "Trainers"}, 
+            {link: "/shoes/sandals", label: "Sandals"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/shoes", label: "All shoes"}, 
+            {link: "/shoes/trainers", label: "Trainers"}, 
+            {link: "/shoes/sandals", label: "Sandals"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/shoes", label: "All shoes"}, 
+            {link: "/shoes/trainers", label: "Trainers"}, 
+            {link: "/shoes/sandals", label: "Sandals"}
         ]}
     ]
     },
     Bags: { link: "/bags", label: "Bags", childLinks: [
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/bags", label: "All bags"}, 
+            {link: "/bags/rucksack", label: "Rucksacks"}, 
+            {link: "/bags/handbags", label: "Handbags"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/bags", label: "All bags"}, 
+            {link: "/bags/rucksack", label: "Rucksacks"}, 
+            {link: "/bags/handbags", label: "Handbags"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/bags", label: "All bags"}, 
+            {link: "/bags/rucksack", label: "Rucksacks"}, 
+            {link: "/bags/handbags", label: "Handbags"}
         ]}
     ]
     },
     "Jewellry and Watches": { link: "/jewellery-watches", label: "Jewellry and Watches", childLinks: [
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/jewellery-watches", label: "All clothing"}, 
+            {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
+            {link: "/jewellery-watches/watches", label: "Watches"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/jewellery-watches", label: "All clothing"}, 
+            {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
+            {link: "/jewellery-watches/watches", label: "Watches"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/jewellery-watches", label: "All clothing"}, 
+            {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
+            {link: "/jewellery-watches/watches", label: "Watches"}
         ]}
     ]
     },
     "Accessories": { link: "/accessories", label: "Accessories", childLinks: [
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/accessories", label: "All accessories"}, 
+            {link: "/accessories/hats", label: "Hats"}, 
+            {link: "/accessories/belts", label: "Belts"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/accessories", label: "All accessories"}, 
+            {link: "/accessories/hats", label: "Hats"}, 
+            {link: "/accessories/belts", label: "Belts"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
-            {link: "/clothing/jackets", label: "Jackets"}, 
-            {link: "/clothing/trousers", label: "Trousers"}
+            {link: "/accessories", label: "All accessories"}, 
+            {link: "/accessories/hats", label: "Hats"}, 
+            {link: "/accessories/belts", label: "Belts"}
         ]}
     ]
     }
