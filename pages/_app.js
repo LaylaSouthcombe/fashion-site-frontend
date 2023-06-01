@@ -22,8 +22,17 @@ const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar {
     display: none;
   }
+  html {
+    height: 100%;
+  }
   body {
     -ms-overflow-style: none;
+    height: 100%;
+  }
+  #__next {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 `
 
