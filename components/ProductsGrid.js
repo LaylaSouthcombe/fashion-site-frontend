@@ -1,14 +1,31 @@
 import styled from "styled-components"
 import ProductTile from "./ProductsCarousel/ProductTile"
+import FilterSideBar from "./FilterSideBar"
 import { useEffect, useState } from "react"
 
-const ProductsGridContainer = styled.section`
+const ProductsGridOuterContainer = styled.section`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.3fr 0.7fr;
+`
+
+const ProductsGridContainer = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 `
 
+const ProductsGridResultsAndSort = styled.div`
 
+`
+
+const NumberOfResults = styled.p`
+
+`
+
+const SortDropDownArea = styled.div`
+
+`
 
 export default function ProductsGrid({products}) {
     console.log(products[0])
@@ -17,6 +34,12 @@ export default function ProductsGrid({products}) {
     const [productSubTypes, setProductSubTypes] = useState([])
     const [sizes, setSizes] = useState([])
     const [colours, setColours] = useState([])
+
+    const [expanded, setExpanded] = useState('');
+
+    const handleChange = (panel) => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
+    };
 
     useEffect(() => {
         if(products !== undefined){
@@ -55,12 +78,21 @@ export default function ProductsGrid({products}) {
 
 
     return (
-        <ProductsGridContainer>
-            {products?.length > 0 ? 
-                products.map((product, i) => (
-                    <ProductTile key={i} product={product}/>
-                ))
-            : null}
-        </ProductsGridContainer>
+        <>
+            <ProductsGridResultsAndSort>
+                <NumberOfResults>{products?.length} Results</NumberOfResults>
+                <SortDropDownArea>Sort</SortDropDownArea>
+            </ProductsGridResultsAndSort>
+            <ProductsGridOuterContainer>
+                <FilterSideBar colours={colours} sizes={sizes} productTypes={productTypes} productSubTypes={productSubTypes} handleChange={handleChange} expanded={expanded}/>
+                <ProductsGridContainer>
+                    {products?.length > 0 ? 
+                        products.map((product, i) => (
+                            <ProductTile key={i} product={product}/>
+                        ))
+                    : null}
+                </ProductsGridContainer>
+            </ProductsGridOuterContainer>
+        </>
     )
 }
