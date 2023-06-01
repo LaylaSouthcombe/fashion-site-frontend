@@ -3,7 +3,7 @@ import GridProduct from "./GridProduct"
 
 export default function ProductsGrid({products}) {
     // console.log(featuredProducts)
-    console.log("products grid", products)
+    // console.log("products grid", products)
     return (
         <div>Featured products
             {products?.length > 0 ? 

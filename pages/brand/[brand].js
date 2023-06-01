@@ -5,7 +5,7 @@ import { Product } from "@/models/Product"
 import ProductsGrid from "@/components/ProductsGrid"
 
 export default function BrandPage({products}){
-    console.log({products})
+    // console.log({products})
     return(
         <>
         <Header/>
@@ -18,10 +18,20 @@ export default function BrandPage({products}){
     )
 }
 
-export async function getServerSideProps(){
+export async function getServerSideProps(context){
     await mongooseConnect()
-    const products = await Product.find({}, null, {sort:{'_id': -1}})
-    console.log("products", products)
+    const {brand} = context.query
+
+    const products = await Product.aggregate([{
+        $search: {
+          index: "default",
+          text: {
+            query: brand.replace("-", " "),
+            path: 'brand'
+          }
+        }
+    }])
+    console.log("products", products.length)
     return {
         props:{
             products: JSON.parse(JSON.stringify(products))
