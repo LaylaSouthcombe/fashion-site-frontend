@@ -8,8 +8,7 @@ const DropdownContainer = styled.div`
     top: 100%;
     left: 0;
     z-index: 100;
-    display: none;
-    /* display: ${props => props.navOpen ? 'grid' : 'none'}; */
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 1rem 3rem;
 
@@ -39,12 +38,12 @@ const ColumnItem = styled.li`
     }
 `
 
-export default function NavDropDown({section, openDesktopMenu, closeDesktopMenu}) {
-    console.log(section)
+export default function NavDropDown({section}) {
+
     return (
         <>
             {section !== undefined ? 
-                <DropdownContainer onMouseEnter={() => openDesktopMenu()} onMouseLeave={() => closeDesktopMenu()}>
+                <DropdownContainer>
                     {navData[section].childLinks.map((column, i) => {
                         return (
                             <>

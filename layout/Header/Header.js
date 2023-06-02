@@ -1,11 +1,12 @@
 import Link from "next/link";
-import styled from "styled-components"
+import styled, {css} from "styled-components"
 import NavDropDown from "@/layout/Header/NavDropDown";
 import { useContext, useState } from "react";
 import { CheckoutContext } from "@/components/CheckoutContext";
 import NavAccordion from "@/components/NavAccordion";
 import {shortNavData} from './NavData'
 import Image from "next/image";
+import { usePathname } from 'next/navigation';
 
 import menuBars from '../../images/icons/menuBars.png'
 import menuCross from '../../images/icons/menuCross.png'
@@ -158,18 +159,20 @@ const DesktopNavLinks = styled.ul`
 `
 
 const MainNavItem = styled.li`
-    :hover > div {
-        display: grid;
-    }
-    :hover + div[class^='Header__BackgroundOverlay'], :hover + div[class*=' Header__BackgroundOverlay']{
-        display: block;
-    }
     :hover > a {
         text-decoration: underline;
         text-decoration-color: var(--main-dark-blue);
         text-decoration-thickness: 3px;
         text-underline-offset: 5px;
     }
+    
+    ${props => props.isActive === true && css`
+    text-decoration: underline;
+        text-decoration-color: var(--main-lightish-blue);
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
+    `}
+
 `
 
 const CartImage = styled.div`
@@ -189,8 +192,7 @@ const CartNumber = styled.div`
 
 const BackgroundOverlay = styled.div`
     background-color: var(--main-dark-blue);
-    opacity: 0.5;
-    display: none;
+    opacity: 0.2;
     position: absolute;
     top: 100%;
     left: 0;
@@ -203,7 +205,7 @@ export default function Header() {
     const {checkoutProducts} = useContext(CheckoutContext)
     
     const [showNavbar, setShowNavbar] = useState(false);
-    
+    const pathname = usePathname();
     const handleShowNavbar = () => {
         const body = document.querySelector('body')
         setShowNavbar(!showNavbar)
@@ -219,17 +221,22 @@ export default function Header() {
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
+    const [menuState, setMenuState] = useState({});
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const openDesktopMenu = () => {
-        const body = document.querySelector('body')
-        body.style.overflow = 'hidden'
-    }
-
-    const closeDesktopMenu = () => {
-        const body = document.querySelector('body')
-        body.style.overflow = 'visible'
-    }
+    const handleMenuOpen = (menuId) => {
+        setMenuState((prevState) => ({
+          ...prevState,
+          [menuId]: true,
+        }));
+      };
     
+      const handleMenuClose = (menuId) => {
+        setMenuState((prevState) => ({
+          ...prevState,
+          [menuId]: false,
+        }));
+      };
 
     return (
         <>
@@ -241,15 +248,22 @@ export default function Header() {
                     <LargeLogo href="/">
                         <Image src={RuneLogo} alt="Rune logo"/>
                     </LargeLogo>
-                    <DesktopNavLinks onMouseExit={(() => closeDesktopMenu())}> 
+                    <DesktopNavLinks> 
                         {shortNavData.map((navItem, i) => {
+                            const isActive = pathname.startsWith(navItem.link)
                             return (
                                 <>
-                                    <MainNavItem key={"mainNav" + i}>
+                                    <MainNavItem key={"mainNav" + i} onMouseEnter={() => handleMenuOpen(navItem.link)}
+                                    onMouseLeave={() => handleMenuClose(navItem.link)} isActive={isActive}>
                                         <NavLink href={navItem.link}>{navItem.label}</NavLink>
-                                        <NavDropDown section={navItem.label}  openDesktopMenu={openDesktopMenu} closeDesktopMenu={closeDesktopMenu}/>
+                                        {menuState[navItem.link] ? 
+                                        <NavDropDown section={navItem.label}
+                                        />
+                                        : null}
                                     </MainNavItem>
-                                    <BackgroundOverlay></BackgroundOverlay>
+                                    {menuState[navItem.link] ? 
+                                    <BackgroundOverlay onMouseEnter={() => handleMenuClose(navItem.link)} onMouseLeave={() => handleMenuClose(navItem.link)} ></BackgroundOverlay>
+                                    : null}
                                 </>
                             )
                         })}

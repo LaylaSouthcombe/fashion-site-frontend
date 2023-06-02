@@ -80,7 +80,7 @@ export default function BrandsPage({brands}){
                             </BrandLetterArea>
                         )
                     })
-            }
+                }
             </BrandsContainer>
             <BannerAd/>
             <Footer/>
