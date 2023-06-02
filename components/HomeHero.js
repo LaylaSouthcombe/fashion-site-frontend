@@ -4,12 +4,11 @@ import HomeHeroImageSmall from '../images/HomeHeroImageSmall.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import arrow from '../images/curatedPicks/right-arrow.png'
-import { useState, useEffect } from 'react'
 
 const HeroImageDiv = styled.div`
     position: relative;
     width: 100%;
-    object-fit: contain;
+    overflow: hidden;
     img {
         width: 100%;
         height: auto;
@@ -82,22 +81,25 @@ const HeroButton = styled(Link)`
     }
 `
 
-export default function HomeHero() {
-
-    const [windowSize, setWindowSize] = useState(typeof window !== 'undefined' ? window?.innerWidth : null)
-
-    const handleResize = () => {
-        setWindowSize(window.innerWidth)
+const SmallHeroImage = styled(Image)`
+    @media (min-width: 768px){
+        display: none;
     }
+`
 
-    useEffect(() => {
-        typeof window !== 'undefined' ? window.addEventListener('resize', handleResize) : null
-    }, [])
-    
+const LargeHeroImage = styled(Image)`
+    display: none;
+    @media (min-width: 768px){
+        display: block;
+    }
+`
+
+export default function HomeHero() {
 
     return (
         <HeroImageDiv>
-            <Image src={windowSize > 768 ? HomeHeroImage : HomeHeroImageSmall} alt="" />
+            <LargeHeroImage src={HomeHeroImage} alt="" /> 
+            <SmallHeroImage src={HomeHeroImageSmall} alt="" />
             <HeroInfo>
                 <HeroText>Level up your style with out summer collections</HeroText>
                 <HeroButton href={"clothing"}>Shop now<Image src={arrow} alt="arrow"/></HeroButton>
