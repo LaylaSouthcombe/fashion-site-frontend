@@ -1,9 +1,7 @@
 import Header from "@/layout/Header/Header"
 import Footer from "@/layout/Footer/Footer"
 import { mongooseConnect } from "@/lib/mongoose"
-import { Product } from "@/models/Product"
-import ProductsGrid from "@/components/ProductsGrid"
-import { useState, useEffect } from "react"
+import { Brand } from "@/models/Brand"
 import styled from "styled-components"
 import Link from "next/link"
 import BannerAd from "@/components/BannerAd"
@@ -51,10 +49,6 @@ const BrandLetterTitle = styled.h3`
     padding: 0.75rem 0rem 0.25rem 0rem;
 `
 
-const BrandNamesContainer = styled.div`
-
-`
-
 const BrandName = styled.p`
     margin: 0.5rem 0rem;
     a {
@@ -62,74 +56,31 @@ const BrandName = styled.p`
     }
 `
 
-export default function BrandsPage({products}){
-
-    const [brands, setBrands] = useState([])
-    const [brandsLoaded, setBrandsLoaded] = useState(false)
-
-    const getBrands = (allProducts) => {
-        let brandsList = []
-        for(let i = 0; i < allProducts.length; i++){
-            if(!brandsList.includes(allProducts[i].brand)){
-                brandsList.push(allProducts[i].brand)
-            }
-        }
-        return brandsList.sort()
-    }
-
-    const getBrandObject = (allBrands) => {
-        let brandsObject = {}
-        for(let i = 0; i < allBrands.length; i++){
-            let letter = allBrands[i][0]
-            let link = allBrands[i].replace(" ", "-").toLowerCase()
-            if(!Object.keys(brandsObject).includes(allBrands[i][0])){
-                brandsObject[letter] = []
-                brandsObject[letter].push({name: allBrands[i], link: link})
-            } else {
-                brandsObject[letter].push({name: allBrands[i], link: link})
-            }
-        }
-        return brandsObject
-    }
-
-    const getBrandsList = (products) => {
-        let brandsList = getBrands(products)
-        let brandsObject = getBrandObject(brandsList)
-        setBrands(brandsObject)
-    }
-
-    useEffect(() => {
-        if(products !== undefined){
-            getBrandsList(products)
-        }
-        setBrandsLoaded(true)
-    },[])
+export default function BrandsPage({brands}){
     return (
         <>
-        <Header/>
-        
+            <Header/>
             <BrandMainTitle>Brands</BrandMainTitle>
             <BrandsContainer>
-                {brandsLoaded ? 
-                    Object.keys(brands).map(brandLetter => {
+                {Object.values(brands).map(brandObject => {
                         return (
-                            <BrandLetterArea key={"brandArea-" + brandLetter}>
-                                <BrandLetterTitle>{brandLetter}</BrandLetterTitle>
-                                <BrandNamesContainer>
-                                    {brands[brandLetter].map((brand, i) => {
+                            <BrandLetterArea key={"brandArea-" + brandObject.letter}>
+                                <BrandLetterTitle>{brandObject.letter}</BrandLetterTitle>
+                                <div>
+                                    {brandObject.brands.map((brand, i) => {
                                         return (
-                                            <BrandName key={`brandName-${brandLetter}-${i}`}>
+                                            <BrandName key={`brandName-${brandObject.letter}-${i}`}>
                                                 <Link href={brand.link}>
                                                 {brand.name}
                                                 </Link>
                                             </BrandName>
                                         )
                                     })}
-                                </BrandNamesContainer>
+                                </div>
                             </BrandLetterArea>
                         )
                     })
-                : null}
+            }
             </BrandsContainer>
             <BannerAd/>
             <Footer/>
@@ -139,10 +90,10 @@ export default function BrandsPage({products}){
 
 export async function getServerSideProps(){
     await mongooseConnect()
-    const products = await Product.find({}, null, {sort:{'_id': -1}})
-    console.log("products", products)
+    const brands = await Brand.find({})
+    console.log("brands", brands)
     return {
         props:{
-            products: JSON.parse(JSON.stringify(products))
+            brands: JSON.parse(JSON.stringify(brands))
     }}
 }
