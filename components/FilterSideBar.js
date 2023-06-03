@@ -125,7 +125,7 @@ const Filter = styled.li`
     }
 `
 
-export default function FilterSideBar({colours, sizes, productTypes, productSubTypes, expanded, handleChange}){
+export default function FilterSideBar({brands, colours, sizes, productTypes, productSubTypes, expanded, handleChange, updateFilteredProducts}){
     return (
         <>
         <div>
@@ -139,8 +139,8 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                             <FilterArea filtersLength={productTypes.length}>
                                 {productTypes.map((type, i) => {
                                     return (
-                                        <Filter key={"childLink" + i}>
-                                            <Checkbox /><Typography>{type}</Typography>
+                                        <Filter key={"childLink" + i} >
+                                            <Checkbox onChange={() => updateFilteredProducts({productType: type})}/><Typography>{type}</Typography>
                                         </Filter>
                                     )
                                 })}
@@ -156,7 +156,7 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                                 {productSubTypes.map((subType, i) => {
                                     return (
                                         <Filter key={"childLink" + i}>
-                                            <Checkbox />
+                                            <Checkbox onChange={() => updateFilteredProducts({productSubType: subType})}/>
                                             <Typography>{subType}</Typography>
                                         </Filter>
                                     )
@@ -166,15 +166,15 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                     </Accordion>
                     <Accordion expanded={expanded === `panel3`} onChange={handleChange(`panel3`)}>
                         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Colour</Typography>
+                            <Typography>Brand</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <FilterArea filtersLength={colours.length}>
-                                {colours.map((colour, i) => {
+                            <FilterArea filtersLength={brands.length}>
+                                {brands.map((brand, i) => {
                                     return (
                                         <Filter key={"childLink" + i}>
-                                            <Checkbox />
-                                            <Typography>{colour}</Typography>
+                                            <Checkbox onChange={() => updateFilteredProducts({brand: brand})}/>
+                                            <Typography>{brand}</Typography>
                                         </Filter>
                                     )
                                 })}
@@ -183,6 +183,23 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                     </Accordion>
                     <Accordion expanded={expanded === `panel4`} onChange={handleChange(`panel4`)}>
                         <AccordionSummary aria-controls="panel4d-content" id="panel4d-header" expandIcon={<ExpandMoreIcon />}>
+                            <Typography>Colour</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <FilterArea filtersLength={colours.length}>
+                                {colours.map((colour, i) => {
+                                    return (
+                                        <Filter key={"childLink" + i}>
+                                            <Checkbox onChange={() => updateFilteredProducts({colour: colour})}/>
+                                            <Typography>{colour}</Typography>
+                                        </Filter>
+                                    )
+                                })}
+                            </FilterArea>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion expanded={expanded === `panel5`} onChange={handleChange(`panel5`)}>
+                        <AccordionSummary aria-controls="panel5d-content" id="panel5d-header" expandIcon={<ExpandMoreIcon />}>
                             <Typography>Size</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -190,7 +207,7 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                                 {sizes.map((size, i) => {
                                     return (
                                         <Filter key={"childLink" + i}>
-                                            <Checkbox />
+                                            <Checkbox onChange={() => updateFilteredProducts({sizeAndStock: size})}/>
                                             <Typography>{size}</Typography>
                                         </Filter>
                                     )
