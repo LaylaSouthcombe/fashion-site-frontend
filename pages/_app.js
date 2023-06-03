@@ -19,15 +19,17 @@ const GlobalStyles = createGlobalStyle`
     --main-blue: #A2A8AD;
     --main-lightish-blue: #dcdfe3;
   }
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  
   html {
     height: 100%;
   }
+  
   body {
     -ms-overflow-style: none;
     height: 100%;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
   #__next {
     height: 100%;

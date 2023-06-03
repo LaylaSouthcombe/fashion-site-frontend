@@ -9,6 +9,7 @@ import BannerAd from "@/components/BannerAd"
 const BrandsContainer = styled.section`
     width: 100%;
     padding: 0px 10%;
+    margin-bottom: 3rem;
     background-color: var(--main-light-blue);
     display: grid;
     grid-template-columns: 1fr;
@@ -70,7 +71,7 @@ export default function BrandsPage({brands}){
                                     {brandObject.brands.map((brand, i) => {
                                         return (
                                             <BrandName key={`brandName-${brandObject.letter}-${i}`}>
-                                                <Link href={brand.link}>
+                                                <Link href={"/brand/" + brand.link}>
                                                 {brand.name}
                                                 </Link>
                                             </BrandName>

@@ -5,6 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Checkbox from '@mui/material/Checkbox';
 import Link from 'next/link';
 
 const theme = createTheme({
@@ -13,7 +14,22 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     boxShadow: 'none',
-                    backgroundColor: 'var(--main-light-blue)'
+                    backgroundColor: 'white',
+                    padding: '1rem 0rem',
+                    '&.Mui-expanded': {
+                        '&:before': {
+                            position: 'absolute',
+                            left: 0,
+                            top: '-1px',
+                            right: 0,
+                            height: '1px',
+                            content: '""',
+                            opacity: '1 !important',
+                            backgroundColor: 'rgba(0, 0, 0, 0.12)'
+                        },
+                        margin: '0 !important'
+                    }
+                    
                 },
             },
         },
@@ -45,7 +61,7 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     padding: 0,
-                    backgroundColor: 'var(--main-lightish-blue)'
+                    margin: '0.75rem 0rem 0rem 0rem'
                 },
             },
         },
@@ -64,6 +80,13 @@ const theme = createTheme({
                     padding: '0rem 1rem'
                 },
             },
+        },
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    padding: '0.5rem 0.25rem 0.5rem 0.5rem'
+                }
+            }
         }
     },
 });
@@ -72,7 +95,34 @@ const ChildNavLink = styled(Link)`
 `
 
 const FilterBarArea = styled.div`
+    padding-top: 1.25rem;
+`
 
+const FilterArea = styled.ul`
+    overflow: scroll;
+    max-height: 15rem;
+    overflow-x: hidden;
+    ::-webkit-scrollbar {
+        display: ${props => props.filtersLength > 6 ? 'block' : 'none'};
+        width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: var(--main-light-blue);
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--main-dark-blue);
+    }
+`
+
+const Filter = styled.li`
+    list-style-type: none;
+    padding: '0.75rem 0.5rem';
+    display: flex;
+    align-items: center;
+    p {
+        padding-left: 0;
+        margin-left: '0.25rem';
+    }
 `
 
 export default function FilterSideBar({colours, sizes, productTypes, productSubTypes, expanded, handleChange}){
@@ -86,13 +136,15 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                             <Typography>Product type</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {productTypes.map((type, i) => {
-                                return (
-                                    <li key={"childLink" + i}>
-                                        <Typography>{type}</Typography>
-                                    </li>
-                                )
-                            })}
+                            <FilterArea filtersLength={productTypes.length}>
+                                {productTypes.map((type, i) => {
+                                    return (
+                                        <Filter key={"childLink" + i}>
+                                            <Checkbox /><Typography>{type}</Typography>
+                                        </Filter>
+                                    )
+                                })}
+                            </FilterArea>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion expanded={expanded === `panel2`} onChange={handleChange(`panel2`)}>
@@ -100,13 +152,16 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                             <Typography>Product subtype</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {productSubTypes.map((subType, i) => {
-                                return (
-                                    <li key={"childLink" + i}>
-                                        <Typography>{subType}</Typography>
-                                    </li>
-                                )
-                            })}
+                            <FilterArea filtersLength={productSubTypes.length}>
+                                {productSubTypes.map((subType, i) => {
+                                    return (
+                                        <Filter key={"childLink" + i}>
+                                            <Checkbox />
+                                            <Typography>{subType}</Typography>
+                                        </Filter>
+                                    )
+                                })}
+                            </FilterArea>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion expanded={expanded === `panel3`} onChange={handleChange(`panel3`)}>
@@ -114,13 +169,16 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                             <Typography>Colour</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {colours.map((colour, i) => {
-                                return (
-                                    <li key={"childLink" + i}>
-                                        <Typography>{colour}</Typography>
-                                    </li>
-                                )
-                            })}
+                            <FilterArea filtersLength={colours.length}>
+                                {colours.map((colour, i) => {
+                                    return (
+                                        <Filter key={"childLink" + i}>
+                                            <Checkbox />
+                                            <Typography>{colour}</Typography>
+                                        </Filter>
+                                    )
+                                })}
+                            </FilterArea>
                         </AccordionDetails>
                     </Accordion>
                     <Accordion expanded={expanded === `panel4`} onChange={handleChange(`panel4`)}>
@@ -128,13 +186,16 @@ export default function FilterSideBar({colours, sizes, productTypes, productSubT
                             <Typography>Size</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            {sizes.map((size, i) => {
-                                return (
-                                    <li key={"childLink" + i}>
+                            <FilterArea filtersLength={sizes.length}>
+                                {sizes.map((size, i) => {
+                                    return (
+                                        <Filter key={"childLink" + i}>
+                                            <Checkbox />
                                             <Typography>{size}</Typography>
-                                    </li>
-                                )
-                            })}
+                                        </Filter>
+                                    )
+                                })}
+                            </FilterArea>
                         </AccordionDetails>
                     </Accordion>
                 </FilterBarArea>

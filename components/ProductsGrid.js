@@ -4,9 +4,10 @@ import FilterSideBar from "./FilterSideBar"
 import { useEffect, useState } from "react"
 
 const ProductsGridOuterContainer = styled.section`
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: 0.3fr 0.7fr;
+    grid-template-columns: 0.25fr 0.75fr;
 `
 
 const ProductsGridContainer = styled.div`
