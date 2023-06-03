@@ -7,16 +7,27 @@ export default async function handle(req, res) {
         return
     }
     await mongooseConnect();
-    const queryArray = req.body
+    const queryArray = req.body.queryArray
     console.log("filters ", queryArray)
-
+    const queryConstraint = req.body.queryConstraint
+    console.log(queryConstraint)
+    let path = Object.keys(queryConstraint)[0]
+    let value = Object.values(queryConstraint)[0].replace("-", " ")
     const getFilteredProducts = async () => {
-        let products = await Product.aggregate([{
+        let products = await Product.aggregate([
+        {
             $search: {
                 index: "default",
                 compound: {
-                    should: queryArray
-                }
+                    filter: queryArray,
+                    must: [{
+                    text: {
+                        query: value,
+                        path: path
+                    }
+                }]
+                },
+                
             }
         }
         ]).limit(10)
@@ -24,7 +35,10 @@ export default async function handle(req, res) {
     }
 
     const getAllProducts = async () => {
-        let products = await Product.find({}).limit(50)
+        let query = {}
+        query[path] = value.toUpperCase()
+        console.log(query)
+        let products = await Product.find(query).limit(50)
         return products
     }
 
@@ -37,9 +51,12 @@ export default async function handle(req, res) {
           array[j] = temp;
         }
     }
+
+    //TODO: add in page specifics so that only items for a single brand is returned, or only shoes
+
     
     shuffleArray(products)
-    console.log("products", products)
+    // console.log("products", products)
 
     // res.json(await Product.find({_id:ids}))
     res.json(products)

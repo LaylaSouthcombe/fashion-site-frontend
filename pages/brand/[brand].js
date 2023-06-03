@@ -9,14 +9,14 @@ const PageContent = styled.div`
     flex-grow: 1;
 `
 
-export default function BrandPage({products}){
+export default function BrandPage({products, brand}){
     // console.log({products})
     return(
         <>
             <Header/>
             <PageContent>
                 {products?.length ? 
-                <ProductsGrid products={products}/>
+                <ProductsGrid products={products} apiUrl={'/api/filtered/brand'} queryConstraint={{brand: brand}}/>
                 : null
                 }
             </PageContent>
@@ -41,6 +41,7 @@ export async function getServerSideProps(context){
     console.log("products", products.length)
     return {
         props:{
-            products: JSON.parse(JSON.stringify(products))
+            products: JSON.parse(JSON.stringify(products)),
+            brand: brand
     }}
 }

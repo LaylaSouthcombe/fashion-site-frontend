@@ -31,7 +31,7 @@ const SortDropDownArea = styled.div`
 
 `
 
-export default function ProductsGrid({products}) {
+export default function ProductsGrid({products, apiUrl, queryConstraint}) {
 
     const [productTypes, setProductTypes] = useState([])
     const [productSubTypes, setProductSubTypes] = useState([])
@@ -106,13 +106,18 @@ export default function ProductsGrid({products}) {
         }
     },[])
 
-    const getFilteredProducts = async (queryArray) => {
-        const response = await axios.post('/api/filtered-products', queryArray)
+    const getFilteredProducts = async (queryArray, queryConstraint) => {
+        let body = {
+            queryArray: queryArray,
+            queryConstraint: queryConstraint
+        }
+        const response = await axios.post(apiUrl, body)
         console.log(response)
         return response.data
     }
 
     const updateFilteredProducts = async (filter) => {
+        //TODO: sort this
         let filterKey = Object.keys(filter)[0]
         let filterValue = Object.values(filter)[0]
 
@@ -126,7 +131,7 @@ export default function ProductsGrid({products}) {
         console.log(filters[filterKey])
         let queryArray = generateQuery(filters)
         console.log("queryArray", queryArray)
-        let newProducts = await getFilteredProducts(queryArray)
+        let newProducts = await getFilteredProducts(queryArray, queryConstraint)
         setCurrentProducts(newProducts)
     }
 
