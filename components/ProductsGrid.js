@@ -17,6 +17,7 @@ const ProductsGridContainer = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr;
 `
 
 const ProductsGridResultsAndSort = styled.div`
@@ -39,6 +40,8 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     const [colours, setColours] = useState([])
     const [brands, setBrands] = useState([])
 
+    const [filterLabels, setFilterLabels] = useState({productType: [], productSubType: [], sizesAndStock: [], colour: [], brand: []})
+
     const [expanded, setExpanded] = useState('');
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -46,20 +49,19 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     };
 
     const [currentProducts, setCurrentProducts] = useState(products)
-    const [filters, setFilters] = useState({productType: [], productSubType: [], colour: [], sizeAndStock: [], brand: []})
-
+    const [filters, setFilters] = useState({productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []})
+    // const [sortResults, setSortResults] = useState("recommended")
     
-    const generateQuery = (filters) => {
+    const generateQueryFromFilters = (filters) => {
+        //TODO: fix it for sizes
         let queryArray = []
         for(let i = 0; i < Object.keys(filters).length; i++){
             let filterKey = Object.keys(filters)[i]
-            console.log(filterKey)
-            console.log(filters[filterKey])
-
+            console.log("filters[filterKey]", filters[filterKey])
             if(filters[filterKey].length > 0){
-                queryArray.push({
+                    queryArray.push({
                     text: {
-                        query: filters[filterKey][0],
+                        query: filters[filterKey],
                         path: filterKey
                     }
                 })
@@ -69,35 +71,27 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     }
 
     const generateAvailableFilters = (products) => {
-        let newProductTypes = []
-        let newProductSubTypes = []
-        let newColours = []
-        let newSizes = []
-        let newBrands = []
+        let newFilterLabels = {productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []}
         for(let i = 0; i < products.length; i++){
-            if(!newProductTypes.includes(products[i].productType)){
-                newProductTypes.push(products[i].productType)
+            if(!newFilterLabels.productType.includes(products[i].productType)){
+                newFilterLabels.productType.push(products[i].productType)
             }
-            if(!newProductSubTypes.includes(products[i].productSubType)){
-                newProductSubTypes.push(products[i].productSubType)
+            if(!newFilterLabels.productSubType.includes(products[i].productSubType)){
+                newFilterLabels.productSubType.push(products[i].productSubType)
             }
-            if(!newColours.includes(products[i].colour)){
-                newColours.push(products[i].colour)
+            if(!newFilterLabels.colour.includes(products[i].colour)){
+                newFilterLabels.colour.push(products[i].colour)
             }
-            if(!newBrands.includes(products[i].brands)){
-                newBrands.push(products[i].brands)
+            if(!newFilterLabels.brand.includes(products[i].brand)){
+                newFilterLabels.brand.push(products[i].brand)
             }
             for(let j = 0; j < products[i].sizesAndStock.length; j++){
-                if(!newSizes.includes(products[i].sizesAndStock[j].size)){
-                    newSizes.push(products[i].sizesAndStock[j].size)
+                if(!newFilterLabels.sizesAndStock.includes(products[i].sizesAndStock[j].size)){
+                    newFilterLabels.sizesAndStock.push(products[i].sizesAndStock[j].size)
                 }
             }
         }
-        setProductTypes(newProductTypes)
-        setProductSubTypes(newProductSubTypes)
-        setColours(newColours)
-        setSizes(newSizes)
-        setBrands(newBrands)
+        setFilterLabels(newFilterLabels)
     }
 
     useEffect(() => {
@@ -109,7 +103,8 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     const getFilteredProducts = async (queryArray, queryConstraint) => {
         let body = {
             queryArray: queryArray,
-            queryConstraint: queryConstraint
+            queryConstraint: queryConstraint,
+            sortResults: "recommended"
         }
         const response = await axios.post(apiUrl, body)
         console.log(response)
@@ -117,7 +112,6 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     }
 
     const updateFilteredProducts = async (filter) => {
-        //TODO: sort this
         let filterKey = Object.keys(filter)[0]
         let filterValue = Object.values(filter)[0]
 
@@ -129,11 +123,14 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
         }
         
         console.log(filters[filterKey])
-        let queryArray = generateQuery(filters)
+        console.log(filters)
+        // let queryArray = generateQueryFromFilters(filters)
+        let queryArray = filters
         console.log("queryArray", queryArray)
         let newProducts = await getFilteredProducts(queryArray, queryConstraint)
         setCurrentProducts(newProducts)
     }
+    //uselayouteffect
 
     return (
         <>
@@ -142,7 +139,8 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
                 <SortDropDownArea>Sort</SortDropDownArea>
             </ProductsGridResultsAndSort>
             <ProductsGridOuterContainer>
-                <FilterSideBar colours={colours} sizes={sizes} productTypes={productTypes} productSubTypes={productSubTypes} handleChange={handleChange} brands={brands} expanded={expanded} updateFilteredProducts={updateFilteredProducts}/>
+                {/* useref? */}
+                <FilterSideBar filterLabels={filterLabels} handleChange={handleChange} expanded={expanded} updateFilteredProducts={updateFilteredProducts}/>
                 <ProductsGridContainer>
                     {currentProducts?.length > 0 ? 
                         currentProducts.map((product, i) => (

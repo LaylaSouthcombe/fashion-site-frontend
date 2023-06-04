@@ -192,7 +192,7 @@ const CartNumber = styled.div`
 
 const BackgroundOverlay = styled.div`
     background-color: var(--main-dark-blue);
-    opacity: 0.2;
+    opacity: 0.4;
     position: absolute;
     top: 100%;
     left: 0;
@@ -222,13 +222,14 @@ export default function Header() {
         setExpanded(newExpanded ? panel : false);
     };
     const [menuState, setMenuState] = useState({});
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleMenuOpen = (menuId) => {
         setMenuState((prevState) => ({
           ...prevState,
           [menuId]: true,
         }));
+        const body = document.querySelector('body')
+        body.style.overflow = 'hidden'
       };
     
       const handleMenuClose = (menuId) => {
@@ -236,6 +237,8 @@ export default function Header() {
           ...prevState,
           [menuId]: false,
         }));
+        const body = document.querySelector('body')
+        body.style.overflow = 'visible'
       };
 
     return (

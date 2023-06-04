@@ -16,7 +16,7 @@ export default function BrandPage({products, brand}){
             <Header/>
             <PageContent>
                 {products?.length ? 
-                <ProductsGrid products={products} apiUrl={'/api/filtered/brand'} queryConstraint={{brand: brand}}/>
+                <ProductsGrid products={products} apiUrl={'/api/filtered/brand'} queryConstraint={{path: 'brand', value: brand.toUpperCase()}}/>
                 : null
                 }
             </PageContent>
@@ -37,7 +37,7 @@ export async function getServerSideProps(context){
             path: 'brand'
           }
         }
-    }]).limit(10)
+    }]).limit(50)
     console.log("products", products.length)
     return {
         props:{

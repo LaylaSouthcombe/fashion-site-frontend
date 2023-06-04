@@ -22,7 +22,7 @@ export default function ClothingPage({products}){
 export async function getServerSideProps(){
     await mongooseConnect()
     const products = await Product.find({}, null, {sort:{'_id': -1}})
-    console.log("products", products)
+    // console.log("products", products)
     return {
         props:{
             products: JSON.parse(JSON.stringify(products))

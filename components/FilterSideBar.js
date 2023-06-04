@@ -125,7 +125,7 @@ const Filter = styled.li`
     }
 `
 
-export default function FilterSideBar({brands, colours, sizes, productTypes, productSubTypes, expanded, handleChange, updateFilteredProducts}){
+export default function FilterSideBar({filterLabels, expanded, handleChange, updateFilteredProducts}){
     return (
         <>
         <div>
@@ -136,8 +136,8 @@ export default function FilterSideBar({brands, colours, sizes, productTypes, pro
                             <Typography>Product type</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <FilterArea filtersLength={productTypes.length}>
-                                {productTypes.map((type, i) => {
+                            <FilterArea filtersLength={filterLabels.productType.length}>
+                                {filterLabels.productType.map((type, i) => {
                                     return (
                                         <Filter key={"childLink" + i} >
                                             <Checkbox onChange={() => updateFilteredProducts({productType: type})}/><Typography>{type}</Typography>
@@ -152,8 +152,8 @@ export default function FilterSideBar({brands, colours, sizes, productTypes, pro
                             <Typography>Product subtype</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <FilterArea filtersLength={productSubTypes.length}>
-                                {productSubTypes.map((subType, i) => {
+                            <FilterArea filtersLength={filterLabels.productSubType.length}>
+                                {filterLabels.productSubType.map((subType, i) => {
                                     return (
                                         <Filter key={"childLink" + i}>
                                             <Checkbox onChange={() => updateFilteredProducts({productSubType: subType})}/>
@@ -169,8 +169,9 @@ export default function FilterSideBar({brands, colours, sizes, productTypes, pro
                             <Typography>Brand</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <FilterArea filtersLength={brands.length}>
-                                {brands.map((brand, i) => {
+                            <FilterArea filtersLength={filterLabels.brand.length}>
+                                {filterLabels.brand.map((brand, i) => {
+                                    console.log(brand)
                                     return (
                                         <Filter key={"childLink" + i}>
                                             <Checkbox onChange={() => updateFilteredProducts({brand: brand})}/>
@@ -186,8 +187,8 @@ export default function FilterSideBar({brands, colours, sizes, productTypes, pro
                             <Typography>Colour</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <FilterArea filtersLength={colours.length}>
-                                {colours.map((colour, i) => {
+                            <FilterArea filtersLength={filterLabels.colour.length}>
+                                {filterLabels.colour.map((colour, i) => {
                                     return (
                                         <Filter key={"childLink" + i}>
                                             <Checkbox onChange={() => updateFilteredProducts({colour: colour})}/>
@@ -203,11 +204,11 @@ export default function FilterSideBar({brands, colours, sizes, productTypes, pro
                             <Typography>Size</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <FilterArea filtersLength={sizes.length}>
-                                {sizes.map((size, i) => {
+                            <FilterArea filtersLength={filterLabels.sizesAndStock.length}>
+                                {filterLabels.sizesAndStock.map((size, i) => {
                                     return (
                                         <Filter key={"childLink" + i}>
-                                            <Checkbox onChange={() => updateFilteredProducts({sizeAndStock: size})}/>
+                                            <Checkbox onChange={() => updateFilteredProducts({sizesAndStock: size})}/>
                                             <Typography>{size}</Typography>
                                         </Filter>
                                     )
