@@ -6,10 +6,10 @@ export default async function handle(req, res) {
         res.json('should be a POST request')
         return
     }
-    
+
     await mongooseConnect();
-    const queryArray = req.body.queryArray
-    console.log("filters ", queryArray)
+    const filters = req.body.filters
+    console.log("filters ", filters)
     const queryConstraint = req.body.queryConstraint
     console.log(queryConstraint)
 
@@ -19,14 +19,14 @@ export default async function handle(req, res) {
     let query = {$or: []}
     query[path] = value
 
-    Object.keys(queryArray).forEach(key => {
-        if(queryArray[key].length){
+    Object.keys(filters).forEach(key => {
+        if(filters[key].length){
             if(key !== 'sizesAndStock'){
                 let newQueryFilter = {}
-                newQueryFilter[key] = { $in: queryArray[key] }
+                newQueryFilter[key] = { $in: filters[key] }
                 query.$or.push(newQueryFilter) 
             } else {
-                queryArray[key].forEach(size => {
+                filters[key].forEach(size => {
                     let newQueryFilter = {}
                     newQueryFilter[key] = { $elemMatch: { size: size, stock: { $gt: 0 } } }
                     query.$or.push(newQueryFilter) 

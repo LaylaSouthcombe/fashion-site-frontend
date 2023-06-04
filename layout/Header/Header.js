@@ -18,8 +18,8 @@ const MainHeader = styled.header`
 `
 
 const LargeLogo = styled.a`
-    max-width: 100px;
-    padding: 1rem;
+    max-width: 120px;
+    padding: 1rem 1rem 1rem 2rem;
     img {
         width: 100%;
         height: auto;

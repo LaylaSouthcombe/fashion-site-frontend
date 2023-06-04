@@ -4,6 +4,10 @@ import FilterSideBar from "./FilterSideBar"
 import { useEffect, useState } from "react"
 import { mongooseConnect } from "@/lib/mongoose"
 import { Product } from "@/models/Product"
+import Image from "next/image"
+import downArrow from "../images/icons/down-arrow.png"
+import upArrow from "../images/icons/up-arrow.png"
+
 import axios from "axios"
 
 const ProductsGridOuterContainer = styled.section`
@@ -21,28 +25,89 @@ const ProductsGridContainer = styled.div`
 `
 
 const ProductsGridResultsAndSort = styled.div`
-
+    width: 90%;
+    margin: 40px auto 20px auto;
+    display: flex;
+    justify-content: space-between;
 `
 
 const NumberOfResults = styled.p`
-
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    color: grey;
 `
 
 const SortDropDownArea = styled.div`
+    padding: 1rem;
+    position: relative;
+    border: 1px solid var(--main-dark-blue);
+    width: 12rem;
+    font-size: 0.9rem;
+`
 
+const DropdownHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .flipped {
+        transform: rotateX(0deg);
+        transition: transform 0.3s ease;
+    }
+    .backFlipped {
+        transform: rotateX(180deg);
+        transition: transform 0.3s ease;
+    }
+    img {
+        width: 1rem;
+        height: auto;
+    }
+`
+
+const DropdownList = styled.ul`
+    padding: 0.5rem;
+    outline: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid var(--main-dark-blue);
+    border-top: none;
+    width: 101%;
+    list-style: none;
+    top: 2.5rem;
+    left: -0.5%;
+
+    li {
+        padding: 0.75rem 0.5rem;
+    }
+
+    li:hover {
+        border-left: 0.25rem solid var(--main-dark-blue);
+        padding-left: 0.25rem;
+    }
 `
 
 export default function ProductsGrid({products, apiUrl, queryConstraint}) {
 
-    const [productTypes, setProductTypes] = useState([])
-    const [productSubTypes, setProductSubTypes] = useState([])
-    const [sizes, setSizes] = useState([])
-    const [colours, setColours] = useState([])
-    const [brands, setBrands] = useState([])
-
     const [filterLabels, setFilterLabels] = useState({productType: [], productSubType: [], sizesAndStock: [], colour: [], brand: []})
+    const [expanded, setExpanded] = useState('')
+    const [selectedValue, setSelectedValue] = useState({ value: 'recommended', label: 'Recommended' });
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-    const [expanded, setExpanded] = useState('');
+    const dropdownOptions = [
+        { value: 'recommended', label: 'Recommended' },
+        { value: 'lowestPrice', label: 'Low to high' },
+        { value: 'highestPrice', label: 'High to low' },
+        { value: 'newIn', label: 'New in' }
+    ];
+
+    const handleDropdownToggle = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleOptionSelect = (valueObject) => {
+        setSelectedValue(valueObject);
+        setIsDropdownOpen(false);
+        console.log('Selected option:', valueObject);
+      };
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -50,46 +115,23 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
 
     const [currentProducts, setCurrentProducts] = useState(products)
     const [filters, setFilters] = useState({productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []})
-    // const [sortResults, setSortResults] = useState("recommended")
-    
-    const generateQueryFromFilters = (filters) => {
-        //TODO: fix it for sizes
-        let queryArray = []
-        for(let i = 0; i < Object.keys(filters).length; i++){
-            let filterKey = Object.keys(filters)[i]
-            console.log("filters[filterKey]", filters[filterKey])
-            if(filters[filterKey].length > 0){
-                    queryArray.push({
-                    text: {
-                        query: filters[filterKey],
-                        path: filterKey
-                    }
-                })
-            }
-        }
-        return queryArray
-    }
 
     const generateAvailableFilters = (products) => {
         let newFilterLabels = {productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []}
         for(let i = 0; i < products.length; i++){
-            if(!newFilterLabels.productType.includes(products[i].productType)){
-                newFilterLabels.productType.push(products[i].productType)
-            }
-            if(!newFilterLabels.productSubType.includes(products[i].productSubType)){
-                newFilterLabels.productSubType.push(products[i].productSubType)
-            }
-            if(!newFilterLabels.colour.includes(products[i].colour)){
-                newFilterLabels.colour.push(products[i].colour)
-            }
-            if(!newFilterLabels.brand.includes(products[i].brand)){
-                newFilterLabels.brand.push(products[i].brand)
-            }
-            for(let j = 0; j < products[i].sizesAndStock.length; j++){
-                if(!newFilterLabels.sizesAndStock.includes(products[i].sizesAndStock[j].size)){
-                    newFilterLabels.sizesAndStock.push(products[i].sizesAndStock[j].size)
+            Object.keys(newFilterLabels).forEach(label => {
+                if(label !== "sizesAndStock"){
+                    if(!newFilterLabels[label].includes(products[i][label])){
+                        newFilterLabels[label].push(products[i][label])
+                    }
+                } else {
+                    for(let j = 0; j < products[i].sizesAndStock.length; j++){
+                        if(!newFilterLabels.sizesAndStock.includes(products[i].sizesAndStock[j].size)){
+                            newFilterLabels.sizesAndStock.push(products[i].sizesAndStock[j].size)
+                        }
+                    }
                 }
-            }
+            })
         }
         setFilterLabels(newFilterLabels)
     }
@@ -100,9 +142,9 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
         }
     },[])
 
-    const getFilteredProducts = async (queryArray, queryConstraint) => {
+    const getFilteredProducts = async (filters, queryConstraint) => {
         let body = {
-            queryArray: queryArray,
+            filters: filters,
             queryConstraint: queryConstraint,
             sortResults: "recommended"
         }
@@ -122,21 +164,33 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
             filters[filterKey].splice(filterIndex, 1)
         }
         
-        console.log(filters[filterKey])
-        console.log(filters)
-        // let queryArray = generateQueryFromFilters(filters)
-        let queryArray = filters
-        console.log("queryArray", queryArray)
-        let newProducts = await getFilteredProducts(queryArray, queryConstraint)
+        let newProducts = await getFilteredProducts(filters, queryConstraint)
         setCurrentProducts(newProducts)
     }
-    //uselayouteffect
 
     return (
         <>
             <ProductsGridResultsAndSort>
                 <NumberOfResults>{products?.length} Results</NumberOfResults>
-                <SortDropDownArea>Sort</SortDropDownArea>
+                <SortDropDownArea>
+                    <DropdownHeader className="dropdown-header" onClick={handleDropdownToggle}>
+                        <span>{!isDropdownOpen ? selectedValue.label : 'Sort By'}</span>
+                        <Image src={downArrow } className={isDropdownOpen ? 'backFlipped' : 'flipped'}/>
+                    </DropdownHeader>
+                    {isDropdownOpen ? (
+                        <DropdownList className="dropdown-options">
+                        {dropdownOptions.map((option) => (
+                            <li
+                            key={option.value}
+                            className="dropdown-option"
+                            onClick={() => handleOptionSelect({value: option.value, label: option.label})}
+                            >
+                            {option.label}
+                            </li>
+                        ))}
+                        </DropdownList>
+                    ) : null}
+                </SortDropDownArea>
             </ProductsGridResultsAndSort>
             <ProductsGridOuterContainer>
                 {/* useref? */}
