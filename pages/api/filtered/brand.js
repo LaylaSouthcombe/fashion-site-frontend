@@ -9,15 +9,17 @@ export default async function handle(req, res) {
 
     await mongooseConnect();
     const filters = req.body.filters
-    console.log("filters ", filters)
-    const queryConstraint = req.body.queryConstraint
-    console.log(queryConstraint)
 
+    const queryConstraint = req.body.queryConstraint
+    
     let path = queryConstraint.path
     let value = queryConstraint.value.replace("-", " ")
 
     let query = {$or: []}
     query[path] = value
+
+    let allProductsQuery = {}
+    allProductsQuery[path] = value
 
     Object.keys(filters).forEach(key => {
         if(filters[key].length){
@@ -35,7 +37,7 @@ export default async function handle(req, res) {
         }
     })
     
-    let sortResultsOptions = {
+    let aggregateSortResultsOptions = {
         recommended: { $sample: { size: 2000} },
         lowestPrice: { $sort : { price : 1 } },
         highestPrice: { $sort : { price : -1 } },
@@ -48,27 +50,21 @@ export default async function handle(req, res) {
                 {
                   $match: query
                 },
-                sortResultsOptions[req.body.sortResults]
+                aggregateSortResultsOptions[req.body.sortResults]
               ]
         )
         return products
     }
 
     const getAllProducts = async () => {
-        let query = {}
-
-        let regexString = ''
-        for(let i = 0; i < value.split(" ").length ; i++){
-            regexString = regexString.concat(value.split(" ")[i])
-            if(i !== value.split(" ").length - 1){
-                regexString = regexString.concat(".*")
-            }
-        }
-
-        let pattern = new RegExp(regexString)
-
-        query[path] = { $regex: pattern, $options: 'si'}
-        let products = await Product.find(query)
+        let products = await Product.aggregate(
+            [
+                {
+                  $match: allProductsQuery
+                },
+                aggregateSortResultsOptions[req.body.sortResults]
+              ]
+        )
         return products
     }
 

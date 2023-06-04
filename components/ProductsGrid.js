@@ -92,6 +92,9 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     const [selectedValue, setSelectedValue] = useState({ value: 'recommended', label: 'Recommended' });
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+    const [currentProducts, setCurrentProducts] = useState(products)
+    const [filters, setFilters] = useState({productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []})
+
     const dropdownOptions = [
         { value: 'recommended', label: 'Recommended' },
         { value: 'lowestPrice', label: 'Low to high' },
@@ -103,18 +106,29 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
         setIsDropdownOpen(!isDropdownOpen);
     };
 
-    const handleOptionSelect = (valueObject) => {
+    const getSortedProducts = async (filters, queryConstraint, sortResults) => {
+        let body = {
+            filters: filters,
+            queryConstraint: queryConstraint,
+            sortResults: sortResults
+        }
+        const response = await axios.post(apiUrl, body)
+        console.log(response)
+        return response.data
+    }
+
+    const handleOptionSelect = async (valueObject) => {
         setSelectedValue(valueObject);
         setIsDropdownOpen(false);
         console.log('Selected option:', valueObject);
+        let newProducts = await getSortedProducts(filters, queryConstraint, valueObject.value)
+        setCurrentProducts(newProducts)
       };
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
     };
 
-    const [currentProducts, setCurrentProducts] = useState(products)
-    const [filters, setFilters] = useState({productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []})
 
     const generateAvailableFilters = (products) => {
         let newFilterLabels = {productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []}
