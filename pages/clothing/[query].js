@@ -10,7 +10,7 @@ const PageContent = styled.div`
 `
 
 export default function ClothingPage({products, queryConstraint}){
-
+    console.log(queryConstraint)
     return(
         <>
         <Header/>
@@ -27,8 +27,8 @@ export default function ClothingPage({products, queryConstraint}){
 
 export async function getServerSideProps(context){
     await mongooseConnect()
-    let productQuery = {}
-    let queryConstraint = {}
+    let productQuery = {productCategory: 'Clothing'}
+    let queryConstraint = {productCategory: 'Clothing'}
     const {query} = context.query
 
     if(query.includes("-s-")){
