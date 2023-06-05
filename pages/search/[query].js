@@ -13,7 +13,7 @@ const ProductGrid = styled.div`
 `
 
 export default function SearchResults({products}) {
-    console.log(products)
+    // console.log(products)
     return (
         <>
         <Header/>

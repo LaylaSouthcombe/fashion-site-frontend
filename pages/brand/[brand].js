@@ -37,7 +37,7 @@ export async function getServerSideProps(context){
             path: 'brand'
           }
         }
-    }]).limit(50)
+    }])
     console.log("products", products.length)
     return {
         props:{

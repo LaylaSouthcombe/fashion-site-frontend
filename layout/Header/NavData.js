@@ -4,8 +4,8 @@ const shortNavData = [
         {link: "/brand/off-white", label: "Off White"}, 
         {link: "/brand/nike", label: "Nike"}
     ]},
-    { link: "/clothing", label: "Clothing", childLinks: [
-        {link: "/clothing", label: "All clothing"}, 
+    { link: "/clothing/all", label: "Clothing", childLinks: [
+        {link: "/clothing/all", label: "All clothing"}, 
         {link: "/clothing/jackets", label: "Jackets"}, 
         {link: "/clothing/trousers", label: "Trousers"}
     ]},
@@ -50,19 +50,19 @@ const navData = {
         ]}
     ]
     },
-    Clothing: { link: "/clothing", label: "Clothing", childLinks: [
+    Clothing: { link: "/clothing/all", label: "Clothing", childLinks: [
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/all", label: "All clothing"}, 
             {link: "/clothing/jackets", label: "Jackets"}, 
             {link: "/clothing/trousers", label: "Trousers"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/all", label: "All clothing"}, 
             {link: "/clothing/jackets", label: "Jackets"}, 
             {link: "/clothing/trousers", label: "Trousers"}
         ]},
         {title: 'title', listItems: [
-            {link: "/clothing", label: "All clothing"}, 
+            {link: "/clothing/all", label: "All clothing"}, 
             {link: "/clothing/jackets", label: "Jackets"}, 
             {link: "/clothing/trousers", label: "Trousers"}
         ]}

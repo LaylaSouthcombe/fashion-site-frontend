@@ -18,6 +18,7 @@ const ProductTileContent = styled(Link)`
 const ProductImage = styled.img`
     border-radius: 5px;
     width: 100%;
+    max-width: 100%;
 `
 
 const ProductInfo = styled.div`

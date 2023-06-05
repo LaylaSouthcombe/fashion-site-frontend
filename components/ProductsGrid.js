@@ -20,7 +20,7 @@ const ProductsGridOuterContainer = styled.section`
 const ProductsGridContainer = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3,  minmax(0, 1fr));
     grid-template-rows: auto 1fr;
 `
 
@@ -135,12 +135,12 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
         for(let i = 0; i < products.length; i++){
             Object.keys(newFilterLabels).forEach(label => {
                 if(label !== "sizesAndStock"){
-                    if(!newFilterLabels[label].includes(products[i][label])){
+                    if(!newFilterLabels[label].includes(products[i][label]) && products[i][label] !== undefined){
                         newFilterLabels[label].push(products[i][label])
                     }
                 } else {
                     for(let j = 0; j < products[i].sizesAndStock.length; j++){
-                        if(!newFilterLabels.sizesAndStock.includes(products[i].sizesAndStock[j].size)){
+                        if(!newFilterLabels.sizesAndStock.includes(products[i].sizesAndStock[j].size) && products[i].sizesAndStock[j].size !== undefined){
                             newFilterLabels.sizesAndStock.push(products[i].sizesAndStock[j].size)
                         }
                     }
@@ -185,7 +185,7 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     return (
         <>
             <ProductsGridResultsAndSort>
-                <NumberOfResults>{products?.length} Results</NumberOfResults>
+                <NumberOfResults>{currentProducts?.length} Results</NumberOfResults>
                 <SortDropDownArea>
                     <DropdownHeader className="dropdown-header" onClick={handleDropdownToggle}>
                         <span>{!isDropdownOpen ? selectedValue.label : 'Sort By'}</span>
