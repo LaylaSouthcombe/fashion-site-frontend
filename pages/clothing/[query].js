@@ -31,14 +31,24 @@ export async function getServerSideProps(context){
     let queryConstraint = {productCategory: 'Clothing'}
     const {query} = context.query
 
+
+    const capitalizeFirstLetter = (word) => {
+        const firstLetter = word.charAt(0)
+        const firstLetterCap = firstLetter.toUpperCase()
+        const remainingLetters = word.slice(1)
+        const capitalizedQueryWord = firstLetterCap + remainingLetters
+        return capitalizedQueryWord
+    }
     if(query.includes("-s-")){
-        productQuery[productSubType] = query.split("-s-")[1]
-        queryConstraint[path] = 'productSubType'
-        queryConstraint[value] = query.split("-s-")[1]
+        let queryWord = capitalizeFirstLetter(query.split("-s-")[1])
+        productQuery["productSubType"] = queryWord
+        queryConstraint["path"] = 'productSubType'
+        queryConstraint["value"] = queryWord
     } else if(query.includes("-t-")){
-        productQuery[productType] = query.split("-t-")[1]
-        queryConstraint[path] = 'productType'
-        queryConstraint[value] = query.split("-t-")[1]
+        let queryWord = capitalizeFirstLetter(query.split("-t-")[1])
+        productQuery["productType"] = queryWord
+        queryConstraint["path"] = 'productType'
+        queryConstraint["value"] = queryWord
     }
 
     const products = await Product.find(productQuery, null, {sort:{'_id': -1}})

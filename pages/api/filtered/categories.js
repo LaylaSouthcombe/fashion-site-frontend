@@ -21,7 +21,6 @@ export default async function handle(req, res) {
     if(queryConstraint.path !== undefined){
         path = queryConstraint.path
         value = queryConstraint.value
-        value[0] = value[0].toUpperCase()
         combinedQuery[path] = value
     }
 
