@@ -51,7 +51,7 @@ export default async function handle(req, res) {
             } else {
                 filters[key].forEach(size => {
                     let newQueryFilter = {}
-                    newQueryFilter[key] = { $elemMatch: { size: size, stock: { $gt: 0 } } }
+                    newQueryFilter[key] = { $elemMatch: { size: new RegExp(size, "i"), stock: { $gt: 0 } } }
                     combinedQuery.$or.push(newQueryFilter) 
                 })
             }
