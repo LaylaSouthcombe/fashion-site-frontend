@@ -38,15 +38,15 @@ export default async function handle(req, res) {
     
     let allProductsQuery = getQueryForAllProducts()
 
-    const getQueryForConstraintAndFilter = () => {
-
-    }
-
     Object.keys(filters).forEach(key => {
         if(filters[key].length){
             if(key !== 'sizesAndStock'){
                 let newQueryFilter = {}
-                newQueryFilter[key] = { $in: filters[key] }
+                let regexFilters = []
+                filters[key].forEach(filter => {
+                    regexFilters.push(new RegExp(filter, "i"))
+                })
+                newQueryFilter[key] = { $in: regexFilters }
                 combinedQuery.$or.push(newQueryFilter) 
             } else {
                 filters[key].forEach(size => {
