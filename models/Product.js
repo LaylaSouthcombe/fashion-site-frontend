@@ -57,7 +57,9 @@ const productSchema = new Schema({
     sizeAndFit: {
         type: String,
         required: true
-    }
+    },
+    createdAt: Number,
+    updatedAt: Number,
   }, {
     timestamps: true
   })

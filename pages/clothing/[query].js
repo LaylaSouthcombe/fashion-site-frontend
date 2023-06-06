@@ -39,18 +39,21 @@ export async function getServerSideProps(context){
         const capitalizedQueryWord = firstLetterCap + remainingLetters
         return capitalizedQueryWord
     }
+    
     if(query.includes("-s-")){
         let queryWord = capitalizeFirstLetter(query.split("-s-")[1])
-        productQuery["productSubType"] = queryWord
+        let queryRegexWord = new RegExp(queryWord, "si")
+        productQuery["productSubType"] = queryRegexWord
         queryConstraint["path"] = 'productSubType'
-        queryConstraint["value"] = queryWord
+        queryConstraint["value"] = queryWord.replace("-", " ")
     } else if(query.includes("-t-")){
         let queryWord = capitalizeFirstLetter(query.split("-t-")[1])
         productQuery["productType"] = queryWord
         queryConstraint["path"] = 'productType'
-        queryConstraint["value"] = queryWord
+        queryConstraint["value"] = queryWord.replace("-", " ")
     }
 
+    console.log(productQuery)
     const products = await Product.find(productQuery, null, {sort:{'_id': -1}})
 
     console.log("products", products.length)
