@@ -19,7 +19,7 @@ const shortNavData = [
         {link: "/bags/rucksack", label: "Rucksacks"}, 
         {link: "/bags/handbags", label: "Handbags"}
     ]},
-    { link: "/jewellery-watches/all", label: "Jewellry and Watches", childLinks: [
+    { link: "/jewellery-watches/all", label: "Jewellery and Watches", childLinks: [
         {link: "/jewellery-watches/all", label: "All clothing"}, 
         {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
         {link: "/jewellery-watches/watches", label: "Watches"}
@@ -99,7 +99,7 @@ const navData = {
         ]}
     ]
     },
-    "Jewellry and Watches": { link: "/jewellery-watches/all", label: "Jewellry and Watches", childLinks: [
+    "Jewellery and Watches": { link: "/jewellery-watches/all", label: "Jewellery and Watches", childLinks: [
         {title: 'title', listItems: [
             {link: "/jewellery-watches/all", label: "All clothing"}, 
             {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
