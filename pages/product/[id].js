@@ -16,7 +16,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
     return (
         <>
             <Header/>
-                <h1>{product.name}</h1>
+                <h2>{product.name}</h2>
                 <p>{product.price}</p>
                 <ProductImagesCarousel images={product.images}/>
                 <p>{product.brand}</p>

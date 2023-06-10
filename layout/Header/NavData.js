@@ -62,7 +62,7 @@ const navData = {
                 {link: "/clothing/-t-trousers", label: "Trousers"}
             ]},
             {title: 'title', listItems: [
-                {link: "/clothing/t-shirts", label: "T-shirts"}, 
+                {link: "/clothing/-t-t-shirts", label: "T-shirts"}, 
                 {link: "/clothing/-t-outerwear", label: "Outerwear"}, 
                 {link: "/clothing/-t-sweatshirts-and-hoodies", label: "Sweatshirts and Hoodies"}
             ]}

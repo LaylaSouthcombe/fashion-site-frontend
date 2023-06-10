@@ -53,7 +53,7 @@ export async function getServerSideProps(context){
         queryConstraint["value"] = queryWord.replace("-", " ")
     }
 
-    console.log(productQuery)
+    console.log("productQuery", productQuery)
     const products = await Product.find(productQuery, null, {sort:{'_id': -1}})
 
     console.log("products", products.length)
