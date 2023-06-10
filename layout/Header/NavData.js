@@ -1,4 +1,5 @@
 import bagImage from "../../images/navImages/bags.jpg"
+import brandsImage from "../../images/navImages/brands.png"
 import clothingImage from "../../images/navImages/clothing.png"
 import hatImage from "../../images/navImages/hat.png"
 import shoeImage from "../../images/navImages/shoes.png"
@@ -41,33 +42,33 @@ const navData = {
     Brands: { link: "/brands", label: "Brands", childLinks: [
             {title: 'title', listItems: [
                 {link: "/brands", label: "All brands"}, 
-                {link: "/brand/off-white", label: "Off White"}, 
+                {link: "/brand/off-white", label: "Off-White"}, 
                 {link: "/brand/nike", label: "Nike"}
             ]},
             {title: 'title', listItems: [
-                {link: "/brands", label: "All brands"}, 
-                {link: "/brand/off-white", label: "Off White"}, 
-                {link: "/brand/nike", label: "Nike"}
+                {link: "/brand/essentials", label: "Essentials"}, 
+                {link: "/brand/carhartt", label: "Carhartt"}, 
+                {link: "/brand/acne-studios", label: "Acne Studios"}
             ]}
         ], image: {
-            source: "",
-            alt: ""
+            source: brandsImage,
+            alt: "Sneakers hanging of ledge"
         }
     },
     Clothing: { link: "/clothing/all", label: "Clothing", childLinks: [
             {title: 'title', listItems: [
                 {link: "/clothing/all", label: "All clothing"}, 
-                {link: "/clothing/jackets", label: "Jackets"}, 
-                {link: "/clothing/trousers", label: "Trousers"}
+                {link: "/clothing/-t-jackets", label: "Jackets"}, 
+                {link: "/clothing/-t-trousers", label: "Trousers"}
             ]},
             {title: 'title', listItems: [
-                {link: "/clothing/all", label: "All clothing"}, 
-                {link: "/clothing/jackets", label: "Jackets"}, 
-                {link: "/clothing/trousers", label: "Trousers"}
+                {link: "/clothing/t-shirts", label: "T-shirts"}, 
+                {link: "/clothing/-t-outerwear", label: "Outerwear"}, 
+                {link: "/clothing/-t-sweatshirts-and-hoodies", label: "Sweatshirts and Hoodies"}
             ]}
         ], image: {
             source: clothingImage,
-            alt: ""
+            alt: "Models posing against chainlink fence"
         }
     },
     Shoes: { link: "/shoes/all", label: "Shoes", childLinks: [
@@ -77,13 +78,13 @@ const navData = {
                 {link: "/shoes/-t-sandals", label: "Sandals"}
             ]},
             {title: 'Sneakers', listItems: [
-                {link: "/shoes/-t-sneakers", label: "All Sneakers"}, 
+                {link: "/shoes/-t-sneakers", label: "Sneakers"}, 
                 {link: "/shoes/-s-running-shoes", label: "Running Shoes"}, 
                 {link: "/shoes/-s-low-top-sneakers", label: "Low Top Sneakers"}
             ]}
         ], image: {
             source: shoeImage,
-            alt: ""
+            alt: "Sneakers"
         }
     },
     Bags: { link: "/bags/all", label: "Bags", childLinks: [
@@ -92,14 +93,14 @@ const navData = {
                 {link: "/bags/-t-bucket-bags", label: "Bucket Bags"}, 
                 {link: "/bags/-t-tote-bags", label: "Handbags"}
             ]},
-            {title: '_________', listItems: [
+            {title: "", listItems: [
                 {link: "/bags/-t-shoulder-bags", label: "Shoulder Bags"}, 
                 {link: "/bags/-t-cross-body-bags", label: "Cross-body Bags"}, 
                 {link: "/bags/-t-backpacks", label: "Backpacks"}
             ]}
         ], image: {
             source: bagImage,
-            alt: ""
+            alt: "Model modelling handbag"
         }
     },
     "Jewellery and Watches": { link: "/jewellery-watches/all", label: "Jewellery and Watches", childLinks: [
@@ -115,7 +116,7 @@ const navData = {
             ]}
         ], image: {
             source: watchImage,
-            alt: ""
+            alt: "Watch on a wrist"
         }
     },
     "Accessories": { link: "/accessories/all", label: "Accessories", childLinks: [
@@ -131,7 +132,7 @@ const navData = {
             ]}
         ], image: {
             source: hatImage,
-            alt: ""
+            alt: "Model wearing beanie hat and glasses"
         }
     }
 }

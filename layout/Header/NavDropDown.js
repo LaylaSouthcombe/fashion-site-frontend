@@ -19,7 +19,7 @@ const DropdownContainer = styled.div`
 `
 
 const DropDownColumn = styled.ul`
-    padding: 1rem 2rem;
+    padding: 0rem 2rem 1rem 2rem;
 `
 
 const ColumnItem = styled.li`
