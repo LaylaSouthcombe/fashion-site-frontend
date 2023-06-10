@@ -1,33 +1,35 @@
 import { useState } from "react"
 import styled from "styled-components"
 
-const TopSectionContainer = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 90%;
-    margin: 0 auto;
-`
-
-
 const ImageGridContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
 `
 
-const Image = styled.img`
+const MainImage = styled.img`
     max-width: 100%;
     margin: 0.5rem;
     border-radius: 5px;
 `
 
-const ImageButtons = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
+const ImageButtonContainer = styled.div`
+    width: 100%;
+`
+
+const Image = styled.img`
+    width: 100%;
     border-radius: 5px;
 `
 
+const ImageButtons = styled.div`
+    display: grid;
+    padding: 0rem 0.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    border-radius: 5px;
+    width: 100%;
+`
 
 
 export default function ProductImagesCarousel({images}){
@@ -36,19 +38,16 @@ export default function ProductImagesCarousel({images}){
     
     return (
         <>
-        <TopSectionContainer>
             <ImageGridContainer>
-                <Image src={mainImage} alt="" />
+                <MainImage src={mainImage} alt="" />
                 <ImageButtons>
                     {images.map((image, i) => (
-                        <div key={"image" + i}>
+                        <ImageButtonContainer key={"image" + i}>
                             <Image src={image} alt="" onClick={(() => setMainImage(image))}/>
-                        </div>
+                        </ImageButtonContainer>
                     ))}
                 </ImageButtons>
             </ImageGridContainer>
-
-        </TopSectionContainer>
         </>
     )
 }
