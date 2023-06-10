@@ -207,6 +207,7 @@ export default function Header() {
     
     const [showNavbar, setShowNavbar] = useState(false);
     const pathname = usePathname();
+
     const handleShowNavbar = () => {
         const body = document.querySelector('body')
         setShowNavbar(!showNavbar)
@@ -327,7 +328,6 @@ export default function Header() {
                     </SideNavButton>
                 </SideNavArea>
             </MainHeader>
-            
         </>
     )
 }
