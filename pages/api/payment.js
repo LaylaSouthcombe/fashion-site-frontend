@@ -12,22 +12,34 @@ export default async function handler(req, res){
         name, email, city, streetAddress, country, postalCode, checkoutProducts
     } = req.body
     await mongooseConnect()
-    const productsIds = checkoutProducts
-    const uniqueIds = [...new Set(productsIds)]
+    const products = checkoutProducts
+    const uniqueIds = [...new Set(products.id)]
     const productsInfo = await Product.find({_id:uniqueIds})
 
     let line_items = []
-    for(const productId of uniqueIds){
-        const productInfo = productsInfo.find(p => p._id.toString() === productId)
-        const quantity = productsIds.filter(id => id === productId)?.length || 0
-        if(quantity > 0 && productInfo){
+    for(const product of products){
+        const productInfo = productsInfo.find(p => p._id.toString() === product.id)
+        const getQuantityOfProduct = (productSizeQuantity) => {
+            let quantity
+            let numberOfEntries = products.filter(product => product.id === productSizeQuantity.id && product.size === productSizeQuantity.size)
+            for(let i = 0; i < numberOfEntries.length; i++){
+                quantity += numberOfEntries[i].quantity
+            }
+            return quantity
+        }
+        // const quantity = products.filter(id => id === productId)?.length || 0
+        const quantity = getQuantityOfProduct(product)
+        let numberInLineItems = line_items.filter(item => item.id === product.id && item.size === product.size)?.length || 0
+        if(quantity > 0 && productInfo && numberInLineItems === 0){
             line_items.push({
                 quantity,
                 price_data: {
                     currency: 'GBP',
                     product_data: {name:productInfo.name},
                     unit_amount: quantity * productInfo.price * 100
-                }
+                },
+                id: product.id,
+                size: product.size
             })
         }
     }

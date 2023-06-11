@@ -73,8 +73,10 @@ export default function CheckoutPage() {
 
     useEffect(() => {
         if(checkoutProducts?.length > 0){
-            axios.post('/api/checkout', {ids:checkoutProducts})
+            console.log("checkoutProducts", checkoutProducts)
+            axios.post('/api/checkout', {products:checkoutProducts})
                 .then(response => {
+                    console.log("response.data", response.data)
                     setProducts(response.data)
                 })
         } else {
@@ -92,13 +94,13 @@ export default function CheckoutPage() {
             clearCheckout()
         }
     }, [])
-
-    const lessOfThisProduct = (id) => {
-        removeProduct(id)
+    // {id: product.id, size: selectedSize, quantity: numberOfSelectedStock}
+    const lessOfThisProduct = (productSizeQuantity) => {
+        removeProduct(productSizeQuantity)
     }
 
-    const moreOfThisProduct = (id) => {
-        addProduct(id)
+    const moreOfThisProduct = (productSizeQuantity) => {
+        addProduct(productSizeQuantity)
     }
 
     const goToPayment = async () => {
@@ -112,10 +114,11 @@ export default function CheckoutPage() {
 
     let total = 0
 
-    for(const productId of checkoutProducts){
-        const price = products.find(p => p._id === productId)?.price || 0
+    for(const product of checkoutProducts){
+        const price = products.find(p => p._id === product.id)?.price || 0
         total += price
     }
+
     if(isSuccess){
         return(
             <>
@@ -151,6 +154,7 @@ export default function CheckoutPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {/* current issue: products and checkouts products info is seperated, need to somehow combine the knowledge so quantity does not rely on number of ids in checkout products, but the quantity stated. Can also add logic to add to checkout products that either adds the id or increases the quantity, which will remove the issue in this page */}
                                     {products.map((product, i) => (
                                         <tr key={"product" + i}>
                                             <ProductInfoCell>

@@ -7,6 +7,10 @@ import mongoose from 'mongoose'
 import ProductsCarousel from "@/components/ProductsCarousel/ProductsCarousel"
 import styled from "styled-components"
 import { useState } from "react"
+import AddToCartBtn from "@/components/AddToCartBtn"
+import PlusSign from "../../images/icons/plus.png"
+import MinusSign from "../../images/icons/minus.png"
+import Image from "next/image"
 
 const ProductPathway = styled.p`
     width: 90%;
@@ -68,6 +72,35 @@ const LastStockLeftPara = styled.div`
     }
 `
 
+const AddProductToCartArea = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+const CounterArea = styled.div`
+    border: 1px solid var(--main-light-blue);
+    padding: 0.45rem 0.8rem;
+    margin: 0.5rem 0.8rem 0.5rem 0.5rem;
+    display: flex;
+    border-radius: 5px;
+    button {
+        padding: 0.25rem;
+        border: none;
+        background-color: white;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        img {
+            width: 0.7rem;
+            height: auto;
+        }
+    }
+
+    span {
+        margin: 0rem 0.75rem;
+    }
+`
+
 export default function ProductPage({product, moreLikeThisProducts}){
     console.log(product)
 
@@ -82,6 +115,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
     }
 
     const [selectedSize, setSelectedSize] = useState(getFirstInStockSize(product))
+    const [numberOfSelectedStock, setNumberOfSelectedStock] = useState(1)
 
     return (
         <>
@@ -109,6 +143,18 @@ export default function ProductPage({product, moreLikeThisProducts}){
                         </>
                         : null}
                     </LastStockLeftPara>
+                    <AddProductToCartArea>
+                        <CounterArea>
+                            <button onClick={(() => numberOfSelectedStock > 1 ? setNumberOfSelectedStock(prev => prev - 1) : null)}>
+                                <Image src={MinusSign}/>
+                            </button>
+                            <span>{numberOfSelectedStock}</span>
+                            <button onClick={(() => setNumberOfSelectedStock(prev => prev + 1))}>
+                                <Image src={PlusSign}/>
+                            </button>
+                        </CounterArea>
+                            <AddToCartBtn productSizeQuantity={{id: product._id, size: selectedSize, quantity: numberOfSelectedStock}}/>
+                    </AddProductToCartArea>
                 </ProductInformationContainer>
             </TopSectionContainer>
                 

@@ -1,8 +1,6 @@
 import { useContext } from "react"
 import { CheckoutContext } from "@/components/CheckoutContext"
 import styled from "styled-components"
-import addToCart from '../images/icons/add-cart.png'
-import Image from "next/image"
 
 const CheckoutButton = styled.div`
     background-color: var(--main-dark-blue);
@@ -10,25 +8,23 @@ const CheckoutButton = styled.div`
     border-radius: 5px;
     justify-content: center;
     align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    img {
-        width: 50%;
-        height: auto;
-    }
+    width: fit-content;
+    color: var(--main-light-blue);
+    font-size: 0.75rem;
+    padding: 0.75rem 0.85rem;
 `
 
-export default function AddToCartBtn({id}) {
+export default function AddToCartBtn({productSizeQuantity}) {
     
     const {addProduct} = useContext(CheckoutContext)
-    
+    console.log(productSizeQuantity)
     const addProductToCheckout = () => {
-        addProduct(id)
+        addProduct(productSizeQuantity)
     }
     
     return (
         <CheckoutButton onClick={() => addProductToCheckout()}>
-            <Image src={addToCart} alt="" width={30} height={30}/>
+            Add to cart
         </CheckoutButton>
     )
 }
