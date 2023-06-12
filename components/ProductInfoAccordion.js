@@ -78,26 +78,20 @@ const theme = createTheme({
                     padding: '0rem 1rem'
                 },
             },
-        },
-        MuiCheckbox: {
-            styleOverrides: {
-                root: {
-                    padding: '0.5rem 0.25rem 0.5rem 0.5rem'
-                }
-            }
         }
     },
 });
 
 const ProductInfoArea = styled.div`
     padding-top: 1.25rem;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 `
 
 const ProductInfoDetailArea = styled.div`
     width: 80%;
     margin-left: 1.5rem;
+    font-size: 0.85rem;
 `
 
 const SizeAndFitInfo = styled.ul`
@@ -143,7 +137,7 @@ export default function ProductInfoAccordion({productInfo, expanded,  handleChan
                         </AccordionSummary>
                         <AccordionDetails>
                             <ProductInfoDetailArea>
-
+                            We offer free international shipping. Try items in the comfort of your own home. If they&apos;re not quite right, you&apos;ve got 28 days to request an exchange or return and send them back to us. We&apos;ll collect them from your home or office for free.
                             </ProductInfoDetailArea>
                         </AccordionDetails>
                     </Accordion>

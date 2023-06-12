@@ -23,16 +23,25 @@ const TopSectionContainer = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 90%;
-    margin: 0 auto;
+    max-width: 1000px;
+    margin: 2rem auto;
 `
 
 const ProductInformationContainer = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 2rem;
 `
 
 const MoreLikeThisTitle = styled.h2`
     text-align: center;
+    margin-top: 2rem;
+`
+
+const MoreLikeThisContainer = styled.div`
+    width: 90%;
+    max-width: 1000px;
+    margin: 2rem auto;
 `
 
 const SizeButtons = styled.div`
@@ -168,10 +177,10 @@ export default function ProductPage({product, moreLikeThisProducts}){
                     <ProductInfoAccordion productInfo={{sizeAndFit: product.sizeAndFit, productSummary: product.productSummary}}  expanded={expanded} handleChange={handleChange}/>
                 </ProductInformationContainer>
             </TopSectionContainer>
-                
-                <p>{product.productSummary}</p>
-                <MoreLikeThisTitle>Similar items</MoreLikeThisTitle>
+            <MoreLikeThisTitle>Similar items</MoreLikeThisTitle>
+            <MoreLikeThisContainer>
                 <ProductsCarousel products={moreLikeThisProducts}/>
+            </MoreLikeThisContainer>
             <Footer/>
         </>
     )
