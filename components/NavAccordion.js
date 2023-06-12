@@ -44,8 +44,7 @@ const theme = createTheme({
         MuiAccordionDetails: {
             styleOverrides: {
                 root: {
-                    padding: 0,
-                    backgroundColor: 'var(--main-lightish-blue)'
+                    padding: '0 0.75rem'
                 },
             },
         },

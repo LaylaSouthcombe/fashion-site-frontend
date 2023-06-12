@@ -29,10 +29,14 @@ const ProductPathway = styled.p`
 
 const TopSectionContainer = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     width: 90%;
     max-width: 1000px;
     margin: 0.5rem auto 2rem auto;
+
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+    }
 `
 
 const ProductInformationContainer = styled.div`
