@@ -20,25 +20,18 @@ export function CheckoutContextProvider({children})  {
         }
     }, [])
 
-    const addProduct = (productSizeQuantity) => {
-        let currentCheckoutProducts = checkoutProducts
-        let filteredProducts = currentCheckoutProducts.filter(product => product.id === productSizeQuantity.id && product.size === productSizeQuantity.size)
-        if(filteredProducts?.length > 0){
-            currentCheckoutProducts.find(product => product.id === productSizeQuantity.id && product.size === productSizeQuantity.size).quantity += productSizeQuantity.quantity;
-            setCheckoutProducts(currentCheckoutProducts)
-        } else {
-            setCheckoutProducts(prev => [...prev, productSizeQuantity])
-        }
+    const addProduct = (productSize) => {
+        setCheckoutProducts(prev => [...prev, productSize])
     }
 
-    const removeProduct = (productSizeQuantity) => {
-        let currentCheckoutProducts = checkoutProducts
-        let filteredProducts = currentCheckoutProducts.filter(product => product.id === productSizeQuantity.id && product.size === productSizeQuantity.size)
-        if(filteredProducts?.length > 0){
-            currentCheckoutProducts.find(product => product.id === productSizeQuantity.id && product.size === productSizeQuantity.size).quantity -= 1
-            setCheckoutProducts(currentCheckoutProducts)
-            console.log(currentCheckoutProducts)
-        }
+    const removeProduct = (productSize) => {
+        setCheckoutProducts(prev => {
+            const pos = prev.findIndex(obj => obj.id === productSize.id && obj.size === productSize.size);
+            if(pos !== -1){
+                return prev.filter((value, i) => i !== pos)
+            }
+            return prev
+        })
     }
 
     const clearCheckout = () => {

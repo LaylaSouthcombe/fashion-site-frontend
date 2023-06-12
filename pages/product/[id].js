@@ -127,22 +127,27 @@ export default function ProductPage({product, moreLikeThisProducts}){
                     <h2>{product.name}</h2>
                     <p>{product.brand}</p>
                     <p>£{product.price}</p>
-                    <SizeButtons>
-                        {product.sizesAndStock.map((sizeObject, i) => {
-                            const isActive = selectedSize.size === sizeObject.size
-                            return (
-                                    <SizeButton key={"sizeObject" + i} isActive={isActive} onClick={() => setSelectedSize(sizeObject)} disabled={sizeObject.stock === 0}>{sizeObject.size}</SizeButton>
-                            )
-                        })}
-                    </SizeButtons>
-                    <LastStockLeftPara>
-                        {selectedSize.stock === 1 ? 
-                        <>
-                            <span>Last 1 left</span>
-                            <span> - make it yours!</span>
-                        </>
-                        : null}
-                    </LastStockLeftPara>
+                    {product.productCategory === "Clothing" || product.productCategory === "Shoes" ?
+                    <>
+                        <SizeButtons>
+                            { product.sizesAndStock.map((sizeObject, i) => {
+                                const isActive = selectedSize.size === sizeObject.size
+                                return (
+                                        <SizeButton key={"sizeObject" + i} isActive={isActive} onClick={() => setSelectedSize(sizeObject)} disabled={sizeObject.stock === 0}>{sizeObject.size}</SizeButton>
+                                )
+                            })}
+                        </SizeButtons>
+                        <LastStockLeftPara>
+                            {selectedSize.stock === 1 ? 
+                            <>
+                                <span>Last 1 left</span>
+                                <span> - make it yours!</span>
+                            </>
+                            : null}
+                        </LastStockLeftPara>
+                    </>
+                    : null
+                    }
                     <AddProductToCartArea>
                         <CounterArea>
                             <button onClick={(() => numberOfSelectedStock > 1 ? setNumberOfSelectedStock(prev => prev - 1) : null)}>
@@ -153,7 +158,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
                                 <Image src={PlusSign}/>
                             </button>
                         </CounterArea>
-                            <AddToCartBtn productSizeQuantity={{id: product._id, size: selectedSize, quantity: numberOfSelectedStock}}/>
+                            <AddToCartBtn productSizeQuantity={{id: product._id, size: selectedSize.size, quantity: numberOfSelectedStock}}/>
                     </AddProductToCartArea>
                 </ProductInformationContainer>
             </TopSectionContainer>

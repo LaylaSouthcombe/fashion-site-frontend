@@ -149,14 +149,13 @@ export default function CheckoutPage() {
                                 <thead>
                                     <tr>
                                         <th>Product</th>
-                                        <th>Quantity</th>
                                         <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* current issue: not returning multiple products for checkout page so can't split by size, maybe have numerous sizes under one section?*/}
                                     {products.map((product, i) => (
-
                                         <tr key={"product" + i}>
                                             {console.log(product.size)}
                                             <ProductInfoCell>
@@ -164,20 +163,23 @@ export default function CheckoutPage() {
                                                     <img src={product.images[0]} alt="product image" />
                                                 </ProductImageBox>
                                                 {product.name}
-                                                {product.size.size}
+                                                {product.size}
                                             </ProductInfoCell>
                                             <td>
-                                                {/* {id: product._id, size: selectedSize, quantity: numberOfSelectedStock} */}
-                                                <button onClick={() => lessOfThisProduct(product._id)}>-</button>
-                                                {checkoutProducts.filter(id => id === product._id).length}
-                                                <button onClick={() => moreOfThisProduct(product._id)}>+</button>
+                                                {product.price}
                                             </td>
                                             <td>
-                                                {checkoutProducts.filter(id => id === product._id).length * product.price}
+                                                <button onClick={() => lessOfThisProduct({id: product._id, size: product.size})}>-</button>
+                                                {checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length}
+                                                <button onClick={() => moreOfThisProduct({id: product._id, size: product.size})}>+</button>
+                                            </td>
+                                            <td>
+                                                {checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length * product.price}
                                             </td>
                                         </tr>
                                     ))}
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td>{total}</td>

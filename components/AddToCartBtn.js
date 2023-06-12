@@ -17,9 +17,15 @@ const CheckoutButton = styled.div`
 export default function AddToCartBtn({productSizeQuantity}) {
     
     const {addProduct} = useContext(CheckoutContext)
-    console.log(productSizeQuantity)
+    
     const addProductToCheckout = () => {
-        addProduct(productSizeQuantity)
+        for(let i = 0; i < productSizeQuantity.quantity; i++){
+            let itemToAdd = {}
+            itemToAdd.id = productSizeQuantity.id
+            itemToAdd.size = productSizeQuantity.size
+            console.log(itemToAdd)
+            addProduct(itemToAdd)
+        }
     }
     
     return (
