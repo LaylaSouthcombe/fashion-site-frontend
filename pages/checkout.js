@@ -154,16 +154,20 @@ export default function CheckoutPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/* current issue: products and checkouts products info is seperated, need to somehow combine the knowledge so quantity does not rely on number of ids in checkout products, but the quantity stated. Can also add logic to add to checkout products that either adds the id or increases the quantity, which will remove the issue in this page */}
+                                    {/* current issue: not returning multiple products for checkout page so can't split by size, maybe have numerous sizes under one section?*/}
                                     {products.map((product, i) => (
+
                                         <tr key={"product" + i}>
+                                            {console.log(product.size)}
                                             <ProductInfoCell>
                                                 <ProductImageBox>
                                                     <img src={product.images[0]} alt="product image" />
                                                 </ProductImageBox>
                                                 {product.name}
+                                                {product.size.size}
                                             </ProductInfoCell>
                                             <td>
+                                                {/* {id: product._id, size: selectedSize, quantity: numberOfSelectedStock} */}
                                                 <button onClick={() => lessOfThisProduct(product._id)}>-</button>
                                                 {checkoutProducts.filter(id => id === product._id).length}
                                                 <button onClick={() => moreOfThisProduct(product._id)}>+</button>

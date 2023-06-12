@@ -13,7 +13,8 @@ export default async function handler(req, res){
     } = req.body
     await mongooseConnect()
     const products = checkoutProducts
-    const uniqueIds = [...new Set(products.id)]
+    const uniqueIds = [...products.id]
+    console.log("uniqueIds", uniqueIds)
     const productsInfo = await Product.find({_id:uniqueIds})
 
     let line_items = []

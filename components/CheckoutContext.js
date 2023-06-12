@@ -29,20 +29,16 @@ export function CheckoutContextProvider({children})  {
         } else {
             setCheckoutProducts(prev => [...prev, productSizeQuantity])
         }
-        // products.find(p => p._id === product.id)?.price
-        
     }
 
     const removeProduct = (productSizeQuantity) => {
-        setCheckoutProducts(prev => {
-            const idPos = prev.indexOf(productSizeQuantity)
-            if(idPos !== -1) {
-                return prev.filter((value, i) => 
-                    i !== idPos
-                )
-            }
-            return prev
-        })
+        let currentCheckoutProducts = checkoutProducts
+        let filteredProducts = currentCheckoutProducts.filter(product => product.id === productSizeQuantity.id && product.size === productSizeQuantity.size)
+        if(filteredProducts?.length > 0){
+            currentCheckoutProducts.find(product => product.id === productSizeQuantity.id && product.size === productSizeQuantity.size).quantity -= 1
+            setCheckoutProducts(currentCheckoutProducts)
+            console.log(currentCheckoutProducts)
+        }
     }
 
     const clearCheckout = () => {
