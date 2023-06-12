@@ -15,8 +15,16 @@ import ProductInfoAccordion from "@/components/ProductInfoAccordion"
 
 const ProductPathway = styled.p`
     width: 90%;
-    margin: 0 auto;
+    margin: 0.5rem auto 0rem auto;
     padding: 0.5rem;
+    color: var(--main-lighter-blue);
+    span {
+        margin: 0 0.5rem;
+        color: var(--main-lighter-blue);
+    }
+    span:last-child {
+        color: var(--main-dark-blue);
+    }
 `
 
 const TopSectionContainer = styled.div`
@@ -24,7 +32,7 @@ const TopSectionContainer = styled.div`
     grid-template-columns: 1fr 1fr;
     width: 90%;
     max-width: 1000px;
-    margin: 2rem auto;
+    margin: 0.5rem auto 2rem auto;
 `
 
 const ProductInformationContainer = styled.div`
@@ -33,20 +41,26 @@ const ProductInformationContainer = styled.div`
     margin: 2rem;
 `
 
-const MoreLikeThisTitle = styled.h2`
-    text-align: center;
-    margin-top: 2rem;
+const ProductTitle = styled.h2`
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
 `
 
-const MoreLikeThisContainer = styled.div`
-    width: 90%;
-    max-width: 1000px;
-    margin: 2rem auto;
+const ProductBrand = styled.p`
+    font-size: 0.9rem;
+`
+
+const ProductPrice = styled.p`
+    margin: 0.5rem 0;
 `
 
 const SizeButtons = styled.div`
     display: flex;
     flex-wrap: wrap;
+    border-top: 1px solid var(--main-light-blue);
+    border-bottom: 1px solid var(--main-light-blue);
+    padding: 1rem 0;
+    margin: 1rem 0 0 0;
 `
 
 const SizeButton = styled.button`
@@ -60,7 +74,7 @@ const SizeButton = styled.button`
     cursor: pointer;
     outline: none;
     border: none;
-
+    
     :hover:enabled {
         background-color:  ${props => props.isActive ? 'var(--main-dark-blue)' : 'var(--main-lightish-blue)'};
     }
@@ -76,7 +90,7 @@ const LastStockLeftPara = styled.div`
     span {
         font-size: 0.8rem;
     }
-
+    
     span:first-child{
         font-weight: bold;
     }
@@ -105,10 +119,21 @@ const CounterArea = styled.div`
             height: auto;
         }
     }
-
+    
     span {
         margin: 0rem 0.75rem;
     }
+`
+
+const MoreLikeThisTitle = styled.h2`
+    text-align: center;
+    margin-top: 2rem;
+`
+
+const MoreLikeThisContainer = styled.div`
+    width: 90%;
+    max-width: 1000px;
+    margin: 2rem auto;
 `
 
 export default function ProductPage({product, moreLikeThisProducts}){
@@ -133,13 +158,17 @@ export default function ProductPage({product, moreLikeThisProducts}){
     return (
         <>
             <Header/>
-            <ProductPathway>{product.productCategory} &gt; {product.productType}</ProductPathway>
+            <ProductPathway>
+                <span>{product.productCategory}</span> 
+                &gt; 
+                <span>{product.productType}</span>
+            </ProductPathway>
             <TopSectionContainer>
                 <ProductImagesCarousel images={product.images}/>
                 <ProductInformationContainer>
-                    <h2>{product.name}</h2>
-                    <p>{product.brand}</p>
-                    <p>£{product.price}</p>
+                    <ProductTitle>{product.name}</ProductTitle>
+                    <ProductBrand>{product.brand}</ProductBrand>
+                    <ProductPrice>£{product.price}</ProductPrice>
                     {product.productCategory === "Clothing" || product.productCategory === "Shoes" ?
                     <>
                         <SizeButtons>
