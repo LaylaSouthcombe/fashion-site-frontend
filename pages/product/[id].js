@@ -11,6 +11,7 @@ import AddToCartBtn from "@/components/AddToCartBtn"
 import PlusSign from "../../images/icons/plus.png"
 import MinusSign from "../../images/icons/minus.png"
 import Image from "next/image"
+import ProductInfoAccordion from "@/components/ProductInfoAccordion"
 
 const ProductPathway = styled.p`
     width: 90%;
@@ -116,7 +117,10 @@ export default function ProductPage({product, moreLikeThisProducts}){
 
     const [selectedSize, setSelectedSize] = useState(getFirstInStockSize(product))
     const [numberOfSelectedStock, setNumberOfSelectedStock] = useState(1)
-
+    const [expanded, setExpanded] = useState('')
+    const handleChange = (panel) => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
+    };
     return (
         <>
             <Header/>
@@ -160,6 +164,8 @@ export default function ProductPage({product, moreLikeThisProducts}){
                         </CounterArea>
                             <AddToCartBtn productSizeQuantity={{id: product._id, size: selectedSize.size, quantity: numberOfSelectedStock}}/>
                     </AddProductToCartArea>
+                    {console.log(product)}
+                    <ProductInfoAccordion productInfo={{sizeAndFit: product.sizeAndFit, productSummary: product.productSummary}}  expanded={expanded} handleChange={handleChange}/>
                 </ProductInformationContainer>
             </TopSectionContainer>
                 
@@ -176,7 +182,7 @@ export async function getServerSideProps(context){
 
     const {id} = context.query
     const product = await Product.findById(id)
-
+    console.log("initial product", product)
     const moreLikeThisProducts = await Product.aggregate([
     {
         $search: {
