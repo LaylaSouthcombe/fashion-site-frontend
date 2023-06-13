@@ -9,18 +9,28 @@ import FilterSideBar from "./FilterSideBar"
 import downArrow from "../images/icons/down-arrow.png"
 
 const ProductsGridOuterContainer = styled.section`
-    width: 90%;
+    width: 80%;
     max-width: 1000px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 0.25fr 0.75fr;
+    grid-template-columns: 1fr;
+    @media (min-width: 768px) {
+        width: 90%;
+        grid-template-columns: 0.25fr 0.75fr;
+    }
 `
 
 const ProductsGridContainer = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 33%);
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+    @media (min-width: 400px) {
+        grid-template-columns: repeat(2, 50%);
+    }
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 33%);
+    }
 `
 
 const ProductsGridResultsAndSort = styled.div`
