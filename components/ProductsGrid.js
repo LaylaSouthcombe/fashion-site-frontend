@@ -10,6 +10,7 @@ import downArrow from "../images/icons/down-arrow.png"
 
 const ProductsGridOuterContainer = styled.section`
     width: 90%;
+    max-width: 1000px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 0.25fr 0.75fr;
@@ -18,13 +19,15 @@ const ProductsGridOuterContainer = styled.section`
 const ProductsGridContainer = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3,  minmax(0, 1fr));
-    grid-template-rows: auto 1fr;
+    grid-template-columns: repeat(3, 33%);
+    grid-template-rows: 1fr 1fr;
 `
 
 const ProductsGridResultsAndSort = styled.div`
     width: 90%;
+    max-width: 1000px;
     margin: 40px auto 20px auto;
+    padding-right: 2rem;
     display: flex;
     justify-content: space-between;
 `

@@ -56,6 +56,8 @@ const CartLink = styled(Link)`
 
 const StyledNav = styled.nav`
     display: none;
+    max-width: 1000px;
+    margin: 0 auto;
     gap: 15px;
     justify-content: space-between;
     position: relative;
@@ -149,6 +151,7 @@ const SideNavLinks = styled.ul`
 
 const DesktopNavLinks = styled.ul`
     padding: 1rem 1rem 0rem 1rem;
+    margin-right: 1rem;
     display: flex;
     flex-direction: row;
     font-size: 0.9rem;
@@ -321,8 +324,8 @@ export default function Header() {
                                             <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
                                         </li>
                                     </SideNavLinks>
-                                </SideNav>
-                            </SideNavPlusOverlay>
+                            </SideNav>
+                        </SideNavPlusOverlay>
                         </>
                     : null}
                     <SideNavButton>

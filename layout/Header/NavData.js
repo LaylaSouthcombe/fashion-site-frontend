@@ -26,7 +26,7 @@ const shortNavData = [
         {link: "/bags/rucksack", label: "Rucksacks"}, 
         {link: "/bags/handbags", label: "Handbags"}
     ]},
-    { link: "/jewellery-watches/all", label: "Jewellery and Watches", childLinks: [
+    { link: "/jewellery-watches/all", label: "Jewellery & Watches", childLinks: [
         {link: "/jewellery-watches/all", label: "All clothing"}, 
         {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
         {link: "/jewellery-watches/watches", label: "Watches"}
@@ -103,7 +103,7 @@ const navData = {
             alt: "Model modelling handbag"
         }
     },
-    "Jewellery and Watches": { link: "/jewellery-watches/all", label: "Jewellery and Watches", childLinks: [
+    "Jewellery & Watches": { link: "/jewellery-watches/all", label: "Jewellery & Watches", childLinks: [
             {listItems: [
                 {link: "/jewellery-watches/all", label: "All jewellery"}, 
                 {link: "/jewellery-watches/-t-fashion-jewelry", label: "Fashion Jewellery"}, 

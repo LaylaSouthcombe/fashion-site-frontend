@@ -6,6 +6,7 @@ const ProductTileContainer = styled.div`
     padding: 0.5rem 1.5rem;
     margin: 0.75rem auto 0.75rem auto;
     height: 95%;
+    width: 100%;
 `
 
 const ProductTileContent = styled(Link)`
