@@ -99,7 +99,7 @@ export default function NewsletterSubscribe() {
     const [errorMessage, setErrorMessage] = useState()
 
     const handleSubscription = () => {
-        console.log(subscriptionEmail.split("@"))
+
         if(subscriptionEmail.length > 0 && subscriptionEmail.includes("@") && subscriptionEmail.split("@")[1] !== ""){
             setSubscribed(true)
             setErrorMessage()
