@@ -2,6 +2,8 @@ import { mongooseConnect } from "@/lib/mongoose"
 import { Product } from "@/models/Product"
 import styled from "styled-components"
 
+import {addFormattedQueryToProductQuery, addFormattedQueryToQueryConstraint} from '../../utils/mongoQueryGenerationUtils'
+
 import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
 import ProductsGrid from "@/components/ProductsGrid"
@@ -27,30 +29,12 @@ export default function JewelleryWatchesPage({products, queryConstraint}){
 
 export async function getServerSideProps(context){
     await mongooseConnect()
-    let productQuery = {productCategory: 'Jewelry & Watches'}
-    let queryConstraint = {productCategory: 'Jewelry & Watches'}
+    let productQuery = {productCategory: 'Jewellery & Watches'}
+    let queryConstraint = {productCategory: 'Jewellery & Watches'}
     const {query} = context.query
 
-    const capitalizeFirstLetter = (word) => {
-        const firstLetter = word.charAt(0)
-        const firstLetterCap = firstLetter.toUpperCase()
-        const remainingLetters = word.slice(1)
-        const capitalizedQueryWord = firstLetterCap + remainingLetters
-        return capitalizedQueryWord
-    }
-    
-    if(query.includes("-s-")){
-        let queryWord = capitalizeFirstLetter(query.split("-s-")[1])
-        let queryRegexWord = new RegExp(queryWord, "si")
-        productQuery["productSubType"] = queryRegexWord
-        queryConstraint["path"] = 'productSubType'
-        queryConstraint["value"] = queryWord.replace("-", " ")
-    } else if(query.includes("-t-")){
-        let queryWord = capitalizeFirstLetter(query.split("-t-")[1])
-        productQuery["productType"] = queryWord
-        queryConstraint["path"] = 'productType'
-        queryConstraint["value"] = queryWord.replace("-", " ")
-    }
+    addFormattedQueryToProductQuery(query, productQuery)
+    addFormattedQueryToQueryConstraint(query, queryConstraint)
 
     const products = await Product.find(productQuery, null, {sort:{'_id': -1}})
 

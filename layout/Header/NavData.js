@@ -40,12 +40,12 @@ const shortNavData = [
 
 const navData = {
     Brands: { link: "/brands", label: "Brands", childLinks: [
-            {title: 'title', listItems: [
+            {listItems: [
                 {link: "/brands", label: "All brands"}, 
                 {link: "/brand/off-white", label: "Off-White"}, 
                 {link: "/brand/nike", label: "Nike"}
             ]},
-            {title: 'title', listItems: [
+            {listItems: [
                 {link: "/brand/essentials", label: "Essentials"}, 
                 {link: "/brand/carhartt", label: "Carhartt"}, 
                 {link: "/brand/acne-studios", label: "Acne Studios"}
@@ -56,15 +56,15 @@ const navData = {
         }
     },
     Clothing: { link: "/clothing/all", label: "Clothing", childLinks: [
-            {title: 'title', listItems: [
+            {listItems: [
                 {link: "/clothing/all", label: "All clothing"}, 
                 {link: "/clothing/-t-jackets", label: "Jackets"}, 
                 {link: "/clothing/-t-trousers", label: "Trousers"}
             ]},
-            {title: 'title', listItems: [
+            {listItems: [
                 {link: "/clothing/-t-t-shirts", label: "T-shirts"}, 
                 {link: "/clothing/-t-outerwear", label: "Outerwear"}, 
-                {link: "/clothing/-t-sweatshirts-and-hoodies", label: "Sweatshirts and Hoodies"}
+                {link: "/clothing/-s-sweatshirts-and-hoodies", label: "Sweatshirts and Hoodies"}
             ]}
         ], image: {
             source: clothingImage,
@@ -72,12 +72,12 @@ const navData = {
         }
     },
     Shoes: { link: "/shoes/all", label: "Shoes", childLinks: [
-            {title: 'Shoes', listItems: [
+            {listItems: [
                 {link: "/shoes/-t-all", label: "All Shoes"}, 
                 {link: "/shoes/-t-boots", label: "Boots"}, 
                 {link: "/shoes/-t-sandals", label: "Sandals"}
             ]},
-            {title: 'Sneakers', listItems: [
+            {listItems: [
                 {link: "/shoes/-t-sneakers", label: "Sneakers"}, 
                 {link: "/shoes/-s-running-shoes", label: "Running Shoes"}, 
                 {link: "/shoes/-s-low-top-sneakers", label: "Low Top Sneakers"}
@@ -88,12 +88,12 @@ const navData = {
         }
     },
     Bags: { link: "/bags/all", label: "Bags", childLinks: [
-            {title: 'Bags', listItems: [
+            {listItems: [
                 {link: "/bags/all", label: "All bags"}, 
                 {link: "/bags/-t-bucket-bags", label: "Bucket Bags"}, 
                 {link: "/bags/-t-tote-bags", label: "Handbags"}
             ]},
-            {title: "", listItems: [
+            {listItems: [
                 {link: "/bags/-t-shoulder-bags", label: "Shoulder Bags"}, 
                 {link: "/bags/-t-cross-body-bags", label: "Cross-body Bags"}, 
                 {link: "/bags/-t-backpacks", label: "Backpacks"}
@@ -104,15 +104,15 @@ const navData = {
         }
     },
     "Jewellery and Watches": { link: "/jewellery-watches/all", label: "Jewellery and Watches", childLinks: [
-            {title: 'title', listItems: [
-                {link: "/jewellery-watches/all", label: "All clothing"}, 
-                {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
-                {link: "/jewellery-watches/watches", label: "Watches"}
+            {listItems: [
+                {link: "/jewellery-watches/all", label: "All jewellery"}, 
+                {link: "/jewellery-watches/-t-fashion-jewelry", label: "Fashion Jewellery"}, 
+                {link: "/jewellery-watches/-t-fine-watches", label: "Fine watches"}
             ]},
-            {title: 'title', listItems: [
-                {link: "/jewellery-watches/all", label: "All clothing"}, 
-                {link: "/jewellery-watches/jewellery", label: "Jewellery"}, 
-                {link: "/jewellery-watches/watches", label: "Watches"}
+            {listItems: [
+                {link: "/jewellery-watches/-s-earrings", label: "Earrings"}, 
+                {link: "/jewellery-watches/-s-bracelets", label: "Bracelets"}, 
+                {link: "/jewellery-watches/-s-necklaces", label: "Necklaces"}
             ]}
         ], image: {
             source: watchImage,
@@ -120,15 +120,15 @@ const navData = {
         }
     },
     "Accessories": { link: "/accessories/all", label: "Accessories", childLinks: [
-            {title: 'title', listItems: [
+            {listItems: [
                 {link: "/accessories/all", label: "All accessories"}, 
-                {link: "/accessories/hats", label: "Hats"}, 
-                {link: "/accessories/belts", label: "Belts"}
+                {link: "/accessories/-t-sunglasses", label: "Sunglasses"}, 
+                {link: "/accessories/-t-hats", label: "Hats"}
             ]},
-            {title: 'title', listItems: [
-                {link: "/accessories/all", label: "All accessories"}, 
-                {link: "/accessories/hats", label: "Hats"}, 
-                {link: "/accessories/belts", label: "Belts"}
+            {listItems: [
+                {link: "/accessories/-t-bags", label: "Bags"}, 
+                {link: "/accessories/-t-socks", label: "Socks"}, 
+                {link: "/accessories/-t-scarves", label: "Scarves"}
             ]}
         ], image: {
             source: hatImage,
