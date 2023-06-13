@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import Link from "next/link"
+import { useState } from "react"
 
 const ProductTileContainer = styled.div`
     padding: 0.5rem 1.5rem;
@@ -53,11 +54,21 @@ const ProductPrice = styled.div`
 export default function ProductTile({product:{_id, name, price, brand,  images}}) {
     const url = `/product/${_id}`
 
+    const [visibleImage, setVisibleImage] = useState(images[0])
+
+    const changeVisibleImage = () => {
+        if(visibleImage === images[0]){
+            setVisibleImage(images[1])
+        } else {
+            setVisibleImage(images[0])
+        }
+    }
+
     return (
         <>
             <ProductTileContainer>
                 <ProductTileContent href={url}>
-                    <ProductImage src={images[0]}/>
+                    <ProductImage src={visibleImage} onMouseEnter={() => changeVisibleImage()} onMouseLeave={() => changeVisibleImage()}/>
                     <ProductInfo>
                         <ProductBrand>{brand}</ProductBrand>
                         <ProductName>{name}</ProductName>
