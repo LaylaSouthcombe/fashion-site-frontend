@@ -86,22 +86,43 @@ const SubscribeConfirmation = styled.div`
     }
 `
 
+const SubscriptionError = styled.p`
+    height: 1rem;
+    margin: 0.75rem 0rem 0rem 0rem;
+    color: #d65871;
+`
+
 export default function NewsletterSubscribe() {
 
     const [subscribed, setSubscribed] = useState(false)
+    const [subscriptionEmail, setSubscriptionEmail] = useState("")
+    const [errorMessage, setErrorMessage] = useState()
+
+    const handleSubscription = () => {
+        console.log(subscriptionEmail.split("@"))
+        if(subscriptionEmail.length > 0 && subscriptionEmail.includes("@") && subscriptionEmail.split("@")[1] !== ""){
+            setSubscribed(true)
+            setErrorMessage()
+        } else {
+            setErrorMessage("Please enter a valid email address")
+        }
+    }
 
     return (
         <SubscribeContainer>
             <SubscribeLargeText>Subscribe to our newsletter to get updates on our latest collections</SubscribeLargeText>
             <SmallSubscribeText>Get 20% off your first order by subscribing to our newsletter</SmallSubscribeText>
+            <SubscriptionError>{errorMessage}</SubscriptionError>
             {!subscribed ? 
-                <SubscribeInputArea>
-                    <SubscribeEmailInput placeholder=" Enter your email"/>
-                    <PlaceholderEmailIcon>
-                        <Image src={emailIcon} alt="email icon"/>
-                    </PlaceholderEmailIcon>
-                    <SubscribeButton onClick={() => setSubscribed(true)}>Subscribe</SubscribeButton>
-                </SubscribeInputArea>
+                <>
+                    <SubscribeInputArea>
+                        <SubscribeEmailInput placeholder=" Enter your email" required onChange={(e) => setSubscriptionEmail(e.target.value)}/>
+                        <PlaceholderEmailIcon>
+                            <Image src={emailIcon} alt="email icon"/>
+                        </PlaceholderEmailIcon>
+                        <SubscribeButton onClick={() => handleSubscription()}>Subscribe</SubscribeButton>
+                    </SubscribeInputArea>
+                </>
             :
                 <SubscribeConfirmation>
                     <SubscribeLargeText>Thanks for subscribing!</SubscribeLargeText>
