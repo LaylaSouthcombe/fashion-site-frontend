@@ -1,6 +1,7 @@
-import BannerAdImage from "@/images/bannerAdImage.jpg"
-import Image from "next/image"
 import styled from "styled-components"
+import Image from "next/image"
+
+import BannerAdImage from "@/images/bannerAdImage.jpg"
 
 const BannerAdContainer = styled.div`
     width: 80%;
@@ -77,7 +78,7 @@ const ShopTheSaleButton = styled.button`
 `
 
 export default function BannerAd() {
-    return(
+    return (
         <BannerAdContainer>
             <BannerImage>
                 <Image src={BannerAdImage} alt="Three males models sat on chairs"/>

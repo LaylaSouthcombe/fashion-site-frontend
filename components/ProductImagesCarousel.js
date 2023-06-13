@@ -31,7 +31,6 @@ const ImageButtons = styled.div`
     width: 100%;
 `
 
-
 export default function ProductImagesCarousel({images}){
 
     const [mainImage, setMainImage] = useState(images?.[0])
@@ -39,11 +38,11 @@ export default function ProductImagesCarousel({images}){
     return (
         <>
             <ImageGridContainer>
-                <MainImage src={mainImage} alt="" />
+                <MainImage src={mainImage} alt="Main product image"/>
                 <ImageButtons>
                     {images.map((image, i) => (
                         <ImageButtonContainer key={"image" + i}>
-                            <Image src={image} alt="" onClick={(() => setMainImage(image))}/>
+                            <Image src={image} alt="Product image button" onClick={(() => setMainImage(image))}/>
                         </ImageButtonContainer>
                     ))}
                 </ImageButtons>

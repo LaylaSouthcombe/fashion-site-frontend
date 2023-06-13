@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import HomeHeroImage from '../images/HomeHeroImage.png'
-import HomeHeroImageSmall from '../images/HomeHeroImageSmall.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import arrow from '../images/curatedPicks/right-arrow.png'
+
+import Arrow from '../images/curatedPicks/right-arrow.png'
+import HomeHeroImage from '../images/HomeHeroImage.png'
+import HomeHeroImageSmall from '../images/HomeHeroImageSmall.png'
 
 const HeroImageDiv = styled.div`
     position: relative;
@@ -98,11 +99,11 @@ export default function HomeHero() {
 
     return (
         <HeroImageDiv>
-            <LargeHeroImage src={HomeHeroImage} alt="" /> 
-            <SmallHeroImage src={HomeHeroImageSmall} alt="" />
+            <LargeHeroImage src={HomeHeroImage} alt="Young male and female clothing models"/> 
+            <SmallHeroImage src={HomeHeroImageSmall} alt="Young male and female clothing models"/>
             <HeroInfo>
                 <HeroText>Level up your style with out summer collections</HeroText>
-                <HeroButton href={"clothing"}>Shop now<Image src={arrow} alt="arrow"/></HeroButton>
+                <HeroButton href={"clothing"}>Shop now<Image src={Arrow} alt="arrow"/></HeroButton>
             </HeroInfo>
         </HeroImageDiv>
     )

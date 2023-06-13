@@ -1,14 +1,12 @@
+import { useEffect, useState } from "react"
+import axios from "axios"
 import styled from "styled-components"
+import Image from "next/image"
+
 import ProductTile from "./ProductsCarousel/ProductTile"
 import FilterSideBar from "./FilterSideBar"
-import { useEffect, useState } from "react"
-import { mongooseConnect } from "@/lib/mongoose"
-import { Product } from "@/models/Product"
-import Image from "next/image"
-import downArrow from "../images/icons/down-arrow.png"
-import upArrow from "../images/icons/up-arrow.png"
 
-import axios from "axios"
+import downArrow from "../images/icons/down-arrow.png"
 
 const ProductsGridOuterContainer = styled.section`
     width: 90%;
@@ -74,11 +72,9 @@ const DropdownList = styled.ul`
     list-style: none;
     top: 2.5rem;
     left: -0.5%;
-
     li {
         padding: 0.75rem 0.5rem;
     }
-
     li:hover {
         border-left: 0.25rem solid var(--main-dark-blue);
         padding-left: 0.25rem;
@@ -100,11 +96,11 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
         { value: 'lowestPrice', label: 'Low to high' },
         { value: 'highestPrice', label: 'High to low' },
         { value: 'newIn', label: 'New in' }
-    ];
+    ]
 
     const handleDropdownToggle = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
+        setIsDropdownOpen(!isDropdownOpen)
+    }
 
     const getSortedProducts = async (filters, queryConstraint, sortResults) => {
         let body = {
@@ -113,25 +109,23 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
             sortResults: sortResults
         }
         const response = await axios.post(apiUrl, body)
-        console.log(response)
         return response.data
     }
 
     const handleOptionSelect = async (valueObject) => {
-        setSelectedValue(valueObject);
-        setIsDropdownOpen(false);
-        console.log('Selected option:', valueObject);
+        setSelectedValue(valueObject)
+        setIsDropdownOpen(false)
         let newProducts = await getSortedProducts(filters, queryConstraint, valueObject.value)
         setCurrentProducts(newProducts)
-      };
+    }
 
     const handleChange = (panel) => (event, newExpanded) => {
-        setExpanded(newExpanded ? panel : false);
-    };
-
+        setExpanded(newExpanded ? panel : false)
+    }
 
     const generateAvailableFilters = (products) => {
         let newFilterLabels = {productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []}
+
         for(let i = 0; i < products.length; i++){
             Object.keys(newFilterLabels).forEach(label => {
                 if(label !== "sizesAndStock"){
@@ -147,6 +141,7 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
                 }
             })
         }
+
         setFilterLabels(newFilterLabels)
     }
 
@@ -163,7 +158,6 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
             sortResults: "recommended"
         }
         const response = await axios.post(apiUrl, body)
-        console.log(response)
         return response.data
     }
 
@@ -189,25 +183,24 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
                 <SortDropDownArea>
                     <DropdownHeader className="dropdown-header" onClick={handleDropdownToggle}>
                         <span>{!isDropdownOpen ? selectedValue.label : 'Sort By'}</span>
-                        <Image src={downArrow } className={isDropdownOpen ? 'backFlipped' : 'flipped'}/>
+                        <Image src={downArrow} className={isDropdownOpen ? 'backFlipped' : 'flipped'} alt="Down arrow"/>
                     </DropdownHeader>
                     {isDropdownOpen ? (
                         <DropdownList className="dropdown-options">
-                        {dropdownOptions.map((option) => (
-                            <li
-                            key={option.value}
-                            className="dropdown-option"
-                            onClick={() => handleOptionSelect({value: option.value, label: option.label})}
-                            >
-                            {option.label}
-                            </li>
-                        ))}
+                            {dropdownOptions.map((option) => (
+                                <li
+                                key={option.value}
+                                className="dropdown-option"
+                                onClick={() => handleOptionSelect({value: option.value, label: option.label})}
+                                >
+                                    {option.label}
+                                </li>
+                            ))}
                         </DropdownList>
                     ) : null}
                 </SortDropDownArea>
             </ProductsGridResultsAndSort>
             <ProductsGridOuterContainer>
-                {/* useref? */}
                 <FilterSideBar filterLabels={filterLabels} handleChange={handleChange} expanded={expanded} updateFilteredProducts={updateFilteredProducts}/>
                 <ProductsGridContainer>
                     {currentProducts?.length > 0 ? 

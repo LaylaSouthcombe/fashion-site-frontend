@@ -1,17 +1,19 @@
-import Header from "@/layout/Header/Header"
-import Footer from "@/layout/Footer/Footer"
-import { mongooseConnect } from "@/lib/mongoose"
-import { Product } from "@/models/Product"
-import ProductImagesCarousel from "@/components/ProductImagesCarousel"
 import mongoose from 'mongoose'
-import ProductsCarousel from "@/components/ProductsCarousel/ProductsCarousel"
-import styled from "styled-components"
+import { mongooseConnect } from "@/lib/mongoose"
 import { useState } from "react"
-import AddToCartBtn from "@/components/AddToCartBtn"
-import PlusSign from "../../images/icons/plus.png"
-import MinusSign from "../../images/icons/minus.png"
+import styled from "styled-components"
 import Image from "next/image"
+
+import { Product } from "@/models/Product"
+import Footer from "@/layout/Footer/Footer"
+import Header from "@/layout/Header/Header"
+import AddToCartBtn from "@/components/AddToCartBtn"
+import ProductsCarousel from "@/components/ProductsCarousel/ProductsCarousel"
+import ProductImagesCarousel from "@/components/ProductImagesCarousel"
 import ProductInfoAccordion from "@/components/ProductInfoAccordion"
+
+import MinusSign from "../../images/icons/minus.png"
+import PlusSign from "../../images/icons/plus.png"
 
 const ProductPathway = styled.p`
     width: 90%;
@@ -33,7 +35,6 @@ const TopSectionContainer = styled.div`
     width: 90%;
     max-width: 1000px;
     margin: 0.5rem auto 2rem auto;
-
     @media (min-width: 768px) {
         grid-template-columns: 1fr 1fr;
     }
@@ -78,11 +79,9 @@ const SizeButton = styled.button`
     cursor: pointer;
     outline: none;
     border: none;
-    
     :hover:enabled {
         background-color:  ${props => props.isActive ? 'var(--main-dark-blue)' : 'var(--main-lightish-blue)'};
     }
-    
     :disabled {
         opacity: 0.5;
     }
@@ -94,7 +93,6 @@ const LastStockLeftPara = styled.div`
     span {
         font-size: 0.8rem;
     }
-    
     span:first-child{
         font-weight: bold;
     }
@@ -123,7 +121,6 @@ const CounterArea = styled.div`
             height: auto;
         }
     }
-    
     span {
         margin: 0rem 0.75rem;
     }
@@ -141,7 +138,6 @@ const MoreLikeThisContainer = styled.div`
 `
 
 export default function ProductPage({product, moreLikeThisProducts}){
-    console.log(product)
 
     const getFirstInStockSize = (product) => {
         let firstStockInSize
@@ -156,9 +152,11 @@ export default function ProductPage({product, moreLikeThisProducts}){
     const [selectedSize, setSelectedSize] = useState(getFirstInStockSize(product))
     const [numberOfSelectedStock, setNumberOfSelectedStock] = useState(1)
     const [expanded, setExpanded] = useState('')
+
     const handleChange = (panel) => (event, newExpanded) => {
-        setExpanded(newExpanded ? panel : false);
-    };
+        setExpanded(newExpanded ? panel : false)
+    }
+
     return (
         <>
             <Header/>
@@ -179,7 +177,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
                             { product.sizesAndStock.map((sizeObject, i) => {
                                 const isActive = selectedSize.size === sizeObject.size
                                 return (
-                                        <SizeButton key={"sizeObject" + i} isActive={isActive} onClick={() => setSelectedSize(sizeObject)} disabled={sizeObject.stock === 0}>{sizeObject.size}</SizeButton>
+                                    <SizeButton key={"sizeObject" + i} isActive={isActive} onClick={() => setSelectedSize(sizeObject)} disabled={sizeObject.stock === 0}>{sizeObject.size}</SizeButton>
                                 )
                             })}
                         </SizeButtons>
@@ -192,22 +190,20 @@ export default function ProductPage({product, moreLikeThisProducts}){
                             : null}
                         </LastStockLeftPara>
                     </>
-                    : null
-                    }
+                    : null}
                     <AddProductToCartArea>
                         <CounterArea>
                             <button onClick={(() => numberOfSelectedStock > 1 ? setNumberOfSelectedStock(prev => prev - 1) : null)}>
-                                <Image src={MinusSign}/>
+                                <Image src={MinusSign} alt="minus sign button"/>
                             </button>
                             <span>{numberOfSelectedStock}</span>
                             <button onClick={(() => setNumberOfSelectedStock(prev => prev + 1))}>
-                                <Image src={PlusSign}/>
+                                <Image src={PlusSign} alt="plus sign button"/>
                             </button>
                         </CounterArea>
-                            <AddToCartBtn productSizeQuantity={{id: product._id, size: selectedSize.size, quantity: numberOfSelectedStock}}/>
+                        <AddToCartBtn productSizeQuantity={{id: product._id, size: selectedSize.size, quantity: numberOfSelectedStock}}/>
                     </AddProductToCartArea>
-                    {console.log(product)}
-                    <ProductInfoAccordion productInfo={{sizeAndFit: product.sizeAndFit, productSummary: product.productSummary}}  expanded={expanded} handleChange={handleChange}/>
+                    <ProductInfoAccordion productInfo={{sizeAndFit: product.sizeAndFit, productSummary: product.productSummary}} expanded={expanded} handleChange={handleChange}/>
                 </ProductInformationContainer>
             </TopSectionContainer>
             <MoreLikeThisTitle>Similar items</MoreLikeThisTitle>
@@ -224,7 +220,7 @@ export async function getServerSideProps(context){
 
     const {id} = context.query
     const product = await Product.findById(id)
-    console.log("initial product", product)
+
     const moreLikeThisProducts = await Product.aggregate([
     {
         $search: {
@@ -251,6 +247,7 @@ export async function getServerSideProps(context){
           }
     }}, 
     { "$limit": 10}])
+    
     return {
         props: {
             product: JSON.parse(JSON.stringify(product)),

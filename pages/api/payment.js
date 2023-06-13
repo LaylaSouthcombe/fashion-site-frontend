@@ -1,20 +1,24 @@
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
 import { mongooseConnect } from "@/lib/mongoose"
+
 import { Order } from "@/models/Order"
 import { Product } from "@/models/Product"
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 export default async function handler(req, res){
     if(req.method !== 'POST'){
         res.json('should be a POST request')
         return
     }
+
     const {
         name, email, city, streetAddress, country, postalCode, checkoutProducts
     } = req.body
+
     await mongooseConnect()
     const products = checkoutProducts
     const uniqueIds = [...products.id]
-    console.log("uniqueIds", uniqueIds)
+
     const productsInfo = await Product.find({_id:uniqueIds})
 
     let line_items = []
@@ -28,7 +32,7 @@ export default async function handler(req, res){
             }
             return quantity
         }
-        // const quantity = products.filter(id => id === productId)?.length || 0
+
         const quantity = getQuantityOfProduct(product)
         let numberInLineItems = line_items.filter(item => item.id === product.id && item.size === product.size)?.length || 0
         if(quantity > 0 && productInfo && numberInLineItems === 0){

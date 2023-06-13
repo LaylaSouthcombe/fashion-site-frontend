@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import Image from "next/image"
+import Link from "next/link"
 
 import casual from '../images/curatedPicks/casual.jpg'
 import men from '../images/curatedPicks/men.jpg'
 import popular from '../images/curatedPicks/popular.jpg'
 import women from '../images/curatedPicks/women.jpg'
 import arrow from '../images/curatedPicks/right-arrow.png'
-import Link from "next/link"
 
 const CuratedContainer = styled.div`
     width: 90%;
@@ -38,13 +38,6 @@ const CuratedBox = styled.div`
         width: 100%;
         height: auto;
         border-radius: 5px;
-    }
-
-    @media (min-width: 768px) {
-        /* img {
-            width: 22%;
-            padding: 8px;
-        } */
     }
 `
 const CuratedLink = styled(Link)`
@@ -100,7 +93,9 @@ export default function CuratedPicks() {
                     return (
                         <CuratedBox key={"pick"+i}>
                             <Image src={pick.image} alt={pick.title[1]+ " image"}/>
-                            <CuratedLink href={"clothing"+pick.url}>{pick.title}<Image src={arrow} alt="arrow"/></CuratedLink>
+                            <CuratedLink href={"clothing"+pick.url}>{pick.title}
+                                <Image src={arrow} alt="arrow"/>
+                            </CuratedLink>
                         </CuratedBox>
                     )
                 })}

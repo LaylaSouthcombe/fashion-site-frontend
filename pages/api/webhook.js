@@ -1,7 +1,10 @@
-import { mongooseConnect } from "@/lib/mongoose";
-import { Order } from "@/models/Order";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
+import { mongooseConnect } from "@/lib/mongoose"
+
+import { Order } from "@/models/Order";
 import {buffer} from 'micro'
+
 const endpointSecret = "whsec_fa354549160a57a757ed9f463134870f80e0947cc8fab430b69d12bd2219800c";
 
 export default async function handler(req,res){
@@ -17,7 +20,6 @@ export default async function handler(req,res){
         return;
     }
 
-  // Handle the event
   switch (event.type) {
     case 'checkout.session.completed':
       const data = event.data.object;

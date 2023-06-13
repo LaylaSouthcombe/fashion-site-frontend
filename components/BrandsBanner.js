@@ -28,7 +28,6 @@ const BrandsGrid = styled.div`
     row-gap: 25px;
     width: 100%;
     padding: 10px 20px;
-
     @media (min-width: 768px) {
         grid-template-columns: repeat(8, 1fr);
         padding: 20px;

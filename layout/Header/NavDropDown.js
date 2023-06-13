@@ -1,6 +1,7 @@
 import styled from "styled-components"
-import {navData} from './NavData'
 import Image from "next/image"
+
+import {navData} from './NavData'
 
 const DropdownContainer = styled.div`
     width: 100%;
@@ -73,11 +74,12 @@ export default function NavDropDown({section}) {
                                     {column.listItems.map((item, i) => {
                                         return (
                                             <>
-                                                <ColumnItem><a href={item.link}>{item.label}</a></ColumnItem>
+                                                <ColumnItem>
+                                                    <a href={item.link}>{item.label}</a>
+                                                </ColumnItem>
                                             </>
                                         )
                                     })}
-                                    
                                 </DropDownColumn>
                             </>
                         )

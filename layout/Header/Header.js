@@ -1,17 +1,20 @@
-import Link from "next/link";
+import { useContext, useState } from "react"
 import styled, {css} from "styled-components"
-import NavDropDown from "@/layout/Header/NavDropDown";
-import { useContext, useState } from "react";
-import { CheckoutContext } from "@/components/CheckoutContext";
-import NavAccordion from "@/components/NavAccordion";
-import {shortNavData} from './NavData'
-import Image from "next/image";
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation'
+import Image from "next/image"
+import Link from "next/link"
 
-import menuBars from '../../images/icons/menuBars.png'
-import menuCross from '../../images/icons/menuCross.png'
+import {shortNavData} from './NavData'
+
+import { CheckoutContext } from "@/components/CheckoutContext"
+
+import NavAccordion from "@/components/NavAccordion"
+import NavDropDown from "@/layout/Header/NavDropDown"
+
+import Cart from '../../images/icons/cart.png'
+import MenuBars from '../../images/icons/menuBars.png'
+import MenuCross from '../../images/icons/menuCross.png'
 import RuneLogo from '../../images/logos/runeLogo.png'
-import cart from '../../images/icons/cart.png'
 
 const MainHeader = styled.header`
   background-color: white;
@@ -165,14 +168,12 @@ const MainNavItem = styled.li`
         text-decoration-thickness: 3px;
         text-underline-offset: 5px;
     }
-    
     ${props => props.isActive === true && css`
     text-decoration: underline;
         text-decoration-color: var(--main-lightish-blue);
         text-decoration-thickness: 3px;
         text-underline-offset: 5px;
     `}
-
 `
 
 const CartImage = styled.div`
@@ -222,26 +223,27 @@ export default function Header() {
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
-    };
+    }
+
     const [menuState, setMenuState] = useState({});
 
     const handleMenuOpen = (menuId) => {
         setMenuState((prevState) => ({
-          ...prevState,
-          [menuId]: true,
-        }));
+            ...prevState,
+            [menuId]: true,
+        }))
         const body = document.querySelector('body')
         body.style.overflow = 'hidden'
-      };
+    }
     
-      const handleMenuClose = (menuId) => {
+    const handleMenuClose = (menuId) => {
         setMenuState((prevState) => ({
-          ...prevState,
-          [menuId]: false,
-        }));
+            ...prevState,
+            [menuId]: false,
+        }))
         const body = document.querySelector('body')
         body.style.overflow = 'visible'
-      };
+    }
 
     return (
         <>
@@ -261,13 +263,14 @@ export default function Header() {
                                     <MainNavItem key={"mainNav" + i} onMouseEnter={() => handleMenuOpen(navItem.link)}
                                     onMouseLeave={() => handleMenuClose(navItem.link)} isActive={isActive}>
                                         <NavLink href={navItem.link}>{navItem.label}</NavLink>
-                                        {menuState[navItem.link] ? 
-                                        <NavDropDown section={navItem.label}
-                                        />
+                                        {menuState[navItem.link] 
+                                        ? 
+                                            <NavDropDown section={navItem.label}/>
                                         : null}
                                     </MainNavItem>
-                                    {menuState[navItem.link] ? 
-                                    <BackgroundOverlay onMouseEnter={() => handleMenuClose(navItem.link)} onMouseLeave={() => handleMenuClose(navItem.link)} ></BackgroundOverlay>
+                                    {menuState[navItem.link] 
+                                    ? 
+                                        <BackgroundOverlay onMouseEnter={() => handleMenuClose(navItem.link)} onMouseLeave={() => handleMenuClose(navItem.link)}></BackgroundOverlay>
                                     : null}
                                 </>
                             )
@@ -275,7 +278,7 @@ export default function Header() {
                         <li>
                             <CartLink href="/checkout">
                                 <CartImage>
-                                    <Image src={cart} alt="cart icon"/>  
+                                    <Image src={Cart} alt="cart icon"/>  
                                 </CartImage>
                             {checkoutProducts?.length > 0 ? 
                                 <CartNumber>
@@ -291,40 +294,39 @@ export default function Header() {
                         <Image src={RuneLogo} alt="Rune logo"/>
                     </LargeLogo>
                     {showNavbar ? 
-                    <>
-                        <SideNavPlusOverlay>
-                            <SideNavOverlay></SideNavOverlay>
-                            <SideNav>
-                            <SmallLogo href="/">
-                                <Image src={RuneLogo} alt="Rune logo"/>
-                            </SmallLogo>
-                            <SideNavLinks>
-                                {shortNavData.map((navItem, i) => {
-                                    if(navItem.childLinks.length === 0){
-                                        return (
-                                            <>
-                                                <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
-                                            </>
-                                        )
-                                    } else {
-                                        return (
-                                            <>
-                                                <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks} accordionNumber={i+1} expanded={expanded} handleChange={handleChange}/></li>
-                                                
-                                            </>
-                                        )
-                                    }
-                                    }) }
-                                    <li className="checkoutLink">
-                                        <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
-                                    </li>
-                                </SideNavLinks>
-                            </SideNav>
-                        </SideNavPlusOverlay>
-                    </>
+                        <>
+                            <SideNavPlusOverlay>
+                                <SideNavOverlay></SideNavOverlay>
+                                <SideNav>
+                                    <SmallLogo href="/">
+                                        <Image src={RuneLogo} alt="Rune logo"/>
+                                    </SmallLogo>
+                                    <SideNavLinks>
+                                        {shortNavData.map((navItem, i) => {
+                                            if(navItem.childLinks.length === 0){
+                                                return (
+                                                    <>
+                                                        <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                                                    </>
+                                                )
+                                            } else {
+                                                return (
+                                                    <>
+                                                        <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks} accordionNumber={i+1} expanded={expanded} handleChange={handleChange}/></li>
+                                                    </>
+                                                )
+                                            }
+                                        })}
+                                        <li className="checkoutLink">
+                                            <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
+                                        </li>
+                                    </SideNavLinks>
+                                </SideNav>
+                            </SideNavPlusOverlay>
+                        </>
                     : null}
                     <SideNavButton>
-                        <Image src={showNavbar ? menuCross : menuBars} alt="hamburger menu icon" onClick={() => handleShowNavbar()}/>
+                        <Image src={showNavbar ? MenuCross : MenuBars} alt="hamburger menu icon" onClick={() => handleShowNavbar()}/>
                     </SideNavButton>
                 </SideNavArea>
             </MainHeader>

@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from "react"
-import Header from "@/layout/Header/Header"
-import Footer from "@/layout/Footer/Footer"
-import { CheckoutContext } from "@/components/CheckoutContext"
-import Input from "@/components/Input"
 import styled from "styled-components"
 import axios from "axios"
-import PlusSign from "../images/icons/plus.png"
-import MinusSign from "../images/icons/minus.png"
 import Image from "next/image"
+
+import { CheckoutContext } from "@/components/CheckoutContext"
+import Footer from "@/layout/Footer/Footer"
+import Header from "@/layout/Header/Header"
+import Input from "@/components/Input"
+
+import MinusSign from "../images/icons/minus.png"
+import PlusSign from "../images/icons/plus.png"
 
 const ColumnsWrapper = styled.div`
     display: grid;
@@ -85,7 +87,6 @@ const ProductQuantityButtons = styled.div`
             width: 0.7rem;
             height: auto;
         }
-        
     }
     button:first-child {
         margin: 0 0.5rem 0 0;
@@ -105,7 +106,6 @@ const ProductQtySubArea = styled.div`
 `
 
 const ProductSubTotal = styled.p`
-
 `
 
 const OrderTotal = styled.div`
@@ -114,7 +114,6 @@ const OrderTotal = styled.div`
     margin: 1rem;
     justify-content: flex-end;
 `
-
 
 const CityHolder = styled.div`
     display: flex;
@@ -126,8 +125,8 @@ const CityHolder = styled.div`
 export default function CheckoutPage() {
 
     const {checkoutProducts, addProduct, removeProduct, clearCheckout} = useContext(CheckoutContext)
-    const [products, setProducts] = useState([])
 
+    const [products, setProducts] = useState([])
     const [name, setName] = useState('')    
     const [email, setEmail] = useState('')    
     const [streetAddress, setStreetAddress] = useState('')
@@ -138,10 +137,8 @@ export default function CheckoutPage() {
 
     useEffect(() => {
         if(checkoutProducts?.length > 0){
-            console.log("checkoutProducts", checkoutProducts)
             axios.post('/api/checkout', {products:checkoutProducts})
                 .then(response => {
-                    console.log("response.data", response.data)
                     setProducts(response.data)
                 })
         } else {
@@ -150,7 +147,6 @@ export default function CheckoutPage() {
     },[checkoutProducts])
 
     useEffect(() => {
-        console.log('hi')
         if(typeof window === 'undefined'){
             return
         }
@@ -159,7 +155,7 @@ export default function CheckoutPage() {
             clearCheckout()
         }
     }, [])
-    // {id: product.id, size: selectedSize, quantity: numberOfSelectedStock}
+
     const lessOfThisProduct = (productSizeQuantity) => {
         removeProduct(productSizeQuantity)
     }
@@ -185,7 +181,7 @@ export default function CheckoutPage() {
     }
 
     if(isSuccess){
-        return(
+        return (
             <>
                 <ColumnsWrapper>
                     <Box>
@@ -201,92 +197,92 @@ export default function CheckoutPage() {
             <Header/>
             <ColumnsWrapper>
                 {!checkoutProducts?.length || !products?.length > 0 ?
-                <Box>
-                    <h2>Basket</h2>
-                    <div>your cart is empty</div>
-                </Box>
+                    <Box>
+                        <h2>Basket</h2>
+                        <div>your cart is empty</div>
+                    </Box>
                 : 
-                <>
-                    <Box>
-                        <div>Your basket</div>
-                            {products.map((product, i) => (
-                                <CheckoutProductContainer key={"product" + i}>
-                                    <ProductImageBox>
-                                        <img src={product.images[0]} alt="product image" />
-                                    </ProductImageBox>
-                                    <ProductInfo>
-                                        <ProductTitle>{product.name}</ProductTitle>
-                                        <ProductBrand>{product.brand}</ProductBrand>
-                                        <ProductColourSizePrice>
-                                            <span>{product.colour}</span>
-                                            &#x2666;
-                                            <span>{product.size}</span>
-                                            &#x2666;
-                                            <span>{product.price}</span>
-                                        </ProductColourSizePrice>
-                                        <ProductQtySubArea>
-                                            <ProductQuantityButtons>
-                                                <button onClick={() => lessOfThisProduct({id: product._id, size: product.size})}>
-                                                    <Image src={MinusSign}/>
-                                                </button>
-                                                    {checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length}
-                                                <button onClick={() => moreOfThisProduct({id: product._id, size: product.size})}>
-                                                    <Image src={PlusSign}/>
-                                                </button>
-                                            </ProductQuantityButtons>
-                                            <ProductSubTotal>
-                                                £{checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length * product.price}
-                                            </ProductSubTotal>
-                                        </ProductQtySubArea>
-                                    </ProductInfo>
-                                </CheckoutProductContainer>
-                            ))}
-                        <OrderTotal>
-                            <p>Total</p>
-                            <p>£{total}</p>
-                        </OrderTotal>
-                    </Box>
-                    <Box>
-                        <p>Order information</p>
-                        <Input type="text" 
-                        placeholder="Name" 
-                        value={name}
-                        name="name" 
-                        onChange={(e) => setName(e.target.value)}/>
-                        <Input type="text" 
-                        placeholder="Email" 
-                        value={email}
-                        name="email" 
-                        onChange={(e) => setEmail(e.target.value)}/>
-                        <Input type="text" 
-                        placeholder="Street address" 
-                        value={streetAddress}
-                        name="streetAddress" 
-                        onChange={(e) => setStreetAddress(e.target.value)}/>
-                        <CityHolder>
+                    <>
+                        <Box>
+                            <div>Your basket</div>
+                                {products.map((product, i) => (
+                                    <CheckoutProductContainer key={"product" + i}>
+                                        <ProductImageBox>
+                                            <img src={product.images[0]} alt="product image" />
+                                        </ProductImageBox>
+                                        <ProductInfo>
+                                            <ProductTitle>{product.name}</ProductTitle>
+                                            <ProductBrand>{product.brand}</ProductBrand>
+                                            <ProductColourSizePrice>
+                                                <span>{product.colour}</span>
+                                                &#x2666;
+                                                <span>{product.size}</span>
+                                                &#x2666;
+                                                <span>{product.price}</span>
+                                            </ProductColourSizePrice>
+                                            <ProductQtySubArea>
+                                                <ProductQuantityButtons>
+                                                    <button onClick={() => lessOfThisProduct({id: product._id, size: product.size})}>
+                                                        <Image src={MinusSign} alt="minus sign button"/>
+                                                    </button>
+                                                        {checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length}
+                                                    <button onClick={() => moreOfThisProduct({id: product._id, size: product.size})}>
+                                                        <Image src={PlusSign} alt="plus sign button"/>
+                                                    </button>
+                                                </ProductQuantityButtons>
+                                                <ProductSubTotal>
+                                                    £{checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length * product.price}
+                                                </ProductSubTotal>
+                                            </ProductQtySubArea>
+                                        </ProductInfo>
+                                    </CheckoutProductContainer>
+                                ))}
+                            <OrderTotal>
+                                <p>Total</p>
+                                <p>£{total}</p>
+                            </OrderTotal>
+                        </Box>
+                        <Box>
+                            <p>Order information</p>
                             <Input type="text" 
-                            placeholder="City" 
-                            value={city}
-                            name="city" 
-                            onChange={(e) => setCity(e.target.value)}/>
+                            placeholder="Name" 
+                            value={name}
+                            name="name" 
+                            onChange={(e) => setName(e.target.value)}/>
                             <Input type="text" 
-                            placeholder="Postal code" 
-                            value={postalCode}
-                            name="postalCode" 
-                            onChange={(e) => setPostalCode(e.target.value)}/>
-                        </CityHolder>
-                        <Input type="text" 
-                        placeholder="Country" 
-                        value={country}
-                        name="country" 
-                        onChange={(e) => setCountry(e.target.value)}/>
-                        <button type="submit"
-                        onClick={goToPayment}>Continue to payment</button>
-                        <input type="hidden"
-                        name="products" 
-                        value={checkoutProducts.join(',')}/>
-                    </Box>
-                </>
+                            placeholder="Email" 
+                            value={email}
+                            name="email" 
+                            onChange={(e) => setEmail(e.target.value)}/>
+                            <Input type="text" 
+                            placeholder="Street address" 
+                            value={streetAddress}
+                            name="streetAddress" 
+                            onChange={(e) => setStreetAddress(e.target.value)}/>
+                            <CityHolder>
+                                <Input type="text" 
+                                placeholder="City" 
+                                value={city}
+                                name="city" 
+                                onChange={(e) => setCity(e.target.value)}/>
+                                <Input type="text" 
+                                placeholder="Postal code" 
+                                value={postalCode}
+                                name="postalCode" 
+                                onChange={(e) => setPostalCode(e.target.value)}/>
+                            </CityHolder>
+                            <Input type="text" 
+                            placeholder="Country" 
+                            value={country}
+                            name="country" 
+                            onChange={(e) => setCountry(e.target.value)}/>
+                            <button type="submit"
+                            onClick={goToPayment}>Continue to payment</button>
+                            <input type="hidden"
+                            name="products" 
+                            value={checkoutProducts.join(',')}/>
+                        </Box>
+                    </>
                 }
             </ColumnsWrapper>
             <Footer/>

@@ -1,7 +1,8 @@
-import styled from "styled-components"
-import emailIcon from '../images/icons/mail.png'
-import Image from "next/image"
 import { useState } from "react"
+import styled from "styled-components"
+import Image from "next/image"
+
+import emailIcon from '../images/icons/mail.png'
 
 const SubscribeContainer = styled.div`
     width: 65%;
@@ -44,7 +45,6 @@ const SubscribeEmailInput = styled.input`
     width: 20rem;
     border-radius: 0.4rem;
     text-indent: 25px;
-    
     ::placeholder {
         opacity: 0.5;
         font-weight: bold;
@@ -95,15 +95,17 @@ export default function NewsletterSubscribe() {
             <SubscribeLargeText>Subscribe to our newsletter to get updates on our latest collections</SubscribeLargeText>
             <SmallSubscribeText>Get 20% off your first order by subscribing to our newsletter</SmallSubscribeText>
             {!subscribed ? 
-            <SubscribeInputArea>
-                <SubscribeEmailInput placeholder=" Enter your email"/>
-                <PlaceholderEmailIcon><Image src={emailIcon} alt="email icon"/></PlaceholderEmailIcon>
-                <SubscribeButton onClick={() => setSubscribed(true)}>Subscribe</SubscribeButton>
-            </SubscribeInputArea>
+                <SubscribeInputArea>
+                    <SubscribeEmailInput placeholder=" Enter your email"/>
+                    <PlaceholderEmailIcon>
+                        <Image src={emailIcon} alt="email icon"/>
+                    </PlaceholderEmailIcon>
+                    <SubscribeButton onClick={() => setSubscribed(true)}>Subscribe</SubscribeButton>
+                </SubscribeInputArea>
             :
-            <SubscribeConfirmation>
-                <SubscribeLargeText>Thanks for subscribing!</SubscribeLargeText>
-            </SubscribeConfirmation>
+                <SubscribeConfirmation>
+                    <SubscribeLargeText>Thanks for subscribing!</SubscribeLargeText>
+                </SubscribeConfirmation>
             }
             <SubscribeTerms>You are able to unsubscribe at any time</SubscribeTerms>
         </SubscribeContainer>

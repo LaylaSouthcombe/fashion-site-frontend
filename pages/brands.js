@@ -1,10 +1,11 @@
-import Header from "@/layout/Header/Header"
-import Footer from "@/layout/Footer/Footer"
 import { mongooseConnect } from "@/lib/mongoose"
 import { Brand } from "@/models/Brand"
 import styled from "styled-components"
 import Link from "next/link"
+
 import BannerAd from "@/components/BannerAd"
+import Footer from "@/layout/Footer/Footer"
+import Header from "@/layout/Header/Header"
 
 const BrandsContainer = styled.section`
     width: 100%;
@@ -58,30 +59,30 @@ const BrandName = styled.p`
 `
 
 export default function BrandsPage({brands}){
+
     return (
         <>
             <Header/>
             <BrandMainTitle>Brands</BrandMainTitle>
             <BrandsContainer>
                 {Object.values(brands).map(brandObject => {
-                        return (
-                            <BrandLetterArea key={"brandArea-" + brandObject.letter}>
-                                <BrandLetterTitle>{brandObject.letter}</BrandLetterTitle>
-                                <div>
-                                    {brandObject.brands.map((brand, i) => {
-                                        return (
-                                            <BrandName key={`brandName-${brandObject.letter}-${i}`}>
-                                                <Link href={"/brand/" + brand.link}>
-                                                {brand.name}
-                                                </Link>
-                                            </BrandName>
-                                        )
-                                    })}
-                                </div>
-                            </BrandLetterArea>
-                        )
-                    })
-                }
+                    return (
+                        <BrandLetterArea key={"brandArea-" + brandObject.letter}>
+                            <BrandLetterTitle>{brandObject.letter}</BrandLetterTitle>
+                            <div>
+                                {brandObject.brands.map((brand, i) => {
+                                    return (
+                                        <BrandName key={`brandName-${brandObject.letter}-${i}`}>
+                                            <Link href={"/brand/" + brand.link}>
+                                            {brand.name}
+                                            </Link>
+                                        </BrandName>
+                                    )
+                                })}
+                            </div>
+                        </BrandLetterArea>
+                    )
+                })}
             </BrandsContainer>
             <BannerAd/>
             <Footer/>
@@ -92,7 +93,7 @@ export default function BrandsPage({brands}){
 export async function getServerSideProps(){
     await mongooseConnect()
     const brands = await Brand.find({})
-    console.log("brands", brands)
+
     return {
         props:{
             brands: JSON.parse(JSON.stringify(brands))

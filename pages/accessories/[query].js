@@ -1,26 +1,27 @@
-import Header from "@/layout/Header/Header"
-import Footer from "@/layout/Footer/Footer"
+import styled from "styled-components"
+
 import { mongooseConnect } from "@/lib/mongoose"
 import { Product } from "@/models/Product"
+
+import Footer from "@/layout/Footer/Footer"
+import Header from "@/layout/Header/Header"
 import ProductsGrid from "@/components/ProductsGrid"
-import styled from "styled-components"
 
 const PageContent = styled.div`
     flex-grow: 1;
 `
 
 export default function AccessoriesPage({products, queryConstraint}){
-    console.log(queryConstraint)
-    return(
+
+    return (
         <>
-        <Header/>
-        <PageContent>
-        {products?.length ? 
-            <ProductsGrid products={products} apiUrl={'/api/filtered/categories'} queryConstraint={queryConstraint}/>
-            : null
-        }
-        </PageContent>
-        <Footer/>
+            <Header/>
+            <PageContent>
+                {products?.length ? 
+                    <ProductsGrid products={products} apiUrl={'/api/filtered/categories'} queryConstraint={queryConstraint}/>
+                : null}
+            </PageContent>
+            <Footer/>
         </>
     )
 }
@@ -30,7 +31,6 @@ export async function getServerSideProps(context){
     let productQuery = {productCategory: 'Accessories'}
     let queryConstraint = {productCategory: 'Accessories'}
     const {query} = context.query
-
 
     const capitalizeFirstLetter = (word) => {
         const firstLetter = word.charAt(0)
@@ -53,10 +53,8 @@ export async function getServerSideProps(context){
         queryConstraint["value"] = queryWord.replace("-", " ")
     }
 
-    console.log(productQuery)
     const products = await Product.find(productQuery, null, {sort:{'_id': -1}})
 
-    console.log("products", products.length)
     return {
         props: {
             products: JSON.parse(JSON.stringify(products)),

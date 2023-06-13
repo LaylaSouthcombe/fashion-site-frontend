@@ -13,7 +13,6 @@ const brandSchema = new Schema({
     }
   }, {
     timestamps: true
-  })
-
+})
 
 export const Brand = models.Brand || model('Brand', brandSchema)

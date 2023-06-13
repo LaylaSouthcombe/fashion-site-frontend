@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
 import styled from "styled-components";
+
+import { useKeenSlider } from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
 import ProductTile from "@/components/ProductsCarousel/ProductTile"
 import CarouselArrow from "@/components/ProductsCarousel/CarouselArrow"
@@ -81,46 +82,46 @@ export default function ProductsCarousel({products}){
 
     return (
         <>
-        <CarouselWrapper className="navigation-wrapper">
-                    {loaded && instanceRef.current ? (
-                        <>
-                            <CarouselArrow
-                            left
-                            onClick={(e) =>
-                                slideLeftAndDecreaseProgress(e)
-                            }
-                            disabled={currentSlide === 0}
-                            />
-                        </>
-                    ) : null}
-                    <CarouselInnerWrapper>
-                        <div ref={sliderRef} className="keen-slider">
-                            {products?.length > 0 ? 
-                                products.map((product, i) => (
-                                    <div key={i} className="keen-slider__slide">
-                                        <ProductTile key={i} product={product}/>
-                                    </div>
-                                ))
-                                : null}
-                        </div>
-                    </CarouselInnerWrapper>
-                    {loaded && instanceRef.current ? (
-                        <>
-                            <CarouselArrow
-                            onClick={(e) =>
-                                slideRightAndIncreaseProgress(e)
-                            }
-                            disabled={
-                                currentSlide >=
-                                instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView
-                              }
-                            />
-                        </>
-                    ) : null}
-                </CarouselWrapper>
+            <CarouselWrapper className="navigation-wrapper">
                 {loaded && instanceRef.current ? (
-                <CarouselBar percentageSlideNumber={percentageSlideNumber} slideLength={instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView + 1}/>
+                    <>
+                        <CarouselArrow
+                        left
+                        onClick={(e) =>
+                            slideLeftAndDecreaseProgress(e)
+                        }
+                        disabled={currentSlide === 0}
+                        />
+                    </>
                 ) : null}
+                <CarouselInnerWrapper>
+                    <div ref={sliderRef} className="keen-slider">
+                        {products?.length > 0 ? 
+                            products.map((product, i) => (
+                                <div key={i} className="keen-slider__slide">
+                                    <ProductTile key={i} product={product}/>
+                                </div>
+                            ))
+                            : null}
+                    </div>
+                </CarouselInnerWrapper>
+                {loaded && instanceRef.current ? (
+                    <>
+                        <CarouselArrow
+                        onClick={(e) =>
+                            slideRightAndIncreaseProgress(e)
+                        }
+                        disabled={
+                            currentSlide >=
+                            instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView
+                            }
+                        />
+                    </>
+                ) : null}
+            </CarouselWrapper>
+            {loaded && instanceRef.current ? (
+                <CarouselBar percentageSlideNumber={percentageSlideNumber} slideLength={instanceRef.current.track.details.slides.length - instanceRef.current.options.slides.perView + 1}/>
+            ) : null}
         </>
     )
 }

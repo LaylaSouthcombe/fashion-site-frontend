@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import Checkbox from '@mui/material/Checkbox';
-import Link from 'next/link';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Typography from '@mui/material/Typography';
 
 const theme = createTheme({
     components: {
@@ -89,10 +89,7 @@ const theme = createTheme({
             }
         }
     },
-});
-
-const ChildNavLink = styled(Link)`
-`
+})
 
 const FilterBarArea = styled.div`
     padding-top: 1.25rem;
@@ -126,99 +123,100 @@ const Filter = styled.li`
 `
 
 export default function FilterSideBar({filterLabels, expanded, handleChange, updateFilteredProducts}){
+
     return (
         <>
-        <div>
-            <ThemeProvider theme={theme}>
-                <FilterBarArea>
-                    <Accordion expanded={expanded === `panel1`} onChange={handleChange(`panel1`)}>
-                        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Product type</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <FilterArea filtersLength={filterLabels.productType.length}>
-                                {filterLabels.productType.map((type, i) => {
-                                    return (
-                                        <Filter key={"childLink" + i} >
-                                            <Checkbox onChange={() => updateFilteredProducts({productType: type})}/><Typography>{type}</Typography>
-                                        </Filter>
-                                    )
-                                })}
-                            </FilterArea>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === `panel2`} onChange={handleChange(`panel2`)}>
-                        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Product subtype</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <FilterArea filtersLength={filterLabels.productSubType.length}>
-                                {filterLabels.productSubType.map((subType, i) => {
-                                    return (
-                                        <Filter key={"childLink" + i}>
-                                            <Checkbox onChange={() => updateFilteredProducts({productSubType: subType})}/>
-                                            <Typography>{subType}</Typography>
-                                        </Filter>
-                                    )
-                                })}
-                            </FilterArea>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === `panel3`} onChange={handleChange(`panel3`)}>
-                        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Brand</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <FilterArea filtersLength={filterLabels.brand.length}>
-                                {filterLabels.brand.map((brand, i) => {
-                                    console.log(brand)
-                                    return (
-                                        <Filter key={"childLink" + i}>
-                                            <Checkbox onChange={() => updateFilteredProducts({brand: brand})}/>
-                                            <Typography>{brand}</Typography>
-                                        </Filter>
-                                    )
-                                })}
-                            </FilterArea>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === `panel4`} onChange={handleChange(`panel4`)}>
-                        <AccordionSummary aria-controls="panel4d-content" id="panel4d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Colour</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <FilterArea filtersLength={filterLabels.colour.length}>
-                                {filterLabels.colour.map((colour, i) => {
-                                    return (
-                                        <Filter key={"childLink" + i}>
-                                            <Checkbox onChange={() => updateFilteredProducts({colour: colour})}/>
-                                            <Typography>{colour}</Typography>
-                                        </Filter>
-                                    )
-                                })}
-                            </FilterArea>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === `panel5`} onChange={handleChange(`panel5`)}>
-                        <AccordionSummary aria-controls="panel5d-content" id="panel5d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Size</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <FilterArea filtersLength={filterLabels.sizesAndStock.length}>
-                                {filterLabels.sizesAndStock.map((size, i) => {
-                                    return (
-                                        <Filter key={"childLink" + i}>
-                                            <Checkbox onChange={() => updateFilteredProducts({sizesAndStock: size})}/>
-                                            <Typography>{size}</Typography>
-                                        </Filter>
-                                    )
-                                })}
-                            </FilterArea>
-                        </AccordionDetails>
-                    </Accordion>
-                </FilterBarArea>
-            </ThemeProvider>
-        </div>
+            <div>
+                <ThemeProvider theme={theme}>
+                    <FilterBarArea>
+                        <Accordion expanded={expanded === `panel1`} onChange={handleChange(`panel1`)}>
+                            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Product type</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <FilterArea filtersLength={filterLabels.productType.length}>
+                                    {filterLabels.productType.map((type, i) => {
+                                        return (
+                                            <Filter key={"childLink" + i} >
+                                                <Checkbox onChange={() => updateFilteredProducts({productType: type})}/><Typography>{type}</Typography>
+                                            </Filter>
+                                        )
+                                    })}
+                                </FilterArea>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion expanded={expanded === `panel2`} onChange={handleChange(`panel2`)}>
+                            <AccordionSummary aria-controls="panel2d-content" id="panel2d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Product subtype</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <FilterArea filtersLength={filterLabels.productSubType.length}>
+                                    {filterLabels.productSubType.map((subType, i) => {
+                                        return (
+                                            <Filter key={"childLink" + i}>
+                                                <Checkbox onChange={() => updateFilteredProducts({productSubType: subType})}/>
+                                                <Typography>{subType}</Typography>
+                                            </Filter>
+                                        )
+                                    })}
+                                </FilterArea>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion expanded={expanded === `panel3`} onChange={handleChange(`panel3`)}>
+                            <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Brand</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <FilterArea filtersLength={filterLabels.brand.length}>
+                                    {filterLabels.brand.map((brand, i) => {
+                                        console.log(brand)
+                                        return (
+                                            <Filter key={"childLink" + i}>
+                                                <Checkbox onChange={() => updateFilteredProducts({brand: brand})}/>
+                                                <Typography>{brand}</Typography>
+                                            </Filter>
+                                        )
+                                    })}
+                                </FilterArea>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion expanded={expanded === `panel4`} onChange={handleChange(`panel4`)}>
+                            <AccordionSummary aria-controls="panel4d-content" id="panel4d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Colour</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <FilterArea filtersLength={filterLabels.colour.length}>
+                                    {filterLabels.colour.map((colour, i) => {
+                                        return (
+                                            <Filter key={"childLink" + i}>
+                                                <Checkbox onChange={() => updateFilteredProducts({colour: colour})}/>
+                                                <Typography>{colour}</Typography>
+                                            </Filter>
+                                        )
+                                    })}
+                                </FilterArea>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion expanded={expanded === `panel5`} onChange={handleChange(`panel5`)}>
+                            <AccordionSummary aria-controls="panel5d-content" id="panel5d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Size</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <FilterArea filtersLength={filterLabels.sizesAndStock.length}>
+                                    {filterLabels.sizesAndStock.map((size, i) => {
+                                        return (
+                                            <Filter key={"childLink" + i}>
+                                                <Checkbox onChange={() => updateFilteredProducts({sizesAndStock: size})}/>
+                                                <Typography>{size}</Typography>
+                                            </Filter>
+                                        )
+                                    })}
+                                </FilterArea>
+                            </AccordionDetails>
+                        </Accordion>
+                    </FilterBarArea>
+                </ThemeProvider>
+            </div>
         </>
     )
 }

@@ -11,8 +11,6 @@ export default async function handle(req, res) {
     const filters = req.body.filters
 
     const queryConstraint = req.body.queryConstraint
-    console.log("queryConstraint", queryConstraint)
-    console.log(filters)
 
     let path
     let value
@@ -26,7 +24,6 @@ export default async function handle(req, res) {
 
     let formattedProductCategory = queryConstraint.productCategory
     combinedQuery["productCategory"] = formattedProductCategory
-    
     
     const getQueryForAllProducts = () => {
         let allProductsQuery = {}
@@ -58,7 +55,7 @@ export default async function handle(req, res) {
             }
         }
     })
-    console.log("combinedQuery", combinedQuery)
+
     let aggregateSortResultsOptions = {
         recommended: { $sample: { size: 2000} },
         lowestPrice: { $sort : { price : 1 } },

@@ -17,18 +17,14 @@ const ExperienceTitle = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     padding: 15px;
-
     h3, p {
         padding: 5px 10px;
     }
-
     p {
         color: grey;
     }
-
     @media (min-width: 768px) {
         grid-template-columns: 1fr 1fr;
-
         p {
             border-left: 2px solid var(--main-dark-blue);
         }
@@ -40,7 +36,6 @@ const ExperienceGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: 100%;
-
     @media (min-width: 768px) {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -55,17 +50,14 @@ const ExperienceBox = styled.div`
         padding: 10px;
         border-radius: 5px;
     }
-
     h3 {
         font-size: 1rem;
         padding: 7.5px 0px;
     }
-
     p {
         color: grey;
         font-size: 0.85rem;
     }
-
     @media (min-width: 768px) {
         img {
             width: 22%;

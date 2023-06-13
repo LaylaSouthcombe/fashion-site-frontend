@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import RuneLogoImg from '../../images/logos/runeLogo.png'
-import Mastercard from '../../images/logos/mastercard.png'
-import Visa from '../../images/logos/visa.png'
-import Paypal from '../../images/logos/paypal.png'
 import Image from "next/image"
+
+import Mastercard from '../../images/logos/mastercard.png'
+import Paypal from '../../images/logos/paypal.png'
+import RuneLogoImg from '../../images/logos/runeLogo.png'
+import Visa from '../../images/logos/visa.png'
 
 const FooterOuterContainer = styled.div`
     position: relative;
@@ -17,7 +18,6 @@ const FooterContainer = styled.section`
     display: grid;
     grid-template-columns: 1fr;
     padding-bottom: 2rem;
-
     @media (min-width: 768px) {
         grid-template-columns: 0.8fr 1.2fr;
         padding-bottom: 1rem;
@@ -80,7 +80,6 @@ const FooterPayments = styled.div`
         height: auto;
         margin: 0 auto;
     }
-    
     @media (min-width: 768px) {
         img {
             margin: 0;
@@ -88,7 +87,6 @@ const FooterPayments = styled.div`
             max-width: 80px;
         }
     }
-
 `
 
 const FooterLine = styled.div`
@@ -111,51 +109,51 @@ const FooterCopyRight = styled.div`
 `
 
 export default function Footer() {
+
     return (
         <>
-        <FooterOuterContainer>
-
-            <FooterContainer>
-                <RuneLogoArea>
-                    <RuneLogo>
-                        <Image src={RuneLogoImg}/>
-                    </RuneLogo>
-                    <FooterText>Specializes in providing high-quality, stylish products for your wardrobe</FooterText>
-                </RuneLogoArea>
-                <FooterInfoSection>
-                    <FooterLinks>
+            <FooterOuterContainer>
+                <FooterContainer>
+                    <RuneLogoArea>
+                        <RuneLogo>
+                            <Image src={RuneLogoImg} alt="Rune logo"/>
+                        </RuneLogo>
+                        <FooterText>Specializes in providing high-quality, stylish products for your wardrobe</FooterText>
+                    </RuneLogoArea>
+                    <FooterInfoSection>
+                        <FooterLinks>
+                            <div>
+                                <FooterTitle>SHOP</FooterTitle>
+                                <FooterText>All Collections</FooterText>
+                                <FooterText>Winter Edition</FooterText>
+                                <FooterText>Sale</FooterText>
+                            </div>
+                            <div>
+                                <FooterTitle>COMPANY</FooterTitle>
+                                <FooterText>About Us</FooterText>
+                                <FooterText>Contact</FooterText>
+                                <FooterText>Affiliates</FooterText>
+                            </div>
+                            <div>
+                                <FooterTitle>SUPPORT</FooterTitle>
+                                <FooterText>FAQs</FooterText>
+                                <FooterText>Cookie Policy</FooterText>
+                                <FooterText>Terms of Use</FooterText>
+                            </div>
+                        </FooterLinks>
                         <div>
-                            <FooterTitle>SHOP</FooterTitle>
-                            <FooterText>All Collections</FooterText>
-                            <FooterText>Winter Edition</FooterText>
-                            <FooterText>Sale</FooterText>
+                            <FooterTitle>PAYMENT METHODS</FooterTitle>
+                            <FooterPayments>
+                                <Image src={Mastercard} alt="mastercard logo"/>
+                                <Image src={Visa} alt="visa logo"/>
+                                <Image src={Paypal} alt="paypal logo"/>
+                            </FooterPayments>
                         </div>
-                        <div>
-                            <FooterTitle>COMPANY</FooterTitle>
-                            <FooterText>About Us</FooterText>
-                            <FooterText>Contact</FooterText>
-                            <FooterText>Affiliates</FooterText>
-                        </div>
-                        <div>
-                            <FooterTitle>SUPPORT</FooterTitle>
-                            <FooterText>FAQs</FooterText>
-                            <FooterText>Cookie Policy</FooterText>
-                            <FooterText>Terms of Use</FooterText>
-                        </div>
-                    </FooterLinks>
-                    <div>
-                        <FooterTitle>PAYMENT METHODS</FooterTitle>
-                        <FooterPayments>
-                            <Image src={Mastercard} alt="mastercard logo"/>
-                            <Image src={Visa} alt="visa logo"/>
-                            <Image src={Paypal} alt="paypal logo"/>
-                        </FooterPayments>
-                    </div>
-                </FooterInfoSection>
-            </FooterContainer>
-            <FooterLine></FooterLine>
-            <FooterCopyRight>Copyright @2023 Rune. All rights reserved</FooterCopyRight>
-        </FooterOuterContainer>
+                    </FooterInfoSection>
+                </FooterContainer>
+                <FooterLine></FooterLine>
+                <FooterCopyRight>Copyright @2023 Rune. All rights reserved</FooterCopyRight>
+            </FooterOuterContainer>
         </>
     )
 }

@@ -1,6 +1,7 @@
 import { useContext } from "react"
-import { CheckoutContext } from "@/components/CheckoutContext"
 import styled from "styled-components"
+
+import { CheckoutContext } from "@/components/CheckoutContext"
 
 const CheckoutButton = styled.div`
     background-color: var(--main-dark-blue);
@@ -23,7 +24,6 @@ export default function AddToCartBtn({productSizeQuantity}) {
             let itemToAdd = {}
             itemToAdd.id = productSizeQuantity.id
             itemToAdd.size = productSizeQuantity.size
-            console.log(itemToAdd)
             addProduct(itemToAdd)
         }
     }

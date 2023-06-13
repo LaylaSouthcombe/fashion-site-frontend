@@ -1,10 +1,11 @@
 import styled from "styled-components"
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Typography from '@mui/material/Typography';
 
 const theme = createTheme({
     components: {
@@ -101,49 +102,51 @@ const SizeAndFitInfo = styled.ul`
 `
 
 export default function ProductInfoAccordion({productInfo, expanded,  handleChange}){
+
     return (
         <>
-        <div>
-            <ThemeProvider theme={theme}>
-                <ProductInfoArea>
-                    <Accordion expanded={expanded === `panel1`} onChange={handleChange(`panel1`)}>
-                        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Product Summary</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <ProductInfoDetailArea>
-                                {productInfo.productSummary}
-                            </ProductInfoDetailArea>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === `panel2`} onChange={handleChange(`panel2`)}>
-                        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Product Size & Fit</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <ProductInfoDetailArea>
-                            <SizeAndFitInfo>
-                                {productInfo.sizeAndFit.map(bullet => (
-                                    <li>{bullet}</li>
-                                ))}
-                            </SizeAndFitInfo>
-
-                            </ProductInfoDetailArea>
-                        </AccordionDetails>
-                    </Accordion>
-                    <Accordion expanded={expanded === `panel3`} onChange={handleChange(`panel3`)}>
-                        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" expandIcon={<ExpandMoreIcon />}>
-                            <Typography>Delivery</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <ProductInfoDetailArea>
-                            We offer free international shipping. Try items in the comfort of your own home. If they&apos;re not quite right, you&apos;ve got 28 days to request an exchange or return and send them back to us. We&apos;ll collect them from your home or office for free.
-                            </ProductInfoDetailArea>
-                        </AccordionDetails>
-                    </Accordion>
-                </ProductInfoArea>
-            </ThemeProvider>
-        </div>
+            <div>
+                <ThemeProvider theme={theme}>
+                    <ProductInfoArea>
+                        <Accordion expanded={expanded === `panel1`} onChange={handleChange(`panel1`)}>
+                            <AccordionSummary aria-controls="panel1d-content" id="panel1d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Product Summary</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <ProductInfoDetailArea>
+                                    {productInfo.productSummary}
+                                </ProductInfoDetailArea>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion expanded={expanded === `panel2`} onChange={handleChange(`panel2`)}>
+                            <AccordionSummary aria-controls="panel2d-content" id="panel2d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Product Size & Fit</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <ProductInfoDetailArea>
+                                    <SizeAndFitInfo>
+                                        {productInfo.sizeAndFit.map(bullet => (
+                                            <>
+                                                <li>{bullet}</li>
+                                            </>
+                                        ))}
+                                    </SizeAndFitInfo>
+                                </ProductInfoDetailArea>
+                            </AccordionDetails>
+                        </Accordion>
+                        <Accordion expanded={expanded === `panel3`} onChange={handleChange(`panel3`)}>
+                            <AccordionSummary aria-controls="panel3d-content" id="panel3d-header" expandIcon={<ExpandMoreIcon />}>
+                                <Typography>Delivery</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <ProductInfoDetailArea>
+                                We offer free international shipping. Try items in the comfort of your own home. If they&apos;re not quite right, you&apos;ve got 28 days to request an exchange or return and send them back to us. We&apos;ll collect them from your home or office for free.
+                                </ProductInfoDetailArea>
+                            </AccordionDetails>
+                        </Accordion>
+                    </ProductInfoArea>
+                </ThemeProvider>
+            </div>
         </>
     )
 }

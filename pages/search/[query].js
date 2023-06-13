@@ -1,11 +1,10 @@
-import Header from "@/layout/Header/Header"
-import Footer from "@/layout/Footer/Footer"
-import { useEffect } from "react"
 import { mongooseConnect } from "@/lib/mongoose"
 import { Product } from "@/models/Product"
-import ProductTile from "@/components/ProductsCarousel/ProductTile"
 import styled from "styled-components"
 
+import Footer from "@/layout/Footer/Footer"
+import Header from "@/layout/Header/Header"
+import ProductTile from "@/components/ProductsCarousel/ProductTile"
 
 const ProductGrid = styled.div`
     display: grid;
@@ -13,11 +12,10 @@ const ProductGrid = styled.div`
 `
 
 export default function SearchResults({products}) {
-    // console.log(products)
+
     return (
         <>
-        <Header/>
-        
+            <Header/>
             <ProductGrid>
                 {products !== undefined ? 
                     products.map((product, i) => {
@@ -25,20 +23,18 @@ export default function SearchResults({products}) {
                             <ProductTile product={product} key={"productTile" + i}/>
                         )
                     })
-                : 
-                null}
+                : null}
             </ProductGrid>
             <Footer/>
         </>
-        
     )
 }
 
 export async function getServerSideProps(context){
     await mongooseConnect()
-    console.log({query: context.query})
+
     const {query} = context.query
-    console.log(query.replace("-", " "))
+
     const products = await Product.aggregate([{
         $search: {
           index: "default",
@@ -50,6 +46,7 @@ export async function getServerSideProps(context){
           }
         }
     }]).limit(10)
+    
     return {
         props: {
             products: JSON.parse(JSON.stringify(products))
