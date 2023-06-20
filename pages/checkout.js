@@ -29,18 +29,24 @@ const Box = styled.div`
 `
 
 const CheckoutProductContainer = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr;
     margin-top: 1rem;
     border-top: 1px solid var(--main-lightish-blue);
     padding-top: 0.75rem;
+    @media (min-width: 550px) {
+        grid-template-columns: 0.3fr 0.7fr;
+    }
 `
 
 const ProductImageBox = styled.div`
     max-width: 150px;
     padding: 10px;
+    margin: 0 auto;
     img {
         width: 100%;
         height: auto;
+        
     }
 `
 
@@ -115,11 +121,21 @@ const OrderTotal = styled.div`
     justify-content: flex-end;
 `
 
+const OrderInformationContainer = styled.div`
+    padding: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+`
+
 const CityHolder = styled.div`
     display: flex;
+    flex-direction: column;
     gap: 5px;
     width: 100%;
     justify-content: space-between;
+    @media (min-width: 360px) {
+        flex-direction: row;
+    }
 `
 
 export default function CheckoutPage() {
@@ -242,7 +258,7 @@ export default function CheckoutPage() {
                                 <p>£{total}</p>
                             </OrderTotal>
                         </Box>
-                        <Box>
+                        <OrderInformationContainer>
                             <p>Order information</p>
                             <Input type="text" 
                             placeholder="Name" 
@@ -281,7 +297,7 @@ export default function CheckoutPage() {
                             <input type="hidden"
                             name="products" 
                             value={checkoutProducts.join(',')}/>
-                        </Box>
+                        </OrderInformationContainer>
                     </>
                 }
             </ColumnsWrapper>
