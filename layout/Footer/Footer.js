@@ -9,13 +9,16 @@ import Visa from '../../images/logos/visa.png'
 const FooterOuterContainer = styled.footer`
     position: relative;
     padding: 3rem 3rem 0 3rem;
-    margin-top: 4rem;
+    width: 100%;
+    margin-top: auto;
     background-color: var(--main-light-blue);
-    flex-shrink: 0;
+    align-self: center;
 `
 
 const FooterContainer = styled.section`
     width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
     padding-bottom: 2rem;
