@@ -130,13 +130,25 @@ const ShippingInformationContainer = styled.div`
         width: 100%;
     }
     button {
-        background-color: var(--main-dark-blue);
         border-radius: 5px;
-        width: 100%;
         color: var(--main-light-blue);
-        font-size: 0.9rem;
-        padding: 0.75rem 0.85rem;
+        background-color: var(--main-dark-blue);
     }
+`
+
+const ShippingTitleAndButton = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+`
+
+const DemoDataButton = styled.button`
+    max-width:fit-content;
+    font-size: 0.8rem;
+    background-color: #f2f3f5;
+    outline: none;
+    padding: 0.5rem 0.65rem;
 `
 
 const ShippingInput = styled(Input)`
@@ -160,16 +172,23 @@ const CityHolder = styled.div`
 
 const PaymentErrorMessage = styled.div`
     height: 1.75rem;
+    max-width: 280px;
     font-size: 0.9rem;
     text-align: center;
     display: flex;
     align-items: center;
     justify-items: center;
-    margin-bottom: 5px;
+    margin:  0 auto 5px auto;
     p {
         color: #e64949;
         width: 100%;
     }
+`
+
+const PaymentButton = styled.button`
+    width: 100%;
+    padding: 0.75rem 0.85rem;
+    font-size: 0.9rem;
 `
 
 export default function CheckoutPage() {
@@ -185,7 +204,7 @@ export default function CheckoutPage() {
     const [country, setCountry] = useState('')
     const [isSuccess, setIsSuccess] = useState(false)
     const [paymentErrorMessage, setPaymentErrorMessage] = useState('')
-
+    
     useEffect(() => {
         if(checkoutProducts?.length > 0){
             axios.post('/api/checkout', {products:checkoutProducts})
@@ -215,6 +234,16 @@ export default function CheckoutPage() {
         addProduct(productSizeQuantity)
     }
 
+    const inputDemoData = () => {
+        setName("Tina")
+        setEmail("Belcher")
+        setStreetAddress("Flat 1, Ocean Avenue")
+        setCity("Seymour's Bay")
+        setPostalCode("07097")
+        setCountry("USA")
+        setPaymentErrorMessage("Use this card number on next page: 4242 4242 4242 4242")
+    }
+
     const goToPayment = async () => {
         if(name.length !== 0 && email.length !== 0 && streetAddress.length !== 0 && city.length !== 0 && country.length !== 0 && postalCode.length !== 0 && checkoutProducts.length !== 0) {
             const response = await axios.post('/api/payment', {
@@ -227,8 +256,7 @@ export default function CheckoutPage() {
             setPaymentErrorMessage("Please fill in all fields")
         } else {
             setPaymentErrorMessage("There are no items in your basket")
-        }
-        
+        }   
     }
 
     let total = 0
@@ -301,7 +329,10 @@ export default function CheckoutPage() {
                             </OrderTotal>
                         </Box>
                         <ShippingInformationContainer>
-                            <p>Shippping information</p>
+                            <ShippingTitleAndButton>
+                                <p>Shippping information</p>
+                                <DemoDataButton onClick={() => inputDemoData()}>Use demo data</DemoDataButton>
+                            </ShippingTitleAndButton>
                             <ShippingInput type="text" 
                             placeholder="Name" 
                             value={name}
@@ -337,8 +368,8 @@ export default function CheckoutPage() {
                             <PaymentErrorMessage>
                                 <p>{paymentErrorMessage}</p>
                             </PaymentErrorMessage>
-                            <button type="submit"
-                            onClick={goToPayment}>Continue to payment</button>
+                            <PaymentButton type="submit"
+                            onClick={goToPayment}>Continue to payment</PaymentButton>
                             <input type="hidden"
                             name="products" 
                             value={checkoutProducts.join(',')}/>
