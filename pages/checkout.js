@@ -125,13 +125,12 @@ const ShippingInformationContainer = styled.div`
     padding: 1rem;
     max-width: 400px;
     margin: 0 auto;
-    p {
+    > p {
         margin-bottom: 1rem;
         width: 100%;
     }
     button {
         background-color: var(--main-dark-blue);
-        margin-top: 1rem;
         border-radius: 5px;
         width: 100%;
         color: var(--main-light-blue);
@@ -159,6 +158,20 @@ const CityHolder = styled.div`
     }
 `
 
+const PaymentErrorMessage = styled.div`
+    height: 1.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 5px;
+    p {
+        color: #e64949;
+        width: 100%;
+    }
+`
+
 export default function CheckoutPage() {
 
     const {checkoutProducts, addProduct, removeProduct, clearCheckout} = useContext(CheckoutContext)
@@ -171,6 +184,7 @@ export default function CheckoutPage() {
     const [postalCode, setPostalCode] = useState('')
     const [country, setCountry] = useState('')
     const [isSuccess, setIsSuccess] = useState(false)
+    const [paymentErrorMessage, setPaymentErrorMessage] = useState('')
 
     useEffect(() => {
         if(checkoutProducts?.length > 0){
@@ -202,12 +216,19 @@ export default function CheckoutPage() {
     }
 
     const goToPayment = async () => {
-        const response = await axios.post('/api/payment', {
-            name,email,streetAddress,city,country,postalCode, checkoutProducts
-        })
-        if(response.data.url){
-            window.location = response.data.url
+        if(name.length !== 0 && email.length !== 0 && streetAddress.length !== 0 && city.length !== 0 && country.length !== 0 && postalCode.length !== 0 && checkoutProducts.length !== 0) {
+            const response = await axios.post('/api/payment', {
+                name,email,streetAddress,city,country,postalCode,checkoutProducts
+            })
+            if(response.data.url){
+                window.location = response.data.url
+            }
+        } else if(checkoutProducts.length !== 0) {
+            setPaymentErrorMessage("Please fill in all fields")
+        } else {
+            setPaymentErrorMessage("There are no items in your basket")
         }
+        
     }
 
     let total = 0
@@ -284,7 +305,7 @@ export default function CheckoutPage() {
                             <ShippingInput type="text" 
                             placeholder="Name" 
                             value={name}
-                            name="name" 
+                            name="name"
                             onChange={(e) => setName(e.target.value)}/>
                             <ShippingInput type="text" 
                             placeholder="Email" 
@@ -313,6 +334,9 @@ export default function CheckoutPage() {
                             value={country}
                             name="country"
                             onChange={(e) => setCountry(e.target.value)}/>
+                            <PaymentErrorMessage>
+                                <p>{paymentErrorMessage}</p>
+                            </PaymentErrorMessage>
                             <button type="submit"
                             onClick={goToPayment}>Continue to payment</button>
                             <input type="hidden"
