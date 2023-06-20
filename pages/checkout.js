@@ -121,10 +121,31 @@ const OrderTotal = styled.div`
     justify-content: flex-end;
 `
 
-const OrderInformationContainer = styled.div`
+const ShippingInformationContainer = styled.div`
     padding: 1rem;
     max-width: 400px;
     margin: 0 auto;
+    p {
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    button {
+        background-color: var(--main-dark-blue);
+        margin-top: 1rem;
+        border-radius: 5px;
+        width: 100%;
+        color: var(--main-light-blue);
+        font-size: 0.9rem;
+        padding: 0.75rem 0.85rem;
+    }
+`
+
+const ShippingInput = styled(Input)`
+    outline: #f2f3f5;
+    border: 2px solid #dee1e3;
+    background: #f2f3f5;
+    padding: 5px 10px;
+    border-radius: 0.4rem;
 `
 
 const CityHolder = styled.div`
@@ -258,46 +279,46 @@ export default function CheckoutPage() {
                                 <p>£{total}</p>
                             </OrderTotal>
                         </Box>
-                        <OrderInformationContainer>
-                            <p>Order information</p>
-                            <Input type="text" 
+                        <ShippingInformationContainer>
+                            <p>Shippping information</p>
+                            <ShippingInput type="text" 
                             placeholder="Name" 
                             value={name}
                             name="name" 
                             onChange={(e) => setName(e.target.value)}/>
-                            <Input type="text" 
+                            <ShippingInput type="text" 
                             placeholder="Email" 
                             value={email}
                             name="email" 
                             onChange={(e) => setEmail(e.target.value)}/>
-                            <Input type="text" 
+                            <ShippingInput type="text" 
                             placeholder="Street address" 
                             value={streetAddress}
                             name="streetAddress" 
                             onChange={(e) => setStreetAddress(e.target.value)}/>
                             <CityHolder>
-                                <Input type="text" 
+                                <ShippingInput type="text" 
                                 placeholder="City" 
                                 value={city}
                                 name="city" 
                                 onChange={(e) => setCity(e.target.value)}/>
-                                <Input type="text" 
+                                <ShippingInput type="text" 
                                 placeholder="Postal code" 
                                 value={postalCode}
                                 name="postalCode" 
                                 onChange={(e) => setPostalCode(e.target.value)}/>
                             </CityHolder>
-                            <Input type="text" 
+                            <ShippingInput type="text" 
                             placeholder="Country" 
                             value={country}
-                            name="country" 
+                            name="country"
                             onChange={(e) => setCountry(e.target.value)}/>
                             <button type="submit"
                             onClick={goToPayment}>Continue to payment</button>
                             <input type="hidden"
                             name="products" 
                             value={checkoutProducts.join(',')}/>
-                        </OrderInformationContainer>
+                        </ShippingInformationContainer>
                     </>
                 }
             </ColumnsWrapper>
