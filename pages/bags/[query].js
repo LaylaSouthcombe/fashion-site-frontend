@@ -14,15 +14,15 @@ const PageContent = styled.div`
 
 export default function BagsPage({products, queryConstraint}){
 
-    return(
+    return (
         <>
-        <Header/>
-        <PageContent>
-            {products?.length ? 
-                <ProductsGrid products={products} apiUrl={'/api/filtered/categories'} queryConstraint={queryConstraint}/>
-            : null}
-        </PageContent>
-        <Footer/>
+            <Header/>
+            <PageContent>
+                {products?.length ? 
+                    <ProductsGrid products={products} apiUrl={'/api/filtered/categories'} queryConstraint={queryConstraint}/>
+                : null}
+            </PageContent>
+            <Footer/>
         </>
     )
 }

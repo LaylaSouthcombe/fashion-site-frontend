@@ -193,7 +193,7 @@ export default function CheckoutPage() {
         )
     }
     return (
-        <div>
+        <>
             <Header/>
             <ColumnsWrapper>
                 {!checkoutProducts?.length || !products?.length > 0 ?
@@ -286,6 +286,6 @@ export default function CheckoutPage() {
                 }
             </ColumnsWrapper>
             <Footer/>
-        </div>
+        </>
     )
 }

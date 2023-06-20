@@ -12,7 +12,7 @@ const PageContent = styled.div`
 
 export default function BrandPage({products, brand}){
 
-    return(
+    return (
         <>
             <Header/>
             <PageContent>

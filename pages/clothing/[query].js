@@ -13,8 +13,8 @@ const PageContent = styled.div`
 `
 
 export default function ClothingPage({products, queryConstraint}){
-    console.log(queryConstraint)
-    return(
+
+    return (
         <>
             <Header/>
             <PageContent>

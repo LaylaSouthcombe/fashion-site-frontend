@@ -6,11 +6,12 @@ import Paypal from '../../images/logos/paypal.png'
 import RuneLogoImg from '../../images/logos/runeLogo.png'
 import Visa from '../../images/logos/visa.png'
 
-const FooterOuterContainer = styled.div`
+const FooterOuterContainer = styled.footer`
     position: relative;
     padding: 3rem 3rem 0 3rem;
     margin-top: 4rem;
     background-color: var(--main-light-blue);
+    flex-shrink: 0;
 `
 
 const FooterContainer = styled.section`

@@ -27,6 +27,9 @@ const LargeLogo = styled.a`
         width: 100%;
         height: auto;
     }
+    @media (min-width: 1200px) {
+        margin-left: 2.5%;
+    }
 `
 
 const SmallLogo = styled.a`
@@ -56,7 +59,6 @@ const CartLink = styled(Link)`
 
 const StyledNav = styled.nav`
     display: none;
-    max-width: 1000px;
     margin: 0 auto;
     gap: 15px;
     justify-content: space-between;

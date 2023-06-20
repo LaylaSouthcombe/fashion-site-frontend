@@ -32,6 +32,8 @@ const GlobalStyles = createGlobalStyle`
     ::-webkit-scrollbar {
       display: none;
     }
+    display: flex;
+    flex-direction: column;
   }
   #__next {
     height: 100%;

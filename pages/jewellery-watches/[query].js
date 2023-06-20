@@ -14,7 +14,7 @@ const PageContent = styled.div`
 
 export default function JewelleryWatchesPage({products, queryConstraint}){
 
-    return(
+    return (
         <>
             <Header/>
             <PageContent>
