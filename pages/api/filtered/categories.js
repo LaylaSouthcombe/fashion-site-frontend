@@ -57,7 +57,7 @@ export default async function handle(req, res) {
     })
 
     let aggregateSortResultsOptions = {
-        recommended: { $sample: { size: 2000} },
+        recommended: { $sort : { views : -1 } },
         lowestPrice: { $sort : { price : 1 } },
         highestPrice: { $sort : { price : -1 } },
         newIn: { $sort : { _id : -1 } }

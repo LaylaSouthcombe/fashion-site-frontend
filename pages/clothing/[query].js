@@ -33,13 +33,26 @@ export async function getServerSideProps(context){
     let queryConstraint = {productCategory: 'Clothing'}
     const {query} = context.query
     
-    if(query !== 'all'){
+    if(query !== 'all' && query !== 'popular' && query !== 'women' && query !== 'men'){
         addFormattedQueryToProductQuery(query, productQuery)
         addFormattedQueryToQueryConstraint(query, queryConstraint)
     }
-    
-    const products = await Product.find(productQuery, null, {sort:{'_id': -1}})
 
+    
+    const getProducts = async (url) => {
+        let products
+        if(url === 'popular'){
+            products = await Product.find(productQuery, null, {sort: { views: -1 }}).limit(200)
+        } else if(url === 'women' || url === 'men'){
+            productQuery["section"] = url[0].toUpperCase() + url.slice(1)
+            products = await Product.find(productQuery, null, {sort:{views: -1}})
+        } else {
+            products = await Product.find(productQuery, null, {sort:{views: -1}})
+        }
+        return products
+    }
+    
+    const products = await getProducts(query)
     return {
         props: {
             products: JSON.parse(JSON.stringify(products)),

@@ -3,6 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 
 import casual from '../images/curatedPicks/casual.jpg'
+import sneakers from '../images/curatedPicks/sneakers.jpg'
+
 import men from '../images/curatedPicks/men.jpg'
 import popular from '../images/curatedPicks/popular.jpg'
 import women from '../images/curatedPicks/women.jpg'
@@ -77,10 +79,10 @@ const CuratedLink = styled(Link)`
 export default function CuratedPicks() {
 
     const picksInfo = [
-        {url: '/popular', image: popular, title: 'Best Sellers'},
-        {url: '/men', image: men, title: 'Shop Men'},
-        {url: '/women', image: women, title: 'Shop Women'},
-        {url: '/casual', image: casual, title: 'Shop Casual'}
+        {url: '/clothing/popular', image: popular, title: 'Best Sellers'},
+        {url: '/clothing/men', image: men, title: 'Shop Men'},
+        {url: '/clothing/women', image: women, title: 'Shop Women'},
+        {url: '/shoes/-t-sneakers', image: sneakers, title: 'Shop Sneakers'}
     ]
 
     return (
@@ -93,7 +95,7 @@ export default function CuratedPicks() {
                     return (
                         <CuratedBox key={"pick"+i}>
                             <Image src={pick.image} alt={pick.title[1]+ " image"}/>
-                            <CuratedLink href={"clothing"+pick.url}>{pick.title}
+                            <CuratedLink href={pick.url}>{pick.title}
                                 <Image src={arrow} alt="arrow"/>
                             </CuratedLink>
                         </CuratedBox>
