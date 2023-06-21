@@ -20,6 +20,9 @@ const ImageButtonContainer = styled.div`
 const Image = styled.img`
     width: 100%;
     border-radius: 5px;
+    :hover {
+        cursor: pointer;
+    }
 `
 
 const ImageButtons = styled.div`

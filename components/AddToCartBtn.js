@@ -13,6 +13,9 @@ const CheckoutButton = styled.div`
     color: var(--main-light-blue);
     font-size: 0.75rem;
     padding: 0.75rem 0.85rem;
+    :hover {
+        cursor: pointer;
+    }
 `
 
 export default function AddToCartBtn({productSizeQuantity}) {

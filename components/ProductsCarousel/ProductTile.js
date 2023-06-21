@@ -16,6 +16,9 @@ const ProductTileContent = styled(Link)`
     display: flex;
     flex-direction: column;
     height: 100%;
+    :hover {
+        cursor: pointer;
+    }
 `
 
 const ProductImage = styled.img`
