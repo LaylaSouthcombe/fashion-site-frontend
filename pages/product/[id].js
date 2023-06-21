@@ -108,6 +108,8 @@ const CounterArea = styled.div`
     margin: 0.5rem 0.8rem 0.5rem 0.5rem;
     display: flex;
     border-radius: 5px;
+    justify-content: space-between;
+    width: 7rem;
     button {
         padding: 0.25rem;
         border: none;
@@ -156,6 +158,16 @@ export default function ProductPage({product, moreLikeThisProducts}){
         setExpanded(newExpanded ? panel : false)
     }
 
+    const increaseNumberToAddToBasket = () => {
+        if(numberOfSelectedStock < selectedSize.stock)
+        setNumberOfSelectedStock(prev => prev + 1)
+    }
+
+    const changeSelectedSize = (sizeObject) => {
+        setSelectedSize(sizeObject)
+        setNumberOfSelectedStock(1)
+    }
+
     return (
         <>
             <Header/>
@@ -176,7 +188,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
                             { product.sizesAndStock.map((sizeObject, i) => {
                                 const isActive = selectedSize.size === sizeObject.size
                                 return (
-                                    <SizeButton key={"sizeObject" + i} isActive={isActive} onClick={() => setSelectedSize(sizeObject)} disabled={sizeObject.stock === 0}>{sizeObject.size}</SizeButton>
+                                    <SizeButton key={"sizeObject" + i} isActive={isActive} onClick={() => changeSelectedSize(sizeObject)} disabled={sizeObject.stock === 0}>{sizeObject.size}</SizeButton>
                                 )
                             })}
                         </SizeButtons>
@@ -185,6 +197,11 @@ export default function ProductPage({product, moreLikeThisProducts}){
                             <>
                                 <span>Last 1 left</span>
                                 <span> - make it yours!</span>
+                            </>
+                            : null}
+                            {selectedSize.stock === numberOfSelectedStock && selectedSize.stock !== 1 ? 
+                            <>
+                                <span> There are only {numberOfSelectedStock} available</span>
                             </>
                             : null}
                         </LastStockLeftPara>
@@ -196,7 +213,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
                                 <Image src={MinusSign} alt="minus sign button"/>
                             </button>
                             <span>{numberOfSelectedStock}</span>
-                            <button onClick={(() => setNumberOfSelectedStock(prev => prev + 1))}>
+                            <button onClick={(() => increaseNumberToAddToBasket(prev => prev + 1))}>
                                 <Image src={PlusSign} alt="plus sign button"/>
                             </button>
                         </CounterArea>
