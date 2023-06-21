@@ -52,12 +52,12 @@ const BrandBox = styled.a`
 export default function BrandsBanner(){
     const brands = [
         { url: 'adidas', image: adidas},
-        { url: 'offwhite', image: offwhite},
+        { url: 'off-white', image: offwhite},
         { url: 'nike', image: nike},
         { url: 'essentials', image: essentials},
         { url: 'carhartt', image: carhartt},
         { url: 'gucci', image: gucci},
-        { url: 'acnestudios', image: acnestudios},
+        { url: 'acne-studios', image: acnestudios},
         { url: 'north-face', image: northFace},
     ]
 

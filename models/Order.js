@@ -8,7 +8,8 @@ const OrderSchema = new Schema({
         city: String,
         country: String,
         postalCode: String,
-        paid: Boolean
+        paid: Boolean,
+        orderTotalPrice: Number
     }, {
         timestamps: true
 })

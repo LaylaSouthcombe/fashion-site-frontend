@@ -10,6 +10,7 @@ import Input from "@/components/Input"
 
 import MinusSign from "../images/icons/minus.png"
 import PlusSign from "../images/icons/plus.png"
+import BannerAdImage from "@/images/bannerAdImage.jpg"
 
 const ColumnsWrapper = styled.div`
     display: grid;
@@ -19,13 +20,38 @@ const ColumnsWrapper = styled.div`
     width: 80%;
     max-width: 900px;
     @media (min-width: 768px) {
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: ${props => props.gridcolumns};
         width: 90%;
     }
 `
 
 const Box = styled.div`
     padding: 1rem;
+`
+
+const OrderThankYouArea = styled.div`
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    h2 {
+        margin: 2rem;
+    }
+    p {
+        margin: 1rem;
+        font-size: 1.1rem;
+    }
+`
+
+const ThankYouImage = styled.div`
+    width: 80%;
+    margin: 1rem auto;
+    border-top: 2px solid var(--main-dark-blue);
+    padding: 2rem;
+    img {
+        width: 100%;
+        height: auto;
+    }
 `
 
 const CheckoutProductContainer = styled.div`
@@ -193,7 +219,7 @@ const PaymentButton = styled.button`
 
 export default function CheckoutPage() {
 
-    const {checkoutProducts, addProduct, removeProduct, clearCheckout} = useContext(CheckoutContext)
+    const {checkoutProducts, addProduct, removeProduct, clearCheckout, inputConfirmedOrder, confirmedOrder} = useContext(CheckoutContext)
 
     const [products, setProducts] = useState([])
     const [name, setName] = useState('')    
@@ -204,6 +230,7 @@ export default function CheckoutPage() {
     const [country, setCountry] = useState('')
     const [isSuccess, setIsSuccess] = useState(false)
     const [paymentErrorMessage, setPaymentErrorMessage] = useState('')
+    const [confirmedOrderDetails, setConfirmedOrderDetails] = useState()
     
     useEffect(() => {
         if(checkoutProducts?.length > 0){
@@ -215,12 +242,19 @@ export default function CheckoutPage() {
             setProducts([])
         }
     },[checkoutProducts])
-
+    const ls = typeof window !== "undefined" ? window.localStorage : null
+    
+    
     useEffect(() => {
         if(typeof window === 'undefined'){
             return
         }
         if(window?.location.href.includes('success')){
+            if(ls && ls.getItem('order')){
+                console.log("storage order ", JSON.parse(ls.getItem('order')))
+                setConfirmedOrderDetails(JSON.parse(ls.getItem('order')))
+                ls?.removeItem('order')
+            }
             setIsSuccess(true)
             clearCheckout()
         }
@@ -235,28 +269,36 @@ export default function CheckoutPage() {
     }
 
     const inputDemoData = () => {
-        setName("Tina")
-        setEmail("Belcher")
+        setName("Tina Belcher")
+        setEmail("TinaBelcher123@example.com")
         setStreetAddress("Flat 1, Ocean Avenue")
         setCity("Seymour's Bay")
         setPostalCode("07097")
         setCountry("USA")
         setPaymentErrorMessage("Use this card number on next page: 4242 4242 4242 4242")
     }
-
+    
     const goToPayment = async () => {
-        if(name.length !== 0 && email.length !== 0 && streetAddress.length !== 0 && city.length !== 0 && country.length !== 0 && postalCode.length !== 0 && checkoutProducts.length !== 0) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if(name.length !== 0 && email.length !== 0 && streetAddress.length !== 0 && city.length !== 0 && country.length !== 0 && postalCode.length !== 0 && checkoutProducts.length !== 0 && emailRegex.test(email)) {
             const response = await axios.post('/api/payment', {
                 name,email,streetAddress,city,country,postalCode,checkoutProducts
             })
+            console.log(response)
+            if(response.data.order.line_items?.length){
+                console.log(response.data.order.line_items)
+                ls?.setItem('order', JSON.stringify(response.data.order))
+            }
             if(response.data.url){
                 window.location = response.data.url
             }
-        } else if(checkoutProducts.length !== 0) {
+        } else if(checkoutProducts.length !== 0 && emailRegex.test(email)) {
             setPaymentErrorMessage("Please fill in all fields")
+        } else if(!emailRegex.test(email)){
+            setPaymentErrorMessage("Please enter a valid email address")
         } else {
             setPaymentErrorMessage("There are no items in your basket")
-        }   
+        }
     }
 
     let total = 0
@@ -269,19 +311,57 @@ export default function CheckoutPage() {
     if(isSuccess){
         return (
             <>
-                <ColumnsWrapper>
-                    <Box>
-                        <h1>Thanks for your order!</h1>
-                        <p>We will email you when your order is dispatched</p>
-                    </Box>
-                </ColumnsWrapper>
+                <Header/>
+                    <ColumnsWrapper gridcolumns={"1fr 1fr"}>
+                        <Box>
+                            {confirmedOrderDetails !== undefined? 
+                                <>
+                                    {confirmedOrderDetails.line_items.map((product, i) => (
+                                <CheckoutProductContainer key={"product" + i}>
+                                    {console.log(product)}
+                                    <ProductImageBox>
+                                        <img src={product.price_data.product_data.images[0]} alt="product image" />
+                                    </ProductImageBox>
+                                    <ProductInfo>
+                                        <ProductTitle>{product.price_data.product_data.name}</ProductTitle>
+                                        <ProductColourSizePrice>
+                                            <span>{product.price_data.product_data.description}</span>
+                                        </ProductColourSizePrice>
+                                        <ProductQtySubArea>
+                                            <ProductQuantityButtons>
+                                                {product.quantity}
+                                            </ProductQuantityButtons>
+                                            <ProductSubTotal>
+                                                £{(product.quantity * product.price_data.unit_amount / 100).toLocaleString()}
+                                            </ProductSubTotal>
+                                        </ProductQtySubArea>
+                                    </ProductInfo>
+                                </CheckoutProductContainer>
+                            )
+                            )}
+                            <OrderTotal>
+                                <p>Total</p>
+                                <p>£{(confirmedOrderDetails.orderTotalPrice / 100).toLocaleString()}</p>
+                            </OrderTotal>
+                                </>
+                            : null}
+                        </Box>
+                        <OrderThankYouArea>
+                            <h2>Thanks for your order!</h2>
+                            <p>You will shortly receive an email containing your order confirmation</p>
+                            <ThankYouImage>
+                                <Image src={BannerAdImage} alt="Three males models sat on chairs"/>
+                            </ThankYouImage>
+                        </OrderThankYouArea>
+                    </ColumnsWrapper>
+                <Footer/>
             </>
         )
     }
     return (
         <>
             <Header/>
-            <ColumnsWrapper>
+            <ColumnsWrapper gridcolumns={"1.2fr 0.8fr"}>
                 {!checkoutProducts?.length || !products?.length > 0 ?
                     <Box>
                         <h2>Basket</h2>
@@ -291,38 +371,38 @@ export default function CheckoutPage() {
                     <>
                         <Box>
                             <div>Your basket</div>
-                                {products.map((product, i) => (
-                                    <CheckoutProductContainer key={"product" + i}>
-                                        <ProductImageBox>
-                                            <img src={product.images[0]} alt="product image" />
-                                        </ProductImageBox>
-                                        <ProductInfo>
-                                            <ProductTitle>{product.name}</ProductTitle>
-                                            <ProductBrand>{product.brand}</ProductBrand>
-                                            <ProductColourSizePrice>
-                                                <span>{product.colour}</span>
-                                                &#x2666;
-                                                <span>{product.size}</span>
-                                                &#x2666;
-                                                <span>{product.price}</span>
-                                            </ProductColourSizePrice>
-                                            <ProductQtySubArea>
-                                                <ProductQuantityButtons>
-                                                    <button onClick={() => lessOfThisProduct({id: product._id, size: product.size})}>
-                                                        <Image src={MinusSign} alt="minus sign button"/>
-                                                    </button>
-                                                        {checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length}
-                                                    <button onClick={() => moreOfThisProduct({id: product._id, size: product.size})}>
-                                                        <Image src={PlusSign} alt="plus sign button"/>
-                                                    </button>
-                                                </ProductQuantityButtons>
-                                                <ProductSubTotal>
-                                                    £{checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length * product.price}
-                                                </ProductSubTotal>
-                                            </ProductQtySubArea>
-                                        </ProductInfo>
-                                    </CheckoutProductContainer>
-                                ))}
+                            {products.map((product, i) => (
+                                <CheckoutProductContainer key={"product" + i}>
+                                    <ProductImageBox>
+                                        <img src={product.images[0]} alt="product image" />
+                                    </ProductImageBox>
+                                    <ProductInfo>
+                                        <ProductTitle>{product.name}</ProductTitle>
+                                        <ProductBrand>{product.brand}</ProductBrand>
+                                        <ProductColourSizePrice>
+                                            <span>{product.colour}</span>
+                                            &#x2666;
+                                            <span>{product.size}</span>
+                                            &#x2666;
+                                            <span>£{product.price}</span>
+                                        </ProductColourSizePrice>
+                                        <ProductQtySubArea>
+                                            <ProductQuantityButtons>
+                                                <button onClick={() => lessOfThisProduct({id: product._id, size: product.size})}>
+                                                    <Image src={MinusSign} alt="minus sign button"/>
+                                                </button>
+                                                    {checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length}
+                                                <button onClick={() => moreOfThisProduct({id: product._id, size: product.size})}>
+                                                    <Image src={PlusSign} alt="plus sign button"/>
+                                                </button>
+                                            </ProductQuantityButtons>
+                                            <ProductSubTotal>
+                                                £{checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length * product.price}
+                                            </ProductSubTotal>
+                                        </ProductQtySubArea>
+                                    </ProductInfo>
+                                </CheckoutProductContainer>
+                            ))}
                             <OrderTotal>
                                 <p>Total</p>
                                 <p>£{total}</p>

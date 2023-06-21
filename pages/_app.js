@@ -40,6 +40,9 @@ const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
+  button:hover {
+    cursor: pointer;
+  }
 `
 
 export default function App({ Component, pageProps }) {

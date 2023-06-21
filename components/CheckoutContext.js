@@ -7,6 +7,7 @@ export function CheckoutContextProvider({children})  {
     const ls = typeof window !== "undefined" ? window.localStorage : null
     
     const [checkoutProducts, setCheckoutProducts] = useState([])
+    const [confirmedOrder, setConfirmedOrder] = useState([])
 
     useEffect(() =>{
         if(checkoutProducts?.length > 0){
@@ -22,6 +23,10 @@ export function CheckoutContextProvider({children})  {
 
     const addProduct = (productSize) => {
         setCheckoutProducts(prev => [...prev, productSize])
+    }
+
+    const inputConfirmedOrder = (order) => {
+        setConfirmedOrder(order)
     }
 
     const removeProduct = (productSize) => {
@@ -40,7 +45,7 @@ export function CheckoutContextProvider({children})  {
     }
 
     return (
-        <CheckoutContext.Provider value={{checkoutProducts, setCheckoutProducts, addProduct, removeProduct, clearCheckout}}>
+        <CheckoutContext.Provider value={{checkoutProducts, setCheckoutProducts, addProduct, removeProduct, clearCheckout, inputConfirmedOrder, confirmedOrder}}>
             {children}
         </CheckoutContext.Provider>
     )

@@ -33,8 +33,10 @@ export async function getServerSideProps(context){
     let queryConstraint = {productCategory: 'Bags'}
     const {query} = context.query
 
-    addFormattedQueryToProductQuery(query, productQuery)
-    addFormattedQueryToQueryConstraint(query, queryConstraint)
+    if(query !== 'all'){
+        addFormattedQueryToProductQuery(query, productQuery)
+        addFormattedQueryToQueryConstraint(query, queryConstraint)
+    }
 
     const products = await Product.find(productQuery, null, {sort:{'_id': -1}})
 
