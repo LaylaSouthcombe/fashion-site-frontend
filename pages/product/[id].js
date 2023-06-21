@@ -3,7 +3,6 @@ import { mongooseConnect } from "@/lib/mongoose"
 import { useState } from "react"
 import styled from "styled-components"
 import Image from "next/image"
-
 import { Product } from "@/models/Product"
 import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
@@ -219,7 +218,11 @@ export async function getServerSideProps(context){
     await mongooseConnect()
 
     const {id} = context.query
-    const product = await Product.findById(id)
+    const product = await Product.findOneAndUpdate(
+        { _id: id },
+        { $inc: { views: 1 } },
+        { returnOriginal: false }
+    )
 
     const moreLikeThisProducts = await Product.aggregate([
     {

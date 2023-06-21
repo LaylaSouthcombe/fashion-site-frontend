@@ -60,7 +60,8 @@ const productSchema = new Schema({
         },
         createdAt: Number,
         updatedAt: Number,
-    }, {
+        views: Number
+    },{
         timestamps: true
 })
 
