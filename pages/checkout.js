@@ -15,6 +15,7 @@ import MinusSign from "../images/icons/minus.png"
 import PlusSign from "../images/icons/plus.png"
 import BannerAdImage from "@/images/bannerAdImage.jpg"
 import FeaturedProducts from "@/components/FeaturedProducts"
+import Link from "next/link"
 
 const ColumnsWrapper = styled.div`
     display: grid;
@@ -226,6 +227,31 @@ const CartEmptyArea = styled.div`
     h2 {
         margin-bottom: 1rem;
     }
+    > p {
+        font-size: 1.1rem;
+        margin: 0.5rem 0;
+    }
+`
+
+const FeaturedProductsSection = styled.div`
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto 4rem auto;
+`
+
+const NavigateButtons = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+    a {
+        text-decoration: none;
+        border-radius: 5px;
+        color: var(--main-light-blue);
+        background-color: var(--main-dark-blue);
+        padding: 0.5rem 0.65rem;
+        margin: 0.2rem 0.2rem 0.2rem 0;
+        font-size: 0.9rem;
+    }
 `
 
 export default function CheckoutPage({featuredProducts}) {
@@ -374,16 +400,26 @@ export default function CheckoutPage({featuredProducts}) {
             <Header/>
                 {!checkoutProducts?.length || !products?.length > 0 ?
                 <>
-                <ColumnsWrapper gridcolumns={"1fr 1fr"}>
+                <ColumnsWrapper gridcolumns={"1.1fr 0.9fr"}>
                     <CartEmptyArea>
                         <h2>Basket</h2>
-                        <p>your cart is empty</p>
+                        <p>Your cart is empty</p>
+                        <p>Browse our collections to get the latest styles!</p>
+                        <NavigateButtons>
+                            <Link href="/clothing/all">Clothing</Link>
+                            <Link href="/shoes/all">Shoes</Link>
+                            <Link href="/bags/all">Bags</Link>
+                            <Link href="/jewellery-watches/all">Jewellery & Watches</Link>
+                            <Link href="/accessories/all">Accessories</Link>
+                        </NavigateButtons>
                     </CartEmptyArea>
                     <ThankYouImage>
                         <Image src={BannerAdImage} alt="Three males models sat on chairs"/>
                     </ThankYouImage>
                 </ColumnsWrapper>
-                <FeaturedProducts featuredProducts={featuredProducts}/>
+                <FeaturedProductsSection>
+                    <FeaturedProducts featuredProducts={featuredProducts}/>
+                </FeaturedProductsSection>
                 </>
                 : 
                     <>
