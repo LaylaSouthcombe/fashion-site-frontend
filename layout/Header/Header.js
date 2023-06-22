@@ -190,9 +190,13 @@ const CartImage = styled.div`
 `
 
 const CartNumber = styled.div`
-    width: 7.5px;
-    height: 7.5px;
-    border-radius: 15px;
+    border-radius: 25px;
+    width: 1.4rem;
+    text-align:center;
+    font-size: 0.7rem;
+    line-height: 1.2rem;
+    padding: 0.1rem;
+    color: white;
     background-color: var(--main-dark-blue);
 `
 
@@ -287,6 +291,7 @@ export default function Header() {
                                 </CartImage>
                             {checkoutProducts?.length > 0 ? 
                                 <CartNumber>
+                                    {checkoutProducts?.length}
                                 </CartNumber>
                             :
                             null}
