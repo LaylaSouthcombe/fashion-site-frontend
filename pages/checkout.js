@@ -1,4 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
+import { mongooseConnect } from "@/lib/mongoose"
+import {Featured} from "@/models/Featured"
+
 import styled from "styled-components"
 import axios from "axios"
 import Image from "next/image"
@@ -11,6 +14,7 @@ import Input from "@/components/Input"
 import MinusSign from "../images/icons/minus.png"
 import PlusSign from "../images/icons/plus.png"
 import BannerAdImage from "@/images/bannerAdImage.jpg"
+import FeaturedProducts from "@/components/FeaturedProducts"
 
 const ColumnsWrapper = styled.div`
     display: grid;
@@ -217,7 +221,14 @@ const PaymentButton = styled.button`
     font-size: 0.9rem;
 `
 
-export default function CheckoutPage() {
+const CartEmptyArea = styled.div`
+    padding: 2rem;
+    h2 {
+        margin-bottom: 1rem;
+    }
+`
+
+export default function CheckoutPage({featuredProducts}) {
 
     const {checkoutProducts, addProduct, removeProduct, clearCheckout, inputConfirmedOrder, confirmedOrder} = useContext(CheckoutContext)
 
@@ -361,14 +372,22 @@ export default function CheckoutPage() {
     return (
         <>
             <Header/>
-            <ColumnsWrapper gridcolumns={"1.2fr 0.8fr"}>
                 {!checkoutProducts?.length || !products?.length > 0 ?
-                    <Box>
+                <>
+                <ColumnsWrapper gridcolumns={"1fr 1fr"}>
+                    <CartEmptyArea>
                         <h2>Basket</h2>
-                        <div>your cart is empty</div>
-                    </Box>
+                        <p>your cart is empty</p>
+                    </CartEmptyArea>
+                    <ThankYouImage>
+                        <Image src={BannerAdImage} alt="Three males models sat on chairs"/>
+                    </ThankYouImage>
+                </ColumnsWrapper>
+                <FeaturedProducts featuredProducts={featuredProducts}/>
+                </>
                 : 
                     <>
+                    <ColumnsWrapper gridcolumns={"1.2fr 0.8fr"}>
                         <Box>
                             <div>Your basket</div>
                             {products.map((product, i) => (
@@ -454,10 +473,22 @@ export default function CheckoutPage() {
                             name="products" 
                             value={checkoutProducts.join(',')}/>
                         </ShippingInformationContainer>
+                    </ColumnsWrapper>
                     </>
                 }
-            </ColumnsWrapper>
+            
             <Footer/>
         </>
     )
 }
+export async function getServerSideProps() {
+
+    await mongooseConnect()
+  
+    const featuredProducts = await Featured.find({})
+    return {
+      props: {
+        featuredProducts: JSON.parse(JSON.stringify(featuredProducts))
+      }
+    }
+  }
