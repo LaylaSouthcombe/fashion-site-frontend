@@ -159,7 +159,6 @@ export default function ProductPage({product, moreLikeThisProducts}){
     }
 
     const increaseNumberToAddToBasket = () => {
-        if(numberOfSelectedStock < selectedSize.stock)
         setNumberOfSelectedStock(prev => prev + 1)
     }
 
@@ -197,11 +196,6 @@ export default function ProductPage({product, moreLikeThisProducts}){
                             <>
                                 <span>Last 1 left</span>
                                 <span> - make it yours!</span>
-                            </>
-                            : null}
-                            {selectedSize.stock === numberOfSelectedStock && selectedSize.stock !== 1 ? 
-                            <>
-                                <span> There are only {numberOfSelectedStock} available</span>
                             </>
                             : null}
                         </LastStockLeftPara>
