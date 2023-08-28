@@ -150,6 +150,7 @@ const OrderTotal = styled.div`
     gap: 1rem;
     margin: 1rem;
     justify-content: flex-end;
+    font-weight: bold;
 `
 
 const ShippingInformationContainer = styled.div`
@@ -204,15 +205,15 @@ const CityHolder = styled.div`
 const PaymentErrorMessage = styled.div`
     height: 1.75rem;
     max-width: 280px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     text-align: center;
     display: flex;
     align-items: center;
     justify-items: center;
-    margin:  0 auto 5px auto;
+    margin:  5px auto 10px auto;
     p {
         color: #e64949;
-        width: 100%;
+        width: 95%;
     }
 `
 
@@ -312,7 +313,7 @@ export default function CheckoutPage({featuredProducts}) {
         setCity("Seymour's Bay")
         setPostalCode("07097")
         setCountry("USA")
-        setPaymentErrorMessage("Use this card number on next page: 4242 4242 4242 4242")
+        setPaymentErrorMessage("Use this card number on next page and random expiry date and security code: 4242 4242 4242 4242")
     }
     
     const goToPayment = async () => {
@@ -377,7 +378,7 @@ export default function CheckoutPage({featuredProducts}) {
                             )
                             )}
                             <OrderTotal>
-                                <p>Total</p>
+                                <p>Total:</p>
                                 <p>£{(confirmedOrderDetails.orderTotalPrice / 100).toLocaleString()}</p>
                             </OrderTotal>
                                 </>
@@ -459,7 +460,7 @@ export default function CheckoutPage({featuredProducts}) {
                                 </CheckoutProductContainer>
                             ))}
                             <OrderTotal>
-                                <p>Total</p>
+                                <p>Total:</p>
                                 <p>£{total}</p>
                             </OrderTotal>
                         </Box>
