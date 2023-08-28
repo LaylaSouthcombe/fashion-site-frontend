@@ -191,10 +191,11 @@ const CartImage = styled.div`
 
 const CartNumber = styled.div`
     border-radius: 25px;
-    width: 1.4rem;
+    width: 1.2rem;
+    height: 1.2rem;
     text-align:center;
-    font-size: 0.7rem;
-    line-height: 1.2rem;
+    font-size: 0.6rem;
+    line-height: 1rem;
     padding: 0.1rem;
     color: white;
     background-color: var(--main-dark-blue);

@@ -180,7 +180,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
                 <ProductInformationContainer>
                     <ProductTitle>{product.name}</ProductTitle>
                     <ProductBrand>{product.brand}</ProductBrand>
-                    <ProductPrice>£{product.price}</ProductPrice>
+                    <ProductPrice>£{product.price.toLocaleString()}</ProductPrice>
                     {product.productCategory === "Clothing" || product.productCategory === "Shoes" ?
                     <>
                         <SizeButtons>
