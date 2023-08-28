@@ -5,9 +5,14 @@ import styled from "styled-components"
 
 import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
+import OrderTile from "@/components/OrderTile"
 
 const PageContent = styled.div`
     flex-grow: 1;
+`
+
+const PastOrders = styled.div`
+
 `
 
 export default function AccountPage({account, orderHistory}){
@@ -16,6 +21,9 @@ export default function AccountPage({account, orderHistory}){
         <>
             <Header/>
             <PageContent>
+                <PastOrders>
+
+                </PastOrders>
 
             </PageContent>
             <Footer/>

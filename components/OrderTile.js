@@ -5,7 +5,7 @@ const OrderContainer = styled.div`
     width: 80%;
 `
 
-export default function BannerAd({order}) {
+export default function OrderTile({order}) {
     return (
         <OrderContainer>
 
