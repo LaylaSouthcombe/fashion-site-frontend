@@ -16,15 +16,16 @@ const PastOrders = styled.div`
 `
 
 export default function AccountPage({account, orderHistory}){
-    console.log(account)
+
     return(
         <>
             <Header/>
             <PageContent>
                 <PastOrders>
-
+                    {orderHistory.map((order, i) => (
+                        <OrderTile order={order} key={i}/>
+                    ))}
                 </PastOrders>
-
             </PageContent>
             <Footer/>
         </>
