@@ -169,6 +169,8 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     },[])
 
     const getFilteredProducts = async (filters, queryConstraint) => {
+        console.log(filters)
+        console.log(queryConstraint)
         let body = {
             filters: filters,
             queryConstraint: queryConstraint,

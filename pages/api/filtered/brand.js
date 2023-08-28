@@ -13,7 +13,7 @@ export default async function handle(req, res) {
     const queryConstraint = req.body.queryConstraint
     
     let path = queryConstraint.path
-    let value = queryConstraint.value.replace("-", " ")
+    let value = queryConstraint.value === "OFF-WHITE" ? queryConstraint.value : queryConstraint.value.replace("-", " ")
 
     let query = {$or: []}
     query[path] = value
