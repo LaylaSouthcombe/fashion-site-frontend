@@ -169,7 +169,6 @@ export default function FilterSideBar({filterLabels, expanded, handleChange, upd
                             <AccordionDetails>
                                 <FilterArea filtersLength={filterLabels.brand.length}>
                                     {filterLabels.brand.map((brand, i) => {
-                                        console.log(brand)
                                         return (
                                             <Filter key={"childLink" + i}>
                                                 <Checkbox onChange={() => updateFilteredProducts({brand: brand})}/>

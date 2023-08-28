@@ -104,6 +104,8 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     const [currentProducts, setCurrentProducts] = useState(products)
     const [filters, setFilters] = useState({productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []})
 
+    const [loaded, setLoaded] = useState(false)
+
     const dropdownOptions = [
         { value: 'recommended', label: 'Recommended' },
         { value: 'lowestPrice', label: 'Low to high' },
@@ -126,10 +128,12 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     }
 
     const handleOptionSelect = async (valueObject) => {
+        setLoaded(false)
         setSelectedValue(valueObject)
         setIsDropdownOpen(false)
         let newProducts = await getSortedProducts(filters, queryConstraint, valueObject.value)
         setCurrentProducts(newProducts)
+        setLoaded(true)
     }
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -175,6 +179,7 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     }
 
     const updateFilteredProducts = async (filter) => {
+        setLoaded(false)
         let filterKey = Object.keys(filter)[0]
         let filterValue = Object.values(filter)[0]
 
@@ -187,6 +192,7 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
         
         let newProducts = await getFilteredProducts(filters, queryConstraint)
         setCurrentProducts(newProducts)
+        setLoaded(true)
     }
 
     return (
@@ -213,14 +219,20 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
                     ) : null}
                 </SortDropDownArea>
             </ProductsGridResultsAndSort>
+            {loaded ? <h1>loaded</h1> : <h1>not loaded</h1>}
             <ProductsGridOuterContainer>
                 <FilterSideBar filterLabels={filterLabels} handleChange={handleChange} expanded={expanded} updateFilteredProducts={updateFilteredProducts}/>
                 <ProductsGridContainer>
-                    {currentProducts?.length > 0 ? 
-                        currentProducts.map((product, i) => (
-                            <ProductTile key={i} product={product}/>
-                        ))
-                    : null}
+                    {loaded ? 
+                        <>
+                            {currentProducts?.length > 0 ? 
+                                currentProducts.map((product, i) => (
+                                    <ProductTile key={i} product={product}/>
+                                ))
+                            : null}
+                        </>
+                    : 
+                    null}
                 </ProductsGridContainer>
             </ProductsGridOuterContainer>
         </>
