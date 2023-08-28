@@ -207,7 +207,7 @@ export default function ProductPage({product, moreLikeThisProducts}){
                                 <Image src={MinusSign} alt="minus sign button"/>
                             </button>
                             <span>{numberOfSelectedStock}</span>
-                            <button onClick={(() => increaseNumberToAddToBasket(prev => prev + 1))}>
+                            <button onClick={(() => selectedSize.stock > 1 ? increaseNumberToAddToBasket(prev => prev + 1) : null )}>
                                 <Image src={PlusSign} alt="plus sign button"/>
                             </button>
                         </CounterArea>
