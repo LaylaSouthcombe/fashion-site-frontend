@@ -5,7 +5,7 @@ import Image from "next/image"
 
 import ProductTile from "./ProductsCarousel/ProductTile"
 import FilterSideBar from "./FilterSideBar"
-
+import SkeletonProductTile from "./ProductsCarousel/SkeletonProductTile"
 import downArrow from "../images/icons/down-arrow.png"
 
 const ProductsGridOuterContainer = styled.section`
@@ -104,7 +104,7 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     const [currentProducts, setCurrentProducts] = useState(products)
     const [filters, setFilters] = useState({productType: [], productSubType: [], colour: [], sizesAndStock: [], brand: []})
 
-    const [loaded, setLoaded] = useState(false)
+    const [loaded, setLoaded] = useState(true)
 
     const dropdownOptions = [
         { value: 'recommended', label: 'Recommended' },
@@ -219,7 +219,6 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
                     ) : null}
                 </SortDropDownArea>
             </ProductsGridResultsAndSort>
-            {loaded ? <h1>loaded</h1> : <h1>not loaded</h1>}
             <ProductsGridOuterContainer>
                 <FilterSideBar filterLabels={filterLabels} handleChange={handleChange} expanded={expanded} updateFilteredProducts={updateFilteredProducts}/>
                 <ProductsGridContainer>
@@ -232,7 +231,15 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
                             : null}
                         </>
                     : 
-                    null}
+                    <>
+                        <SkeletonProductTile/>
+                        <SkeletonProductTile/>
+                        <SkeletonProductTile/>
+                        <SkeletonProductTile/>
+                        <SkeletonProductTile/>
+                        <SkeletonProductTile/>
+                    </>
+                    }
                 </ProductsGridContainer>
             </ProductsGridOuterContainer>
         </>
