@@ -8,7 +8,7 @@ const OrderContainer = styled.div`
 export default function OrderTile({order}) {
     return (
         <OrderContainer>
-
+            <p>{order.email}</p>
         </OrderContainer>
     )
 }
