@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongodb'
 import {model,models,Schema} from 'mongoose'
 
 const OrderSchema = new Schema({
@@ -9,7 +10,8 @@ const OrderSchema = new Schema({
         country: String,
         postalCode: String,
         paid: Boolean,
-        orderTotalPrice: Number
+        orderTotalPrice: Number,
+        accountId: ObjectId
     }, {
         timestamps: true
 })
