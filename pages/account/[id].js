@@ -8,7 +8,9 @@ import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
 import OrderTile from "@/components/OrderTile"
 
+import BannerAdImage from "@/images/bannerAdImage.jpg"
 import Link from "next/link"
+import Image from "next/image"
 import FeaturedProducts from "@/components/FeaturedProducts"
 
 const PageContent = styled.div`
@@ -16,11 +18,15 @@ const PageContent = styled.div`
 `
 
 const PastOrders = styled.div`
-
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto 4rem auto;
 `
 
 const UserInfo = styled.div`
-
+    width: 80%;
+    max-width: 1200px;
+    margin: 4rem auto 1rem auto;
 `
 
 const NavigateButtons = styled.div`
@@ -44,6 +50,29 @@ const FeaturedProductsSection = styled.div`
     margin: 2rem auto 4rem auto;
 `
 
+const NoPastOrdersWrapper = styled.div`
+    width: 80%;
+    max-width: 1000px;
+    margin: 2rem auto 4rem auto;
+    display: flex;
+
+    p {
+        margin-bottom: 1rem;
+    }
+`
+
+const ThankYouImage = styled.div`
+    width: 30%;
+    margin: 0 auto;
+    border-left: 2px solid var(--main-dark-blue);
+    padding: 2rem;
+    object-fit: contain;
+    img {
+        width: 100%;
+        height: auto;
+    }
+`
+
 export default function AccountPage({account, orderHistory, featuredProducts}){
 
     return(
@@ -52,33 +81,39 @@ export default function AccountPage({account, orderHistory, featuredProducts}){
             <PageContent>
                 <UserInfo>
                     <p>Hey {account.name}!</p>
-                    
                 </UserInfo>
-                <PastOrders>
-                {!orderHistory.length ? 
+                {orderHistory.length ? 
                 <>
-                    <p>Your past orders</p>
-                    {orderHistory.map((order, i) => (
-                        <OrderTile order={order} key={i}/>
-                    ))}
+                    <PastOrders>
+                        <p>Your past orders</p>
+                        {orderHistory.map((order, i) => (
+                            <OrderTile order={order} key={i}/>
+                        ))}
+                    </PastOrders>
                 </>
                 : 
                 <>
-                    <p>You have no past orders</p>
-                    <p>Browse our collections to get the latest styles!</p>
-                    <NavigateButtons>
-                        <Link href="/clothing/all">Clothing</Link>
-                        <Link href="/shoes/all">Shoes</Link>
-                        <Link href="/bags/all">Bags</Link>
-                        <Link href="/jewellery-watches/all">Jewellery & Watches</Link>
-                        <Link href="/accessories/all">Accessories</Link>
-                    </NavigateButtons>
+                    <NoPastOrdersWrapper>
+                        <div>
+                            <p>You have no past orders</p>
+                            <p>Browse our collections to get the latest styles!</p>
+                            <NavigateButtons>
+                                <Link href="/clothing/all">Clothing</Link>
+                                <Link href="/shoes/all">Shoes</Link>
+                                <Link href="/bags/all">Bags</Link>
+                                <Link href="/jewellery-watches/all">Jewellery & Watches</Link>
+                                <Link href="/accessories/all">Accessories</Link>
+                            </NavigateButtons>
+                        </div>
+                        <ThankYouImage>
+                            <Image src={BannerAdImage} alt="Three males models sat on chairs"/>
+                        </ThankYouImage>
+                    </NoPastOrdersWrapper>
                     <FeaturedProductsSection>
                         <FeaturedProducts featuredProducts={featuredProducts}/>
                     </FeaturedProductsSection>
                 </>
                 }
-                </PastOrders>
             </PageContent>
             <Footer/>
         </>
