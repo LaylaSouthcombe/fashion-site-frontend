@@ -19,7 +19,7 @@ const PageContent = styled.div`
 
 const PastOrders = styled.div`
     width: 90%;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 2rem auto 4rem auto;
 `
 
