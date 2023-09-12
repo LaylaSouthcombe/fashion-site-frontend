@@ -218,6 +218,8 @@ export default function Header() {
     const {checkoutProducts} = useContext(CheckoutContext)
     
     const [showNavbar, setShowNavbar] = useState(false);
+    const [expanded, setExpanded] = useState('');
+    
     const pathname = usePathname();
 
     const handleShowNavbar = () => {
@@ -230,7 +232,7 @@ export default function Header() {
         }
     }
 
-    const [expanded, setExpanded] = useState('');
+    // const accountHref = loggedIn ? `/account/${accountId}` : '/login'
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -287,11 +289,11 @@ export default function Header() {
                             )
                         })}
                         <li>
-                        <CartLink href="/account">
-                            <CartImage>
-                                <Image src={Account} alt="account icon"/> 
-                            </CartImage>
-                        </CartLink>
+                            <CartLink href="/account">
+                                <CartImage>
+                                    <Image src={Account} alt="account icon"/> 
+                                </CartImage>
+                            </CartLink>
                         </li>
                         <li>
                             <CartLink href="/checkout">
