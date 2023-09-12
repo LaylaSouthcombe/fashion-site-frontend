@@ -63,6 +63,15 @@ const LoginRegisterButton = styled.button`
     margin: 10px 0;
 `
 
+const FirstSecondName = styled.div`
+    display: grid;
+    grid-template-columns: 100%;
+    @media (min-width: 768px) {
+        grid-template-columns: 35% 65%;
+        column-gap: 10px;
+    }
+`
+
 export default function LoginPage({}){
 
     const [formData, setFormData] = useState({
@@ -119,7 +128,35 @@ export default function LoginPage({}){
                             required
                         />
                     </FormGroup>
-                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'}>Login</LoginRegisterButton>
+                    {
+                        formType !== 'login' ? 
+                        <FirstSecondName>
+                            <FormGroup>
+                                <Label>First Name</Label>
+                                <Input
+                                    type="firstName"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>Last Name</Label>
+                                <Input
+                                    type="lastName"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                            </FormGroup>
+                        </FirstSecondName>
+                        : null
+                    }
+                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'}>
+                        {formType === 'login' ? 'Sign In' : 'Create Account'}
+                    </LoginRegisterButton>
                 </LoginForm>
                 <LoginRegisterChanger>
                     <HaveDontHaveText>
