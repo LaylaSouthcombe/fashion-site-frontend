@@ -53,6 +53,21 @@ const LoginRegisterChanger = styled.div`
 
 `
 
+const HaveDontHaveText = styled.h3`
+
+`
+
+const LoginRegisterButton = styled.button`
+    background-color: ${props => props.buttonColor};
+    color: ${props => props.fontColor};
+    width: 100%;
+    border: 1px solid black;
+    outline: none;
+    padding: 5px;
+    border-radius: 2.5px;
+    font-size: 16px;
+`
+
 export default function LoginPage({}){
 
     const [formData, setFormData] = useState({
@@ -73,6 +88,15 @@ export default function LoginPage({}){
         // Add your login logic here
         console.log(formData);
       };
+
+      const [loginRegisterText, setLoginRegisterText] = useState('Don\'t have an account?')
+
+      const [formType, setFormType] = useState('login')
+
+      const changeLoginRegisterForm = () => {
+        setFormType(formType === 'login' ? 'register' : 'login')
+
+      }
 
     return (
         <>
@@ -100,10 +124,15 @@ export default function LoginPage({}){
                         required
                     />
                     </FormGroup>
-                    <Button type="submit">Login</Button>
+                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'}>Login</LoginRegisterButton>
                 </LoginForm>
                 <LoginRegisterChanger>
-
+                    <HaveDontHaveText>
+                        {formType === 'login' ? 'Don\'t have an account?' : 'Already have an account'}
+                    </HaveDontHaveText>
+                    <LoginRegisterButton buttonColor={'white'} fontColor={'black'} onClick={() => changeLoginRegisterForm()}>
+                        {formType === 'login' ? 'Create Account' : 'Sign In'}
+                    </LoginRegisterButton>
                 </LoginRegisterChanger>
                 </LoginPageWrapper>
             <BannerAd/>
