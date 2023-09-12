@@ -8,20 +8,18 @@ import Header from "@/layout/Header/Header"
 
 const LoginPageWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  max-width: 600px;
 `;
 
 const LoginTitle = styled.h2`
-
+    margin-bottom: 10px;
 `
 
 const LoginForm = styled.form`
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 `;
 
 const FormGroup = styled.div`
@@ -31,6 +29,7 @@ const FormGroup = styled.div`
 const Label = styled.label`
   display: block;
   font-weight: bold;
+  margin-bottom: 5px;
 `;
 
 const Input = styled.input`
@@ -40,17 +39,11 @@ const Input = styled.input`
   border-radius: 3px;
 `;
 
-const Button = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 3px;
-  cursor: pointer;
-`;
-
 const LoginRegisterChanger = styled.div`
-
+    margin-top: 45px;
+    border-top: 1px solid black;
+    padding-top: 45px;
+    text-align: center;
 `
 
 const HaveDontHaveText = styled.h3`
@@ -66,6 +59,8 @@ const LoginRegisterButton = styled.button`
     padding: 5px;
     border-radius: 2.5px;
     font-size: 16px;
+    cursor: pointer;
+    margin: 10px 0;
 `
 
 export default function LoginPage({}){
@@ -105,24 +100,24 @@ export default function LoginPage({}){
                 <LoginTitle>Sign in</LoginTitle>
                 <LoginForm onSubmit={handleSubmit}>
                     <FormGroup>
-                    <Label>Email</Label>
-                    <Input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                    />
+                        <Label>Email</Label>
+                        <Input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                        />
                     </FormGroup>
                     <FormGroup>
-                    <Label>Password</Label>
-                    <Input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        required
-                    />
+                        <Label>Password</Label>
+                        <Input
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleInputChange}
+                            required
+                        />
                     </FormGroup>
                     <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'}>Login</LoginRegisterButton>
                 </LoginForm>
