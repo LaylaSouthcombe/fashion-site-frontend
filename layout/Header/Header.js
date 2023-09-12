@@ -12,6 +12,7 @@ import NavAccordion from "@/components/NavAccordion"
 import NavDropDown from "@/layout/Header/NavDropDown"
 
 import Cart from '../../images/icons/cart.png'
+import Account from '../../images/icons/account.png'
 import MenuBars from '../../images/icons/menuBars.png'
 import MenuCross from '../../images/icons/menuCross.png'
 import RuneLogo from '../../images/logos/runeLogo.png'
@@ -285,6 +286,13 @@ export default function Header() {
                                 </>
                             )
                         })}
+                        <li>
+                        <CartLink href="/account">
+                            <CartImage>
+                                <Image src={Account} alt="account icon"/> 
+                            </CartImage>
+                        </CartLink>
+                        </li>
                         <li>
                             <CartLink href="/checkout">
                                 <CartImage>
