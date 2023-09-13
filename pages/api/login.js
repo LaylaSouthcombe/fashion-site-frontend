@@ -18,8 +18,5 @@ export default async function handler(req, res){
 
     console.log(accountInfo)
 
-    res.json({
-        url:session.url,
-        order: orderDoc
-    })
+    res.json(accountInfo)
 }
