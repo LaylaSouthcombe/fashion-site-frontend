@@ -10,7 +10,7 @@ const LoginPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: 0 auto;
+  margin: 40px auto;
   max-width: 600px;
 `;
 
@@ -77,30 +77,28 @@ export default function LoginPage({}){
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-      });
-    
-      const handleInputChange = (e) => {
+        firstName: '',
+        secondName: ''
+    });
+
+    const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
-          ...formData,
-          [name]: value,
+            ...formData,
+            [name]: value,
         });
-      };
-    
-      const handleSubmit = (e) => {
+    };
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your login logic here
-        console.log(formData);
-      };
+        //add in db call
+    };
 
-      const [loginRegisterText, setLoginRegisterText] = useState('Don\'t have an account?')
+    const [formType, setFormType] = useState('login')
 
-      const [formType, setFormType] = useState('login')
-
-      const changeLoginRegisterForm = () => {
-        setFormType(formType === 'login' ? 'register' : 'login')
-
-      }
+    const changeLoginRegisterForm = () => {
+    setFormType(formType === 'login' ? 'register' : 'login')
+    }
 
     return (
         <>
