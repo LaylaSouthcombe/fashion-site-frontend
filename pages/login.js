@@ -5,6 +5,7 @@ import { useState } from "react"
 import BannerAd from "@/components/BannerAd"
 import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
+import axios from "axios"
 
 const LoginPageWrapper = styled.div`
   display: flex;
@@ -97,7 +98,21 @@ export default function LoginPage({}){
     const [formType, setFormType] = useState('login')
 
     const changeLoginRegisterForm = () => {
-    setFormType(formType === 'login' ? 'register' : 'login')
+        setFormType(formType === 'login' ? 'register' : 'login')
+    }
+
+    const sendLoginRequest = async ({email, password}) => {
+        const response = await axios.post('/api/login', {
+            email, password
+        })
+        console.log(response)
+        // if(response.data.order.line_items?.length){
+        //     console.log(response.data.order.line_items)
+        //     ls?.setItem('order', JSON.stringify(response.data.order))
+        // }
+        // if(response.data.url){
+        //     window.location = response.data.url
+        // }
     }
 
     return (
@@ -152,7 +167,7 @@ export default function LoginPage({}){
                         </FirstSecondName>
                         : null
                     }
-                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'}>
+                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'} onClick={() => sendLoginRequest(formData)}>
                         {formType === 'login' ? 'Sign In' : 'Create Account'}
                     </LoginRegisterButton>
                 </LoginForm>
