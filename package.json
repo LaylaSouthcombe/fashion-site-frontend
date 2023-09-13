@@ -19,6 +19,7 @@
     "@mui/material": "^5.13.2",
     "@mui/styles": "^5.13.2",
     "axios": "^1.4.0",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.0.3",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.2",
