@@ -106,13 +106,10 @@ export default function LoginPage({}){
             email, password
         })
         console.log(response)
-        // if(response.data.order.line_items?.length){
-        //     console.log(response.data.order.line_items)
-        //     ls?.setItem('order', JSON.stringify(response.data.order))
-        // }
-        // if(response.data.url){
-        //     window.location = response.data.url
-        // }
+        if(response.status === 200){
+            const ls = typeof window !== "undefined" ? window.localStorage : null
+            ls?.setItem('loggedin', true)
+        }
     }
 
     return (
