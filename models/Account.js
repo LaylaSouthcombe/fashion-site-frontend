@@ -3,6 +3,8 @@ import {model,models,Schema} from 'mongoose'
 const AccountSchema = new Schema({
         name: String,
         email: String,
+        firstName: String,
+        lastName: String,
         streetAddress: String,
         city: String,
         country: String,
