@@ -79,7 +79,7 @@ export default function LoginPage({}){
         email: '',
         password: '',
         firstName: '',
-        secondName: ''
+        lastName: ''
     });
 
     const handleInputChange = (e) => {
@@ -102,11 +102,28 @@ export default function LoginPage({}){
     }
 
     const sendLoginRequest = async ({email, password}) => {
+        //add in required
         const response = await axios.post('/api/login', {
             email, password
         })
         console.log(response)
+        //add in error handling
         if(response.status === 200){
+            const ls = typeof window !== "undefined" ? window.localStorage : null
+            ls?.setItem('loggedin', true)
+        }
+    }
+
+    const sendRegisterRequest = async ({email, password, firstName, lastName}) => {
+        const response = await axios.post('/api/register', {
+            email, password, firstName, lastName
+        })
+        console.log(response)
+
+        //add in error handling
+        //add in user info to ls
+
+        if(response.status === 201){
             const ls = typeof window !== "undefined" ? window.localStorage : null
             ls?.setItem('loggedin', true)
         }
@@ -164,7 +181,7 @@ export default function LoginPage({}){
                         </FirstSecondName>
                         : null
                     }
-                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'} onClick={() => sendLoginRequest(formData)}>
+                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'} onClick={() => formType === 'login' ?sendLoginRequest(formData) : sendRegisterRequest(formData)}>
                         {formType === 'login' ? 'Sign In' : 'Create Account'}
                     </LoginRegisterButton>
                 </LoginForm>
