@@ -11,14 +11,12 @@ export default async function handler(req, res){
     const {
         email, password, firstName, lastName
     } = req.body
-  
-    console.log(email, password, firstName, lastName)
 
     try {
       await mongooseConnect()
 
       const existingUser = await Account.findOne({email: email})
-      
+
       if (existingUser) {
         return res.status(401).json({ message: 'User already exists' });
       }
@@ -28,15 +26,13 @@ export default async function handler(req, res){
       const newUser = new Account({ email, password: hashedPassword, firstName, lastName });
 
       newUser.save()
-        .then((account) => {
-          console.log('New account created:', account);
+        .then(() => {
           res.status(201).json({ message: 'Account created successfully' });
         })
         .catch((error) => {
           return res.status(401).json({ message: 'Account couldn\'t be created ', error});
         });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal Server Error' });
+      res.status(500).json({ message: 'Internal Server Error', error });
     }
 }
