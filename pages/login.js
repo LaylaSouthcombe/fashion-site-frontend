@@ -115,18 +115,19 @@ export default function LoginPage({}){
     }
 
     const sendRegisterRequest = async ({email, password, firstName, lastName}) => {
-        const response = await axios.post('/api/register', {
-            email, password, firstName, lastName
-        })
-        console.log(response)
-
-        //add in error handling
-        //add in user info to ls
-
-        if(response.status === 201){
-            const ls = typeof window !== "undefined" ? window.localStorage : null
-            ls?.setItem('loggedin', true)
-            ls?.setItem('accountId', response.data.accountId)
+        if(email && email.includes('@') && password && password.length > 10 && firstName && lastName){
+            try {
+                const response = await axios.post('/api/register', {
+                    email, password, firstName, lastName
+                })
+                if(response.status === 201){
+                    const ls = typeof window !== "undefined" ? window.localStorage : null
+                    ls?.setItem('loggedin', true)
+                    ls?.setItem('accountId', response.data.accountId)
+                }
+            } catch(error){
+                console.log(error)
+            }
         }
     }
 
@@ -153,6 +154,7 @@ export default function LoginPage({}){
                             name="password"
                             value={formData.password}
                             onChange={handleInputChange}
+                            minLength={10}
                             required
                         />
                     </FormGroup>

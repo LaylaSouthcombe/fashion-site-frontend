@@ -18,7 +18,8 @@ export default async function handler(req, res){
       const existingUser = await Account.findOne({email: email})
 
       if (existingUser) {
-        return res.status(401).json({ message: 'User already exists' });
+        // throw new Error('User already exists');
+        return res.status(500).json({ message: 'User not found' })
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -27,12 +28,14 @@ export default async function handler(req, res){
 
       newUser.save()
         .then((account) => {
-          res.status(201).json({ message: 'Account created successfully', accountId: account._id });
+          res.status(201).json({ message: 'Account created successfully', accountId: account._id })
         })
         .catch((error) => {
-          return res.status(401).json({ message: 'Account couldn\'t be created ', error});
-        });
+          throw new Error('Account could not be created ', error);
+        })
+
     } catch (error) {
-      res.status(500).json({ message: 'Internal Server Error', error });
+      console.error('hi ', error)
+      res.status(error.requestResult.statusCode).send(error.message)
     }
 }
