@@ -26,8 +26,8 @@ export default async function handler(req, res){
       const newUser = new Account({ email, password: hashedPassword, firstName, lastName });
 
       newUser.save()
-        .then(() => {
-          res.status(201).json({ message: 'Account created successfully' });
+        .then((account) => {
+          res.status(201).json({ message: 'Account created successfully', accountId: account._id });
         })
         .catch((error) => {
           return res.status(401).json({ message: 'Account couldn\'t be created ', error});

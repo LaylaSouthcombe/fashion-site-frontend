@@ -126,6 +126,7 @@ export default function LoginPage({}){
         if(response.status === 201){
             const ls = typeof window !== "undefined" ? window.localStorage : null
             ls?.setItem('loggedin', true)
+            ls?.setItem('accountId', response.data.accountId)
         }
     }
 
