@@ -102,15 +102,19 @@ export default function LoginPage({}){
     }
 
     const sendLoginRequest = async ({email, password}) => {
-        //add in required
-        const response = await axios.post('/api/login', {
-            email, password
-        })
-        console.log(response)
-        //add in error handling
-        if(response.status === 200){
-            const ls = typeof window !== "undefined" ? window.localStorage : null
-            ls?.setItem('loggedin', true)
+        try {
+            //add in required
+            const response = await axios.post('/api/login', {
+                email, password
+            })
+            console.log(response)
+            //add in error handling
+            if(response.status === 200){
+                const ls = typeof window !== "undefined" ? window.localStorage : null
+                ls?.setItem('loggedin', true)
+            }
+        } catch(error){
+            console.log(error)
         }
     }
 
