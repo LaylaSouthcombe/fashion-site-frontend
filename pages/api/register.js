@@ -23,7 +23,7 @@ export default async function handler(req, res){
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = new Account({ email, password: hashedPassword, firstName, lastName });
+      const newUser = new Account({ email, passwordHash: hashedPassword, firstName, lastName });
 
       newUser.save()
         .then((account) => {
