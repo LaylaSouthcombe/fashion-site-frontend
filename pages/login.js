@@ -102,19 +102,21 @@ export default function LoginPage({}){
     }
 
     const sendLoginRequest = async ({email, password}) => {
-        try {
-            //add in required
-            const response = await axios.post('/api/login', {
-                email, password
-            })
-            console.log(response)
-            //add in error handling
-            if(response.status === 200){
-                const ls = typeof window !== "undefined" ? window.localStorage : null
-                ls?.setItem('loggedin', true)
+        if(email && email.includes('@') && password){
+            try {
+                //add in required
+                const response = await axios.post('/api/login', {
+                    email, password
+                })
+                console.log(response)
+                //add in error handling
+                if(response.status === 200){
+                    const ls = typeof window !== "undefined" ? window.localStorage : null
+                    ls?.setItem('loggedin', true)
+                }
+            } catch(error){
+                console.log(error)
             }
-        } catch(error){
-            console.log(error)
         }
     }
 
@@ -158,7 +160,7 @@ export default function LoginPage({}){
                             name="password"
                             value={formData.password}
                             onChange={handleInputChange}
-                            minLength={10}
+                            minLength={formType === 'login' ? 0 : 10}
                             required
                         />
                     </FormGroup>
