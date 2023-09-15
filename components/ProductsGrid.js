@@ -54,6 +54,7 @@ const SortDropDownArea = styled.div`
     border: 1px solid var(--main-dark-blue);
     width: 12rem;
     font-size: 0.9rem;
+    z-index: 900;
 `
 
 const DropdownHeader = styled.div`
@@ -81,10 +82,16 @@ const DropdownList = styled.ul`
     background-color: white;
     border: 1px solid var(--main-dark-blue);
     border-top: none;
-    width: 101%;
+    width: 101.5%;
+    @media (min-width: 768px) {
+        width: 101%;
+        left: -0.5%;
+    }
+    
     list-style: none;
     top: 2.5rem;
-    left: -0.5%;
+    left: -1%;
+    
     li {
         padding: 0.75rem 0.5rem;
     }
