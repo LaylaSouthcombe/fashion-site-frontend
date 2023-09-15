@@ -288,7 +288,7 @@ export default function CheckoutPage({featuredProducts}) {
             return
         }
         if(window?.location.href.includes('success')){
-            if(ls && ls.getItem('order')){
+            if(ls && ls?.getItem('order')){
                 console.log("storage order ", JSON.parse(ls.getItem('order')))
                 setConfirmedOrderDetails(JSON.parse(ls.getItem('order')))
                 ls?.removeItem('order')

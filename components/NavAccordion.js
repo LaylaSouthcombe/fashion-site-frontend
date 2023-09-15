@@ -68,11 +68,7 @@ const theme = createTheme({
     },
 });
 
-const ChildNavLink = styled(Link)`
-    text-decoration: none;
-`
-
-export default function NavAccordion({accordionNumber, label, childLinks, expanded, handleChange}) {
+export default function NavAccordion({accordionNumber, label, childLinks, expanded, handleChange, handleClickedNavLink}) {
 
     return (
         <div>
@@ -85,9 +81,9 @@ export default function NavAccordion({accordionNumber, label, childLinks, expand
                         {childLinks.map((link, i) => {
                             return (
                                 <li key={"childLink" + i}>
-                                    <ChildNavLink href={link.link}>
-                                        <Typography>{link.label}</Typography>
-                                    </ChildNavLink>
+                                    <span onClick={() => handleClickedNavLink(link.link)}>
+                                    <Typography>{link.label}</Typography>
+                                    </span>
                                 </li>
                             )
                         })}

@@ -16,8 +16,8 @@ export function CheckoutContextProvider({children})  {
     }, [checkoutProducts])
 
     useEffect(() => {
-        if(ls && ls.getItem('checkout')){
-            setCheckoutProducts(JSON.parse(ls.getItem('checkout')))
+        if(ls && ls?.getItem('checkout')){
+            setCheckoutProducts(JSON.parse(ls?.getItem('checkout')))
         }
     }, [])
 

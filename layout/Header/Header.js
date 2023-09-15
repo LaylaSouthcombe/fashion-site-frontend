@@ -3,6 +3,7 @@ import styled, {css} from "styled-components"
 import { usePathname } from 'next/navigation'
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from 'next/router';
 
 import {shortNavData} from './NavData'
 
@@ -225,6 +226,7 @@ export default function Header() {
     const [expanded, setExpanded] = useState('');
     
     const pathname = usePathname();
+    const router = useRouter();
 
     const handleShowNavbar = () => {
         const body = document.querySelector('body')
@@ -235,9 +237,17 @@ export default function Header() {
             body.style.overflow = 'hidden'
         }
     }
+
+    const handleClickedNavLink = (link) => {
+        const body = document.querySelector('body')
+        body.style.overflow = 'visible'
+        console.log(body.style)
+        router.push(link)
+    }
+
     const ls = typeof window !== "undefined" ? window.localStorage : null
-    const loggedIn = ls.getItem('loggedIn') === 'true'
-    const accountId = ls.getItem('accountId')
+    const loggedIn = ls?.getItem('loggedIn') === 'true'
+    const accountId = ls?.getItem('accountId')
 
     const accountHref = loggedIn && accountId ? `/account/${accountId}` : '/login'
 
@@ -334,13 +344,13 @@ export default function Header() {
                                             if(navItem.childLinks.length === 0){
                                                 return (
                                                     <>
-                                                        <li key={"sideNav" + i}><NavLink href={navItem.link}>{navItem.label}</NavLink></li>
+                                                        <li key={"sideNav" + i}><span onClick={() => handleClickedNavLink(navItem.link)}>{navItem.label}</span></li>
                                                     </>
                                                 )
                                             } else {
                                                 return (
                                                     <>
-                                                        <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks} accordionNumber={i+1} expanded={expanded} handleChange={handleChange}/></li>
+                                                        <li key={"sideNav" + i}><NavAccordion label={navItem.label} childLinks={navItem.childLinks} accordionNumber={i+1} expanded={expanded} handleChange={handleChange} handleClickedNavLink={handleClickedNavLink}/></li>
                                                     </>
                                                 )
                                             }
