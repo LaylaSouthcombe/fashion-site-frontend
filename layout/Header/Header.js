@@ -276,7 +276,6 @@ export default function Header() {
     const handleClickedNavLink = (link) => {
         const body = document.querySelector('body')
         body.style.overflow = 'visible'
-        console.log(body.style)
         router.push(link)
     }
 

@@ -14,42 +14,34 @@ const LoginPageWrapper = styled.div`
   width: 80%;
   margin: 40px auto;
   max-width: 600px;
-`;
+`
 
 const LoginTitle = styled.h2`
     margin-bottom: 20px;
 `
 
-const LoginForm = styled.form`
-
-`;
-
 const FormGroup = styled.div`
   margin-bottom: 20px;
-`;
+`
 
 const Label = styled.label`
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
-`;
+`
 
 const Input = styled.input`
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
-`;
+`
 
 const LoginRegisterChanger = styled.div`
     margin-top: 45px;
     border-top: 1px solid black;
     padding-top: 45px;
     text-align: center;
-`
-
-const HaveDontHaveText = styled.h3`
-
 `
 
 const LoginRegisterButton = styled.button`
@@ -81,7 +73,7 @@ export default function LoginPage({}){
         password: '',
         firstName: '',
         lastName: ''
-    });
+    })
 
     const router = useRouter();
 
@@ -90,13 +82,12 @@ export default function LoginPage({}){
         setFormData({
             ...formData,
             [name]: value,
-        });
-    };
+        })
+    }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        //add in db call
-    };
+        e.preventDefault()
+    }
 
     const [formType, setFormType] = useState('login')
 
@@ -110,9 +101,7 @@ export default function LoginPage({}){
                 const response = await axios.post('/api/login', {
                     email, password
                 })
-                console.log(response)
                 //add in error handling
-                //add logout
                 if(response.status === 200){
                     const ls = typeof window !== "undefined" ? window.localStorage : null
                     ls?.setItem('loggedIn', true)
@@ -148,7 +137,7 @@ export default function LoginPage({}){
             <Header/>
             <LoginPageWrapper>
                 <LoginTitle>{formType === 'login' ? 'Sign In' : 'Create Account'}</LoginTitle>
-                <LoginForm onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <FormGroup>
                         <Label>Email</Label>
                         <Input
@@ -199,11 +188,11 @@ export default function LoginPage({}){
                     <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'} onClick={() => formType === 'login' ?sendLoginRequest(formData) : sendRegisterRequest(formData)}>
                         {formType === 'login' ? 'Sign In' : 'Create Account'}
                     </LoginRegisterButton>
-                </LoginForm>
+                </form>
                 <LoginRegisterChanger>
-                    <HaveDontHaveText>
+                    <h3>
                         {formType === 'login' ? 'Don\'t have an account?' : 'Already have an account'}
-                    </HaveDontHaveText>
+                    </h3>
                     <LoginRegisterButton buttonColor={'white'} fontColor={'black'} onClick={() => changeLoginRegisterForm()}>
                         {formType === 'login' ? 'Create Account' : 'Sign In'}
                     </LoginRegisterButton>
