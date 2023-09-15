@@ -265,6 +265,13 @@ export default function Header() {
     const loggedIn = ls?.getItem('loggedIn') === 'true'
     const accountId = ls?.getItem('accountId')
 
+    const signOut = (e) => {
+        e.preventDefault()
+        ls?.setItem('loggedIn', false)
+        ls?.setItem('accountId', undefined)
+    }
+
+
     const accountHref = loggedIn && accountId ? `/account/${accountId}` : '/login'
 
     const handleChange = (panel) => (event, newExpanded) => {
@@ -394,7 +401,7 @@ export default function Header() {
                                         </li>
                                         {loggedIn ? 
                                             <li className="logoutButton">
-                                                <LogoutButton>Sign out</LogoutButton>
+                                                <LogoutButton onClick={(e) => signOut(e)}>Sign out</LogoutButton>
                                             </li>
                                         : null}
                                     </SideNavLinks>
