@@ -155,6 +155,9 @@ const SideNavLinks = styled.ul`
             gap: 5px;
         }
     }
+    li.logoutButton {
+        text-align: center;
+    }
 `
 
 const DesktopNavLinks = styled.ul`
@@ -180,7 +183,7 @@ const MainNavItem = styled.li`
         text-underline-offset: 5px;
     }
     ${props => props.isActive === true && css`
-    text-decoration: underline;
+        text-decoration: underline;
         text-decoration-color: var(--main-lightish-blue);
         text-decoration-thickness: 3px;
         text-underline-offset: 5px;
@@ -217,6 +220,19 @@ const BackgroundOverlay = styled.div`
     height: 100vh;
     position: absolute;
     z-index: 10;
+`
+
+const LogoutButton = styled.button`
+    background-color: white;
+    color: black;
+    width: 80%;
+    border: 1px solid black;
+    outline: none;
+    padding: 5px;
+    border-radius: 2.5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 auto;
 `
 
 export default function Header() {
@@ -376,6 +392,11 @@ export default function Header() {
                                             null}
                                             </NavLink>
                                         </li>
+                                        {loggedIn ? 
+                                            <li className="logoutButton">
+                                                <LogoutButton>Sign out</LogoutButton>
+                                            </li>
+                                        : null}
                                     </SideNavLinks>
                             </SideNav>
                         </SideNavPlusOverlay>

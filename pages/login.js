@@ -17,7 +17,7 @@ const LoginPageWrapper = styled.div`
 `;
 
 const LoginTitle = styled.h2`
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 `
 
 const LoginForm = styled.form`
@@ -147,7 +147,7 @@ export default function LoginPage({}){
         <>
             <Header/>
             <LoginPageWrapper>
-                <LoginTitle>Sign in</LoginTitle>
+                <LoginTitle>{formType === 'login' ? 'Sign In' : 'Create Account'}</LoginTitle>
                 <LoginForm onSubmit={handleSubmit}>
                     <FormGroup>
                         <Label>Email</Label>

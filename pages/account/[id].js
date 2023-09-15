@@ -27,6 +27,8 @@ const UserInfo = styled.div`
     width: 80%;
     max-width: 1200px;
     margin: 4rem auto 1rem auto;
+    font-weight: bold;
+    font-size: 1.5rem;
 `
 
 const NavigateButtons = styled.div`
@@ -74,13 +76,13 @@ const ThankYouImage = styled.div`
 `
 
 export default function AccountPage({account, orderHistory, featuredProducts}){
-    console.log(account)
+
     return(
         <>
             <Header/>
             <PageContent>
                 <UserInfo>
-                    <p>Hey {account.firstName}!</p>
+                    <p>Welcome to your account {account.firstName}</p>
                 </UserInfo>
                 {orderHistory.length ? 
                 <>
