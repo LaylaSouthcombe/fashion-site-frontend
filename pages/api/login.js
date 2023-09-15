@@ -26,7 +26,7 @@ export default async function handler(req, res){
         return res.status(401).json({ message: 'Incorrect email or password' })
       }
 
-      res.status(200).json({ message: 'Authentication successful' })
+      res.status(200).json({ message: 'Authentication successful', accountId: user._id })
     } catch (error) {
       console.error(error)
       res.status(error.requestResult.statusCode).send(error.message)

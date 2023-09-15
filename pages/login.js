@@ -104,15 +104,16 @@ export default function LoginPage({}){
     const sendLoginRequest = async ({email, password}) => {
         if(email && email.includes('@') && password){
             try {
-                //add in required
                 const response = await axios.post('/api/login', {
                     email, password
                 })
                 console.log(response)
                 //add in error handling
+                //add logout
                 if(response.status === 200){
                     const ls = typeof window !== "undefined" ? window.localStorage : null
                     ls?.setItem('loggedin', true)
+                    ls?.setItem('accountId', response.data.accountId)
                 }
             } catch(error){
                 console.log(error)
