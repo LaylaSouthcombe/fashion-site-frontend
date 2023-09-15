@@ -66,6 +66,14 @@ const FirstSecondName = styled.div`
     }
 `
 
+const ErrorMessage = styled.div`
+    width: 75%;
+    font-size: 0.85rem;
+    color: red;
+    margin: 0 auto;
+    text-align: center;
+`
+
 export default function LoginPage({}){
 
     const [formData, setFormData] = useState({
@@ -74,6 +82,8 @@ export default function LoginPage({}){
         firstName: '',
         lastName: ''
     })
+
+    const [errorMessage, setErrorMessage] = useState("")
 
     const router = useRouter();
 
@@ -101,7 +111,6 @@ export default function LoginPage({}){
                 const response = await axios.post('/api/login', {
                     email, password
                 })
-                //add in error handling
                 if(response.status === 200){
                     const ls = typeof window !== "undefined" ? window.localStorage : null
                     ls?.setItem('loggedIn', true)
@@ -109,7 +118,7 @@ export default function LoginPage({}){
                     router.push(`/account/${response.data.accountId}`)
                 }
             } catch(error){
-                console.log(error)
+                setErrorMessage(error.response.data.message)
             }
         }
     }
@@ -185,6 +194,7 @@ export default function LoginPage({}){
                         </FirstSecondName>
                         : null
                     }
+                    <ErrorMessage>{errorMessage}</ErrorMessage>
                     <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'} onClick={() => formType === 'login' ?sendLoginRequest(formData) : sendRegisterRequest(formData)}>
                         {formType === 'login' ? 'Sign In' : 'Create Account'}
                     </LoginRegisterButton>

@@ -17,18 +17,17 @@ export default async function handler(req, res){
 
       const user = await Account.findOne({email: email})
       if (!user) {
-        return res.status(401).json({ message: 'User not found' })
+        return res.status(401).json({ message: 'No account with that email found. Please ensure you have entered your email correctly.' })
       }
 
       const isPasswordValid = await bcrypt.compare(password, user.passwordHash)
 
       if (!isPasswordValid) {
-        return res.status(401).json({ message: 'Incorrect email or password' })
+        return res.status(401).json({ message: 'Incorrect email and password combination. Please ensure you have entered both correctly.' })
       }
 
       res.status(200).json({ message: 'Authentication successful', accountId: user._id })
     } catch (error) {
-      console.error(error)
-      res.status(error.requestResult.statusCode).send(error.message)
+      res.status(error.requestResult.statusCode).json({message: error.message})
     }
 }
