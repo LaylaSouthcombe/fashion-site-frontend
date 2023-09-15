@@ -18,8 +18,7 @@ export default async function handler(req, res){
       const existingUser = await Account.findOne({email: email})
 
       if (existingUser) {
-        // throw new Error('User already exists');
-        return res.status(500).json({ message: 'User not found' })
+        return res.status(500).json({ message: 'Account with this email already exists.' })
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -35,7 +34,6 @@ export default async function handler(req, res){
         })
 
     } catch (error) {
-      console.error('hi ', error)
-      res.status(error.requestResult.statusCode).send(error.message)
+      res.status(error.requestResult.statusCode).json({message: error.message})
     }
 }

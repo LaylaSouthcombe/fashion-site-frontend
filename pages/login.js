@@ -136,7 +136,7 @@ export default function LoginPage({}){
                     router.push(`/account/${response.data.accountId}`)
                 }
             } catch(error){
-                console.log(error)
+                setErrorMessage(error.response.data.message)
             }
         }
     }
