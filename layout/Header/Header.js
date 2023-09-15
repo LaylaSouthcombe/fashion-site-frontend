@@ -53,6 +53,12 @@ const NavLink = styled(Link)`
     }
 `
 
+const AdditionalLink = styled.span`
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+`
+
 const CartLink = styled(Link)`
     text-decoration: none;
     display: flex;
@@ -114,7 +120,7 @@ const SideNavOverlay = styled.div`
 `
 
 const SideNav = styled.nav`
-    z-index: 100;
+    z-index: 998;
     display: flex;
     flex-direction: column;
     @media (min-width: 768px) {
@@ -140,7 +146,7 @@ const SideNav = styled.nav`
 
 const SideNavButton = styled.div`
     display: block;
-    z-index: 101;
+    z-index: 999;
     @media (min-width: 768px) {
         display: none;
     }
@@ -282,6 +288,7 @@ export default function Header() {
         e.preventDefault()
         ls?.setItem('loggedIn', false)
         ls?.setItem('accountId', undefined)
+        handleClickedNavLink("/")
     }
 
 
@@ -392,15 +399,15 @@ export default function Header() {
                                             }
                                         })}
                                         <li className="profileLink">
-                                            <NavLink href={accountHref}>
+                                            <AdditionalLink onClick={() => handleClickedNavLink(accountHref)}>
                                                 <p>Account </p>
                                                 <CartImage>
                                                     <Image src={Account} alt="account icon"/> 
                                                 </CartImage>
-                                            </NavLink>
+                                            </AdditionalLink>
                                         </li>
                                         <li className="checkoutLink">
-                                            <NavLink href="/checkout">Checkout 
+                                            <AdditionalLink onClick={() => handleClickedNavLink("/checkout")}>Checkout 
                                             <CartImage>
                                                 <Image src={Cart} alt="cart icon"/>  
                                             </CartImage>
@@ -410,7 +417,7 @@ export default function Header() {
                                                 </CartNumber>
                                             :
                                             null}
-                                            </NavLink>
+                                            </AdditionalLink>
                                         </li>
                                         {loggedIn ? 
                                             <li className="logoutButton">

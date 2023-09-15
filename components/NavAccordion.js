@@ -1,6 +1,4 @@
-import Link from 'next/link';
 import styled from 'styled-components';
-
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -68,6 +66,10 @@ const theme = createTheme({
     },
 });
 
+const ChildLink = styled.span`
+    cursor: pointer;
+`
+
 export default function NavAccordion({accordionNumber, label, childLinks, expanded, handleChange, handleClickedNavLink}) {
 
     return (
@@ -81,9 +83,9 @@ export default function NavAccordion({accordionNumber, label, childLinks, expand
                         {childLinks.map((link, i) => {
                             return (
                                 <li key={"childLink" + i}>
-                                    <span onClick={() => handleClickedNavLink(link.link)}>
+                                    <ChildLink onClick={() => handleClickedNavLink(link.link)}>
                                     <Typography>{link.label}</Typography>
-                                    </span>
+                                    </ChildLink>
                                 </li>
                             )
                         })}
