@@ -124,6 +124,18 @@ const SideNav = styled.nav`
     width: 100%;
     height: 100vh;
     overflow: scroll;
+    
+    ::-webkit-scrollbar {
+        background-color: var(--main-light-blue);
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: var(--main-light-blue);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--main-light-blue);
+    }
 `
 
 const SideNavButton = styled.div`
