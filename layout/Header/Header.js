@@ -140,6 +140,7 @@ const SideNavButton = styled.div`
     right: 1rem;
     top: 1rem;
     width: 20px;
+    cursor: pointer;
 `
 
 const SideNavLinks = styled.ul`
