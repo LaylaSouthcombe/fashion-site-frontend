@@ -57,21 +57,27 @@ const NoPastOrdersWrapper = styled.div`
     max-width: 1000px;
     margin: 2rem auto 4rem auto;
     display: flex;
-
+    flex-direction: column;
     p {
         margin-bottom: 1rem;
+    }
+    @media (min-width: 786px) {
+        flex-direction: row;
     }
 `
 
 const ThankYouImage = styled.div`
-    width: 30%;
+    width: 80%;
     margin: 0 auto;
-    border-left: 2px solid var(--main-dark-blue);
     padding: 2rem;
     object-fit: contain;
     img {
         width: 100%;
         height: auto;
+    }
+    @media (min-width: 786px) {
+        width: 30%;
+        border-left: 2px solid var(--main-dark-blue);
     }
 `
 
