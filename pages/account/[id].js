@@ -74,13 +74,13 @@ const ThankYouImage = styled.div`
 `
 
 export default function AccountPage({account, orderHistory, featuredProducts}){
-
+    console.log(account)
     return(
         <>
             <Header/>
             <PageContent>
                 <UserInfo>
-                    <p>Hey {account.name}!</p>
+                    <p>Hey {account.firstName}!</p>
                 </UserInfo>
                 {orderHistory.length ? 
                 <>

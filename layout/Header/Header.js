@@ -231,8 +231,11 @@ export default function Header() {
             body.style.overflow = 'hidden'
         }
     }
+    const ls = typeof window !== "undefined" ? window.localStorage : null
+    const loggedIn = ls.getItem('loggedIn') === 'true'
+    const accountId = ls.getItem('accountId')
 
-    // const accountHref = loggedIn ? `/account/${accountId}` : '/login'
+    const accountHref = loggedIn && accountId ? `/account/${accountId}` : '/login'
 
     const handleChange = (panel) => (event, newExpanded) => {
         setExpanded(newExpanded ? panel : false);
@@ -289,7 +292,7 @@ export default function Header() {
                             )
                         })}
                         <li>
-                            <CartLink href="/account">
+                            <CartLink href={accountHref}>
                                 <CartImage>
                                     <Image src={Account} alt="account icon"/> 
                                 </CartImage>

@@ -115,7 +115,7 @@ export default function LoginPage({}){
                 //add logout
                 if(response.status === 200){
                     const ls = typeof window !== "undefined" ? window.localStorage : null
-                    ls?.setItem('loggedin', true)
+                    ls?.setItem('loggedIn', true)
                     ls?.setItem('accountId', response.data.accountId)
                     router.push(`/account/${response.data.accountId}`)
                 }
@@ -133,7 +133,7 @@ export default function LoginPage({}){
                 })
                 if(response.status === 201){
                     const ls = typeof window !== "undefined" ? window.localStorage : null
-                    ls?.setItem('loggedin', true)
+                    ls?.setItem('loggedIn', true)
                     ls?.setItem('accountId', response.data.accountId)
                     router.push(`/account/${response.data.accountId}`)
                 }
