@@ -147,8 +147,12 @@ const SideNavLinks = styled.ul`
         list-style: none;
         padding: 0.5rem 0rem;
     }
-    li.checkoutLink {
+    li.checkoutLink, li.profileLink {
         margin: 0rem 1rem;
+        a {
+            display: flex;
+            gap: 5px;
+        }
     }
 `
 
@@ -303,12 +307,12 @@ export default function Header() {
                                 <CartImage>
                                     <Image src={Cart} alt="cart icon"/>  
                                 </CartImage>
-                            {checkoutProducts?.length > 0 ? 
-                                <CartNumber>
-                                    {checkoutProducts?.length}
-                                </CartNumber>
-                            :
-                            null}
+                                {checkoutProducts?.length > 0 ? 
+                                    <CartNumber>
+                                        {checkoutProducts?.length}
+                                    </CartNumber>
+                                :
+                                null}
                             </CartLink>
                         </li>
                     </DesktopNavLinks>
@@ -341,8 +345,26 @@ export default function Header() {
                                                 )
                                             }
                                         })}
+                                        <li className="profileLink">
+                                            <NavLink href={accountHref}>
+                                                <p>Account </p>
+                                                <CartImage>
+                                                    <Image src={Account} alt="account icon"/> 
+                                                </CartImage>
+                                            </NavLink>
+                                        </li>
                                         <li className="checkoutLink">
-                                            <NavLink href="/checkout">Checkout ({checkoutProducts?.length})</NavLink>
+                                            <NavLink href="/checkout">Checkout 
+                                            <CartImage>
+                                                <Image src={Cart} alt="cart icon"/>  
+                                            </CartImage>
+                                            {checkoutProducts?.length > 0 ? 
+                                                <CartNumber>
+                                                    {checkoutProducts?.length}
+                                                </CartNumber>
+                                            :
+                                            null}
+                                            </NavLink>
                                         </li>
                                     </SideNavLinks>
                             </SideNav>
