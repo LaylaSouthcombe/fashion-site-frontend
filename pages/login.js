@@ -6,6 +6,7 @@ import BannerAd from "@/components/BannerAd"
 import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
 import axios from "axios"
+import { useRouter } from 'next/router';
 
 const LoginPageWrapper = styled.div`
   display: flex;
@@ -82,6 +83,8 @@ export default function LoginPage({}){
         lastName: ''
     });
 
+    const router = useRouter();
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -114,6 +117,7 @@ export default function LoginPage({}){
                     const ls = typeof window !== "undefined" ? window.localStorage : null
                     ls?.setItem('loggedin', true)
                     ls?.setItem('accountId', response.data.accountId)
+                    router.push(`/account/${response.data.accountId}`)
                 }
             } catch(error){
                 console.log(error)
@@ -131,6 +135,7 @@ export default function LoginPage({}){
                     const ls = typeof window !== "undefined" ? window.localStorage : null
                     ls?.setItem('loggedin', true)
                     ls?.setItem('accountId', response.data.accountId)
+                    router.push(`/account/${response.data.accountId}`)
                 }
             } catch(error){
                 console.log(error)
