@@ -1,6 +1,5 @@
 import { mongooseConnect } from "@/lib/mongoose"
 import styled from "styled-components"
-import Link from "next/link"
 import { useState } from "react"
 import BannerAd from "@/components/BannerAd"
 import Footer from "@/layout/Footer/Footer"

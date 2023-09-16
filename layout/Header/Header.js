@@ -249,9 +249,24 @@ const LogoutButton = styled.button`
     outline: none;
     padding: 5px;
     border-radius: 2.5px;
-    font-size: 16px;
+    font-size: 0.9rem;
     cursor: pointer;
     margin: 0 auto;
+`
+
+const AccountDropdown = styled.div`
+    position: absolute;
+    z-index: 999;
+    background-color: white;
+    padding: 1rem;
+    width: 8rem;
+    border: 1px solid var(--main-dark-blue);
+    right: 1rem;
+    margin-top: 0.5rem;
+    div {
+        margin: 0.75rem auto 0 auto;
+        text-align: center;
+    }
 `
 
 export default function Header() {
@@ -259,6 +274,7 @@ export default function Header() {
     
     const [showNavbar, setShowNavbar] = useState(false);
     const [expanded, setExpanded] = useState('');
+    const [showAccountDropdown, setShowAccountDropdown] = useState(false)
     
     const pathname = usePathname();
     const router = useRouter();
@@ -347,12 +363,23 @@ export default function Header() {
                                 </>
                             )
                         })}
-                        <li>
+                        <li  onMouseEnter={() => setShowAccountDropdown(true)}
+                                    onMouseLeave={() => setShowAccountDropdown(false)} >
                             <CartLink href={accountHref}>
                                 <CartImage>
                                     <Image src={Account} alt="account icon"/> 
                                 </CartImage>
                             </CartLink>
+                            {
+                                loggedIn && showAccountDropdown ? 
+                                    <AccountDropdown>
+                                        <CartLink href={accountHref}>My Account</CartLink>
+                                        <div>
+                                            <LogoutButton onClick={(e) => signOut(e)}>Sign out</LogoutButton>
+                                        </div>
+                                    </AccountDropdown>
+                                : null
+                            }
                         </li>
                         <li>
                             <CartLink href="/checkout">
