@@ -65,12 +65,31 @@ const FirstSecondName = styled.div`
     }
 `
 
+const DemoDataButton = styled.button`
+    max-width:fit-content;
+    font-size: 0.8rem;
+    background-color: black;
+    outline: none;
+    padding: 0.5rem 0.65rem;
+    color: white;
+    border: 1px solid black;
+    border-radius: 2.5px;
+    cursor: pointer;
+    margin: 10px 0;
+`
+
 const ErrorMessage = styled.div`
     width: 75%;
     font-size: 0.85rem;
     color: red;
     margin: 0 auto;
     text-align: center;
+`
+
+const LoginTitleButtonArea = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 `
 
 export default function LoginPage({}){
@@ -96,6 +115,15 @@ export default function LoginPage({}){
 
     const handleSubmit = (e) => {
         e.preventDefault()
+    }
+
+    const useTestData = () => {
+        setFormData({
+            email: 'testuser123@gmail.com',
+            password: 'testuser123',
+            firstName: '',
+            lastName: ''
+        })
     }
 
     const [formType, setFormType] = useState('login')
@@ -144,7 +172,10 @@ export default function LoginPage({}){
         <>
             <Header/>
             <LoginPageWrapper>
-                <LoginTitle>{formType === 'login' ? 'Sign In' : 'Create Account'}</LoginTitle>
+                <LoginTitleButtonArea>
+                    <LoginTitle>{formType === 'login' ? 'Sign In' : 'Create Account'}</LoginTitle>
+                    <DemoDataButton onClick={() => inputDemoData()}>Use demo data</DemoDataButton>
+                </LoginTitleButtonArea>
                 <form onSubmit={handleSubmit}>
                     <FormGroup>
                         <Label>Email</Label>
@@ -194,7 +225,7 @@ export default function LoginPage({}){
                         : null
                     }
                     <ErrorMessage>{errorMessage}</ErrorMessage>
-                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'} onClick={() => formType === 'login' ?sendLoginRequest(formData) : sendRegisterRequest(formData)}>
+                    <LoginRegisterButton type="submit" buttonColor={'black'} fontColor={'white'} onClick={() => formType === 'login' ? sendLoginRequest(formData) : sendRegisterRequest(formData)}>
                         {formType === 'login' ? 'Sign In' : 'Create Account'}
                     </LoginRegisterButton>
                 </form>
