@@ -11,7 +11,7 @@ export default async function handler(req, res){
     }
 
     const {
-        name, email, city, streetAddress, country, postalCode, checkoutProducts
+        name, email, city, streetAddress, country, postalCode, checkoutProducts, accountId
     } = req.body
 
     await mongooseConnect()
@@ -51,7 +51,7 @@ export default async function handler(req, res){
     }
 
     const orderDoc = await Order.create({
-        line_items,name,email,streetAddress,city,postalCode,country,paid:false, orderTotalPrice
+        line_items,name,email,streetAddress,city,postalCode,country,paid:false, orderTotalPrice, accountId
     })
 
     const session = await stripe.checkout.sessions.create({
@@ -64,7 +64,7 @@ export default async function handler(req, res){
     })
 
     res.json({
-        url:session.url,
+        url: session.url,
         order: orderDoc
     })
 }

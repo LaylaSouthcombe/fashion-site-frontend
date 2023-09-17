@@ -317,9 +317,10 @@ export default function CheckoutPage({featuredProducts}) {
     
     const goToPayment = async () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        let accountId = ls?.getItem("accountId")
         if(name.length !== 0 && email.length !== 0 && streetAddress.length !== 0 && city.length !== 0 && country.length !== 0 && postalCode.length !== 0 && checkoutProducts.length !== 0 && emailRegex.test(email)) {
             const response = await axios.post('/api/payment', {
-                name,email,streetAddress,city,country,postalCode,checkoutProducts
+                name,email,streetAddress,city,country,postalCode,checkoutProducts,accountId
             })
             if(response.data.order.line_items?.length){
                 ls?.setItem('order', JSON.stringify(response.data.order))
