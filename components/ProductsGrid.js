@@ -99,6 +99,15 @@ const DropdownList = styled.ul`
     }
 `
 
+const NoProductsWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p {
+        text-align: center;
+    }
+`
+
 export default function ProductsGrid({products, apiUrl, queryConstraint}) {
 
     const [filterLabels, setFilterLabels] = useState({productType: [], productSubType: [], sizesAndStock: [], colour: [], brand: []})
@@ -233,7 +242,11 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
                                 currentProducts.map((product, i) => (
                                     <ProductTile key={i} product={product}/>
                                 ))
-                            : null}
+                            : 
+                                <NoProductsWrapper>
+                                    <p>No products found</p>
+                                </NoProductsWrapper>
+                            }
                         </>
                     : 
                     <>
