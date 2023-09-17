@@ -41,7 +41,7 @@ export function CheckoutContextProvider({children})  {
 
     const clearCheckout = () => {
         setCheckoutProducts([])
-        ls?.removeItem('checkout')
+        ls?.setItem('checkout', JSON.stringify([]))
     }
 
     return (

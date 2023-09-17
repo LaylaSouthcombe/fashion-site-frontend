@@ -139,8 +139,9 @@ export async function getServerSideProps(context){
 
     let orderQuery = {accountId: id}
 
-    const orderHistory =  await Order.find(orderQuery)
+    const orderHistory =  await Order.find(orderQuery).sort({ _id: -1 })
     const featuredProducts = await Featured.find({})
+    
     return {
         props: {
             account: JSON.parse(JSON.stringify(account)),
