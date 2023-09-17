@@ -458,7 +458,7 @@ export default function CheckoutPage({featuredProducts}) {
                             ))}
                             <OrderTotal>
                                 <p>Total:</p>
-                                <p>£{total}</p>
+                                <p>£{(total).toLocaleString()}</p>
                             </OrderTotal>
                         </Box>
                         <ShippingInformationContainer>
