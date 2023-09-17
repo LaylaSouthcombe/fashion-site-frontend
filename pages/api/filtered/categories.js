@@ -63,7 +63,6 @@ export default async function handle(req, res) {
         newIn: { $sort : { _id : -1 } }
     }
 
-//TODO: add 0 results
     const getFilteredProducts = async () => {
         let products = await Product.aggregate(
             [

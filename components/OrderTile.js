@@ -114,7 +114,6 @@ const LineItem = styled.div`
 `
 
 export default function OrderTile({order}) {
-    console.log(order)
 
     const originalDateString = order.createdAt
     const originalDate = new Date(originalDateString)
