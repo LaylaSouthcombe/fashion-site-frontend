@@ -1,10 +1,30 @@
 import styled from "styled-components"
 
 const OrderContainer = styled.div`
-    width: 80%;
+    width: 100%;
     margin-top: 20px;
+    border-top: 1px solid var(--main-lightish-blue);
+`
+
+const LineItemsAddressContainer = styled.div`
+    display: grid;
+    grid-template-columns: 100%;
     @media (min-width: 768px) {
-        width: 60%;
+        grid-template-columns: 60% 40%;
+    }
+`
+
+const LineItemsContainer = styled.div`
+
+`
+
+const AddressContainer = styled.div`
+    padding: 20px;
+    p {
+        margin: 5px;
+    }
+    p:first-child {
+        font-weight: bold;
     }
 `
 
@@ -100,9 +120,9 @@ export default function OrderTile({order}) {
     const originalDate = new Date(originalDateString)
 
     const options = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
     }
 
     const formattedDate = originalDate.toLocaleDateString("en-US", options)
@@ -131,27 +151,40 @@ export default function OrderTile({order}) {
     return (
         <OrderContainer>
             <ProductDate>{formattedDateWithSuffix}</ProductDate>
-            {order.line_items.map((item, i) => (
-                <LineItem key={i}>
-                    <ProductImageBox>
-                        <img src={item.price_data.product_data.images[0]} alt="product image" />
-                    </ProductImageBox>
-                    <ProductInfo>
-                        <ProductTitle>{item.price_data.product_data.name}</ProductTitle>
-                        <ProductColourSizePrice>
-                            <span>{item.price_data.product_data.description}</span>
-                        </ProductColourSizePrice>
-                        <ProductQtySubArea>
-                            <ProductQuantityButtons>
-                                {item.quantity}
-                            </ProductQuantityButtons>
-                            <ProductSubTotal>
-                                £{(item.quantity * item.price_data.unit_amount / 100).toLocaleString()}
-                            </ProductSubTotal>
-                        </ProductQtySubArea>
-                    </ProductInfo>
-                </LineItem>
-            ))}
+            <LineItemsAddressContainer>
+                <LineItemsContainer>
+                    {order.line_items.map((item, i) => (
+                        <LineItem key={i}>
+                            <ProductImageBox>
+                                <img src={item.price_data.product_data.images[0]} alt="product image" />
+                            </ProductImageBox>
+                            <ProductInfo>
+                                <ProductTitle>{item.price_data.product_data.name}</ProductTitle>
+                                <ProductColourSizePrice>
+                                    <span>{item.price_data.product_data.description}</span>
+                                </ProductColourSizePrice>
+                                <ProductQtySubArea>
+                                    <ProductQuantityButtons>
+                                        {item.quantity}
+                                    </ProductQuantityButtons>
+                                    <ProductSubTotal>
+                                        £{(item.quantity * item.price_data.unit_amount / 100).toLocaleString()}
+                                    </ProductSubTotal>
+                                </ProductQtySubArea>
+                            </ProductInfo>
+                        </LineItem>
+                    ))}
+                </LineItemsContainer>
+                <AddressContainer>
+                    <p>Delivery Address</p>
+                    <p>{order.name}</p>
+                    <p>{order.streetAddress}</p>
+                    <p>{order.city}</p>
+                    <p>{order.postalCode}</p>
+                    <p>{order.country}</p>
+                </AddressContainer>
+            </LineItemsAddressContainer>
+            <OrderTotal>Total: £{(order.orderTotalPrice / 100).toLocaleString()}</OrderTotal>
         </OrderContainer>
     )
 }
