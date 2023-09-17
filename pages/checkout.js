@@ -289,7 +289,6 @@ export default function CheckoutPage({featuredProducts}) {
         }
         if(window?.location.href.includes('success')){
             if(ls && ls?.getItem('order')){
-                console.log("storage order ", JSON.parse(ls.getItem('order')))
                 setConfirmedOrderDetails(JSON.parse(ls.getItem('order')))
                 ls?.removeItem('order')
             }
@@ -322,9 +321,7 @@ export default function CheckoutPage({featuredProducts}) {
             const response = await axios.post('/api/payment', {
                 name,email,streetAddress,city,country,postalCode,checkoutProducts
             })
-            console.log(response)
             if(response.data.order.line_items?.length){
-                console.log(response.data.order.line_items)
                 ls?.setItem('order', JSON.stringify(response.data.order))
             }
             if(response.data.url){
@@ -356,7 +353,6 @@ export default function CheckoutPage({featuredProducts}) {
                                 <>
                                     {confirmedOrderDetails.line_items.map((product, i) => (
                                 <CheckoutProductContainer key={"product" + i}>
-                                    {console.log(product)}
                                     <ProductImageBox>
                                         <img src={product.price_data.product_data.images[0]} alt="product image" />
                                     </ProductImageBox>

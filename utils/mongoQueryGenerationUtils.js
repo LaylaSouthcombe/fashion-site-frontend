@@ -26,7 +26,7 @@ const addFormattedQueryToQueryConstraint = (query, queryConstraint) => {
     let fieldName = generateQueryFieldName(query)
     let queryWord = query.split(wordSplitter)[1].replace(/-/g, ".*")
     queryConstraint["path"] = fieldName
-    queryConstraint["value"] = queryWord.replace(/-/g, " ")
+    queryConstraint["value"] = {$regex: queryWord, $options: "si"}
 }
 
 module.exports = {addFormattedQueryToProductQuery, addFormattedQueryToQueryConstraint}

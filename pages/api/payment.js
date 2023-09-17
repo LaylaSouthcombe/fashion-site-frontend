@@ -54,8 +54,6 @@ export default async function handler(req, res){
         line_items,name,email,streetAddress,city,postalCode,country,paid:false, orderTotalPrice
     })
 
-    console.log("payment",orderDoc)
-
     const session = await stripe.checkout.sessions.create({
         line_items,
         mode:'payment',

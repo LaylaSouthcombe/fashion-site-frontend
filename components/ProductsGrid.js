@@ -176,8 +176,6 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
     },[])
 
     const getFilteredProducts = async (filters, queryConstraint) => {
-        console.log(filters)
-        console.log(queryConstraint)
         let body = {
             filters: filters,
             queryConstraint: queryConstraint,
@@ -198,7 +196,7 @@ export default function ProductsGrid({products, apiUrl, queryConstraint}) {
             let filterIndex = filters[filterKey].indexOf(filterValue)
             filters[filterKey].splice(filterIndex, 1)
         }
-        
+
         let newProducts = await getFilteredProducts(filters, queryConstraint)
         setCurrentProducts(newProducts)
         setLoaded(true)

@@ -93,7 +93,7 @@ const LineItem = styled.div`
 `
 
 export default function OrderTile({order}) {
-    console.log(order)
+
     return (
         <OrderContainer>
             {order.line_items.map((item, i) => (

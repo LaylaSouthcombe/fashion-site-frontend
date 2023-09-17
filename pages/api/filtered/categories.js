@@ -62,7 +62,7 @@ export default async function handle(req, res) {
         highestPrice: { $sort : { price : -1 } },
         newIn: { $sort : { _id : -1 } }
     }
-    //TODO: use regex for subtype query
+
 //TODO: add 0 results
     const getFilteredProducts = async () => {
         let products = await Product.aggregate(

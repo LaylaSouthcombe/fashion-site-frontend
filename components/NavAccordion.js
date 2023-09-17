@@ -66,6 +66,12 @@ const theme = createTheme({
     },
 });
 
+const ChildListValue = styled.span`
+    p {
+        margin-bottom: 0.75rem;
+    }
+`
+
 const ChildLink = styled.span`
     cursor: pointer;
 `
@@ -82,11 +88,11 @@ export default function NavAccordion({accordionNumber, label, childLinks, expand
                     <AccordionDetails>
                         {childLinks.map((link, i) => {
                             return (
-                                <li key={"childLink" + i}>
+                                <ChildListValue key={"childLink" + i}>
                                     <ChildLink onClick={() => handleClickedNavLink(link.link)}>
                                     <Typography>{link.label}</Typography>
                                     </ChildLink>
-                                </li>
+                                </ChildListValue>
                             )
                         })}
                     </AccordionDetails>
