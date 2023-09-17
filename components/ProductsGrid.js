@@ -61,6 +61,7 @@ const DropdownHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
     .flipped {
         transform: rotateX(0deg);
         transition: transform 0.3s ease;
@@ -76,24 +77,21 @@ const DropdownHeader = styled.div`
 `
 
 const DropdownList = styled.ul`
+
     padding: 0.5rem;
     outline: none;
     position: absolute;
     background-color: white;
     border: 1px solid var(--main-dark-blue);
     border-top: none;
-    width: 101.5%;
-    @media (min-width: 768px) {
-        width: 101%;
-        left: -0.5%;
-    }
-    
+    width: calc(100% + 2px);
     list-style: none;
     top: 2.5rem;
-    left: -1%;
+    left: -1px;
     
     li {
         padding: 0.75rem 0.5rem;
+        cursor: pointer;
     }
     li:hover {
         border-left: 0.25rem solid var(--main-dark-blue);
