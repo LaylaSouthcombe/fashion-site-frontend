@@ -306,13 +306,13 @@ export default function CheckoutPage({featuredProducts}) {
     }
 
     const inputDemoData = () => {
-        setName("Tina Belcher")
-        setEmail("TinaBelcher123@example.com")
+        setName("Test User")
+        setEmail("testuser123@example.com")
         setStreetAddress("Flat 1, Ocean Avenue")
         setCity("Seymour's Bay")
         setPostalCode("07097")
         setCountry("USA")
-        setPaymentErrorMessage("Use this card number on next page and random expiry date and security code: 4242 4242 4242 4242")
+        setPaymentErrorMessage("Use this card number on next page and random expiry date and security code etc: 4242 4242 4242 4242")
     }
     
     const goToPayment = async () => {
@@ -450,7 +450,7 @@ export default function CheckoutPage({featuredProducts}) {
                                                 </button>
                                             </ProductQuantityButtons>
                                             <ProductSubTotal>
-                                                £{checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length * product.price}
+                                                £{(checkoutProducts.filter(checkoutProduct => checkoutProduct._id === product.id && checkoutProduct.size === product.size)?.length * product.price).toLocaleString()}
                                             </ProductSubTotal>
                                         </ProductQtySubArea>
                                     </ProductInfo>

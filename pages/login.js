@@ -117,7 +117,7 @@ export default function LoginPage({}){
         e.preventDefault()
     }
 
-    const useTestData = () => {
+    const inputTestData = () => {
         setFormData({
             email: 'testuser123@gmail.com',
             password: 'testuser123',
@@ -174,7 +174,7 @@ export default function LoginPage({}){
             <LoginPageWrapper>
                 <LoginTitleButtonArea>
                     <LoginTitle>{formType === 'login' ? 'Sign In' : 'Create Account'}</LoginTitle>
-                    <DemoDataButton onClick={() => inputDemoData()}>Use demo data</DemoDataButton>
+                    <DemoDataButton onClick={() => inputTestData()}>Use demo data</DemoDataButton>
                 </LoginTitleButtonArea>
                 <form onSubmit={handleSubmit}>
                     <FormGroup>
