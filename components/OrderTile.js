@@ -1,18 +1,19 @@
 import styled from "styled-components"
-import Image from "next/image"
 
 const OrderContainer = styled.div`
     width: 80%;
+    margin-top: 20px;
+    @media (min-width: 768px) {
+        width: 60%;
+    }
 `
 
 const ProductImageBox = styled.div`
     max-width: 150px;
     padding: 10px;
-    margin: 0 auto;
     img {
         width: 100%;
         height: auto;
-        
     }
 `
 
@@ -24,10 +25,9 @@ const ProductTitle = styled.p`
     margin: 0.5rem 0;
 `
 
-const ProductBrand = styled.p`
-    margin: 0.5rem 0;
+const ProductDate = styled.p`
+    margin: 1rem;
     font-size: 0.9rem;
-    color: var(--main-lighter-blue);
 `
 
 const ProductColourSizePrice = styled.div`
@@ -89,13 +89,48 @@ const OrderTotal = styled.div`
 `
 
 const LineItem = styled.div`
-
+    display: flex;
+    margin-left: 10%;
 `
 
 export default function OrderTile({order}) {
+    console.log(order)
+
+    const originalDateString = order.createdAt
+    const originalDate = new Date(originalDateString)
+
+    const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    }
+
+    const formattedDate = originalDate.toLocaleDateString("en-US", options)
+
+    const day = originalDate.getDate()
+    const daySuffix = getDaySuffix(day)
+
+    function getDaySuffix(day) {
+    if (day >= 11 && day <= 13) {
+        return "th"
+    }
+    switch (day % 10) {
+        case 1:
+            return "st"
+        case 2:
+            return "nd"
+        case 3:
+            return "rd"
+        default:
+            return "th"
+    }
+    }
+
+    const formattedDateWithSuffix = `${day}${daySuffix} ${formattedDate}`
 
     return (
         <OrderContainer>
+            <ProductDate>{formattedDateWithSuffix}</ProductDate>
             {order.line_items.map((item, i) => (
                 <LineItem key={i}>
                     <ProductImageBox>
