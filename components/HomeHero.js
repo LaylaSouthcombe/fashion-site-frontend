@@ -3,16 +3,29 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import Arrow from '../images/curatedPicks/right-arrow.png'
-import HomeHeroImage from '../images/HomeHeroImage.png'
-import HomeHeroImageSmall from '../images/HomeHeroImageSmall.png'
+
+import Model1 from '../images/heroImages/model-1.png'
+import Model2 from '../images/heroImages/model-2.png'
+import Model3 from '../images/heroImages/model-3.png'
 
 const HeroImageDiv = styled.div`
     position: relative;
     width: 100%;
+    max-width: 1400px;
     overflow: hidden;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 400px;
+    text-align: center;
+    justify-content: center;
     img {
         width: 100%;
         height: auto;
+        vertical-align: middle;
+    }
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 `
 
@@ -28,7 +41,7 @@ const HeroInfo = styled.div`
         top: 20%;
     }
     @media (min-width: 500px) {
-        top: 25%;
+        top: 35%;
     }
 `
 
@@ -82,25 +95,33 @@ const HeroButton = styled(Link)`
     }
 `
 
-const SmallHeroImage = styled(Image)`
-    @media (min-width: 768px){
-        display: none;
-    }
-`
-
-const LargeHeroImage = styled(Image)`
-    display: none;
-    @media (min-width: 768px){
-        display: block;
-    }
+const HeroImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-height: 100%;
+  img {
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+    width: auto;
+  }
 `
 
 export default function HomeHero() {
 
     return (
         <HeroImageDiv>
-            <LargeHeroImage src={HomeHeroImage} alt="Young male and female clothing models"/> 
-            <SmallHeroImage src={HomeHeroImageSmall} alt="Young male and female clothing models"/>
+            <HeroImage>
+                <Image src={Model1} alt="Young male and female clothing models"/>
+            </HeroImage>
+            <HeroImage>
+                <Image src={Model2} alt="Young male and female clothing models"/>
+            </HeroImage>
+            <HeroImage>
+                <Image src={Model3} alt="Young male and female clothing models"/>
+            </HeroImage>
             <HeroInfo>
                 <HeroText>Level up your style with out summer collections</HeroText>
                 <HeroButton href={"clothing"}>Shop now<Image src={Arrow} alt="arrow"/></HeroButton>
