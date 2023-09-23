@@ -101,31 +101,40 @@ const HeroButton = styled(Link)`
 `
 
 const HeroImage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  max-height: 100%;
-  img {
-    max-width: 100%;
-    max-height: none;
-    height: auto;
-    width: auto;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-height: 100%;
+
+    display: ${props => props.mobile === true ? 'inline-block' : 'none'};
+    
+    @media (min-width: 768px) {
+        display: inline-block;
+    }
+
+    img {
+        max-width: 100%;
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        object-position: center;
+        overflow: clip;
+    }
 `
 
 export default function HomeHero() {
 
     return (
         <HeroImageDiv>
-            <HeroImage>
-                <Image src={Model1} alt="Young male and female clothing models"/>
+            <HeroImage mobile={true}>
+                <Image src={Model1} alt="Female clothing model"/>
             </HeroImage>
-            <HeroImage>
-                <Image src={Model2} alt="Young male and female clothing models"/>
+            <HeroImage mobile={false}>
+                <Image src={Model3} alt="Female clothing model"/>
             </HeroImage>
-            <HeroImage>
-                <Image src={Model3} alt="Young male and female clothing models"/>
+            <HeroImage mobile={true}>
+                <Image src={Model2} alt="Male clothing model"/>
             </HeroImage>
             <HeroInfo>
                 <HeroText>Level up your style with out summer collections</HeroText>
