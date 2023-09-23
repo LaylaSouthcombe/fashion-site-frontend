@@ -5,6 +5,7 @@ import BannerAdImage from "@/images/bannerAdImage.jpg"
 
 const BannerAdContainer = styled.div`
     width: 80%;
+    max-width: 1200px;
     margin: 5rem auto;
     display: grid;
     grid-template-columns: 1fr;

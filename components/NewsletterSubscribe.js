@@ -7,6 +7,7 @@ import emailIcon from '../images/icons/mail.png'
 const SubscribeContainer = styled.div`
     width: 65%;
     margin: 0 auto 4rem auto;
+    max-width: 1200px;
     text-align: center;
     display: flex;
     flex-direction: column;
