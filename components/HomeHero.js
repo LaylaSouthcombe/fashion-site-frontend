@@ -51,6 +51,11 @@ const HeroText = styled.h1`
     font-size: 1rem;
     max-width: 500px;
     margin: 0 auto;
+    text-shadow:
+                -0.75px -0.75px 0 var(--main-dark-blue),
+                0.75px -0.75px 0 var(--main-dark-blue),
+                -0.75px 0.75px 0 var(--main-dark-blue),
+                0.75px 0.75px 0 var(--main-dark-blue);
     @media (min-width: 400px) {
         font-size: 1.25rem;
     }
