@@ -121,7 +121,6 @@ export default function OrderTile({order}) {
     const options = {
         year: "numeric",
         month: "short",
-        day: "numeric",
     }
 
     const formattedDate = originalDate.toLocaleDateString("en-US", options)
@@ -145,8 +144,7 @@ export default function OrderTile({order}) {
     }
     }
 
-    const formattedDateWithSuffix = `${day}${daySuffix} ${formattedDate}`
-
+    const formattedDateWithSuffix = `${day}${daySuffix} ${formattedDate.replace(',', '')}`;
     return (
         <OrderContainer>
             <ProductDate>{formattedDateWithSuffix}</ProductDate>
