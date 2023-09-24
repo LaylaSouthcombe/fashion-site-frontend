@@ -8,7 +8,7 @@ import essentials from '../images/brandIcons/essentials.png'
 import offwhite from '../images/brandIcons/offwhite.png'
 import northFace from '../images/brandIcons/northFace.png'
 import carhartt from '../images/brandIcons/carhartt.png'
-import acnestudios from '../images/brandIcons/acnestudios.png'
+import acnestudios from '../images/brandIcons/acneStudios.png'
 
 const BrandsContainer = styled.div`
     width: 90%;
