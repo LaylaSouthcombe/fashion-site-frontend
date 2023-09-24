@@ -138,7 +138,7 @@ export default function HomeHero() {
             </HeroImage>
             <HeroInfo>
                 <HeroText>Level up your style with out summer collections</HeroText>
-                <HeroButton href={"clothing"}>Shop now<Image src={Arrow} alt="arrow"/></HeroButton>
+                <HeroButton href={"clothing/all"}>Shop now<Image src={Arrow} alt="arrow"/></HeroButton>
             </HeroInfo>
         </HeroImageDiv>
     )
