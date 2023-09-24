@@ -8,11 +8,14 @@ import Visa from '../../images/logos/visa.png'
 
 const FooterOuterContainer = styled.footer`
     position: relative;
-    padding: 3rem 3rem 0 3rem;
+    padding: 2rem 2rem 0 2rem;
     width: 100%;
     margin-top: auto;
     background-color: var(--main-light-blue);
     align-self: center;
+    @media (min-width: 500px) {
+        padding: 3rem 3rem 0 3rem;
+    }
 `
 
 const FooterContainer = styled.section`
