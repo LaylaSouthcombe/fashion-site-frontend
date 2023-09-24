@@ -18,7 +18,8 @@ export default async function handle(req, res) {
 
     if(queryConstraint.path !== undefined){
         path = queryConstraint.path
-        value = new RegExp(queryConstraint.value, "i")
+        let intValue = queryConstraint.value === "off-white" ? queryConstraint.value : queryConstraint.value.replace("-", " ")
+        value = new RegExp(intValue, "i")
         combinedQuery[path] = value
         console.log(combinedQuery)
     }
