@@ -66,18 +66,6 @@ const LargeBannerText = styled.h2`
     }
 `
 
-const ShopTheSaleButton = styled.button`
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    margin-top: 0.5rem;
-    width: fit-content;
-`
-
 export default function BannerAd() {
     return (
         <BannerAdContainer>
@@ -87,7 +75,6 @@ export default function BannerAd() {
             <BannerTextArea>
                 <SmallBannerText>LIMITED OFFER</SmallBannerText>
                 <LargeBannerText>35% off this Friday only, plus get a free gift</LargeBannerText>
-                <ShopTheSaleButton>Shop the sale</ShopTheSaleButton>
             </BannerTextArea>
         </BannerAdContainer>
     )
