@@ -109,8 +109,15 @@ const OrderTotal = styled.div`
 `
 
 const LineItem = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 40% 60%;
     margin-left: 10%;
+    @media (min-width: 500px) {
+        grid-template-columns: 30% 70%;
+    }
+    @media (min-width: 768px) {
+        display: flex;
+    }
 `
 
 export default function OrderTile({order}) {
