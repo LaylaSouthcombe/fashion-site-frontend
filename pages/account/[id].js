@@ -29,6 +29,8 @@ const UserInfo = styled.div`
     margin: 4rem auto 1rem auto;
     font-weight: bold;
     font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
 `
 
 const NavigateButtons = styled.div`
@@ -80,8 +82,31 @@ const ThankYouImage = styled.div`
         border-left: 2px solid var(--main-dark-blue);
     }
 `
-
+const LogoutButton = styled.button`
+    display: none;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    outline: none;
+    padding: 5px;
+    border-radius: 2.5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: fit-content;
+    @media (min-width: 768px) {
+        display: inline-block;
+    }
+`
 export default function AccountPage({account, orderHistory, featuredProducts}){
+    
+    const ls = typeof window !== "undefined" ? window.localStorage : null
+
+    const signOut = (e) => {
+        e.preventDefault()
+        ls?.setItem('loggedIn', false)
+        ls?.setItem('accountId', undefined)
+        handleClickedNavLink("/")
+    }
 
     return(
         <>
@@ -89,6 +114,7 @@ export default function AccountPage({account, orderHistory, featuredProducts}){
             <PageContent>
                 <UserInfo>
                     <p>Welcome to your account {account.firstName}</p>
+                    <LogoutButton onClick={(e) => signOut(e)}>Sign out</LogoutButton>
                 </UserInfo>
                 {orderHistory.length ? 
                 <>
