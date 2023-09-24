@@ -35,7 +35,10 @@ const ColumnItem = styled.li`
         text-decoration-color: var(--main-dark-blue);
         text-decoration-thickness: 3px;
         text-underline-offset: 5px;
-
+    }
+    @media (min-width: 1300px) {
+        font-size: 1rem;
+        margin: 1.3rem 0rem;
     }
 `
 
