@@ -54,7 +54,6 @@ const SortDropDownArea = styled.div`
     border: 1px solid var(--main-dark-blue);
     width: 12rem;
     font-size: 0.9rem;
-    /* z-index: 900; */
 `
 
 const DropdownHeader = styled.div`

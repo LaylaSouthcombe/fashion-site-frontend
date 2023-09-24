@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Link from "next/link"
 import { useState } from "react"
+import { useRouter } from 'next/router';
 
 const ProductTileContainer = styled.div`
     padding: 0.5rem 1.5rem;
@@ -9,7 +10,7 @@ const ProductTileContainer = styled.div`
     width: 100%;
 `
 
-const ProductTileContent = styled(Link)`
+const ProductTileContent = styled.div`
     text-decoration: none;
     color: var(--main-dark-blue);
     display: flex;
@@ -57,7 +58,7 @@ const ProductPrice = styled.div`
 
 export default function ProductTile({product:{_id, name, price, brand,  images}}) {
     const url = `/product/${_id}`
-
+    const router = useRouter();
     const [visibleImage, setVisibleImage] = useState(images[0])
 
     const changeVisibleImage = () => {
@@ -67,11 +68,14 @@ export default function ProductTile({product:{_id, name, price, brand,  images}}
             setVisibleImage(images[0])
         }
     }
-
+    const handleClickedNavLink = (link) => {
+        router.push(link)
+    }
+    
     return (
         <>
             <ProductTileContainer>
-                <ProductTileContent href={url}>
+                <ProductTileContent onClick={() => handleClickedNavLink(url)}>
                     <ProductImage src={visibleImage} onMouseEnter={() => changeVisibleImage()} onMouseLeave={() => changeVisibleImage()}/>
                     <ProductInfo>
                         <ProductBrand>{brand}</ProductBrand>

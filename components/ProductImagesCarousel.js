@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 
 const ImageGridContainer = styled.div`
@@ -37,6 +37,10 @@ const ImageButtons = styled.div`
 export default function ProductImagesCarousel({images}){
 
     const [mainImage, setMainImage] = useState(images?.[0])
+    
+    useEffect(() => {
+        setMainImage(images?.[0])
+    }, [images])
     
     return (
         <>
