@@ -3,6 +3,7 @@ import { Account } from "@/models/Account"
 import {Featured} from "@/models/Featured"
 import { Order } from "@/models/Order"
 import styled from "styled-components"
+import { useRouter } from 'next/router';
 
 import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
@@ -100,6 +101,13 @@ const LogoutButton = styled.button`
 export default function AccountPage({account, orderHistory, featuredProducts}){
     
     const ls = typeof window !== "undefined" ? window.localStorage : null
+    const router = useRouter();
+    
+    const handleClickedNavLink = (link) => {
+        const body = document.querySelector('body')
+        body.style.overflow = 'visible'
+        router.push(link)
+    }
 
     const signOut = (e) => {
         e.preventDefault()
