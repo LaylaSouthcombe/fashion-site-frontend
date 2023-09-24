@@ -29,30 +29,18 @@ export default function BrandPage({products, brand}){
 
 export async function getServerSideProps(context){
     await mongooseConnect()
-    // const {brand} = context.query
 
-    // const products = await Product.aggregate([{
-    //     $search: {
-    //       index: "default",
-    //       text: {
-    //         query: brand.replace("-", " "),
-    //         path: 'brand'
-    //       }
-    //     }
-    // }])
-    // console.log(context.query)
     const {brand} = context.query
 
     let productQuery = {brand: brand}
     let queryConstraint = {brand: brand}
-    console.log("query", brand)
+
     if(brand !== 'all'){
         addFormattedQueryToProductQuery(brand, productQuery)
         addFormattedQueryToQueryConstraint(brand, queryConstraint)
     }
-    console.log(queryConstraint)
+
     let formattedBrand = brand.split("-b-")[1]
-    console.log(formattedBrand)
 
     const products = await Product.find(productQuery, null, {sort:{'_id': -1}})
 

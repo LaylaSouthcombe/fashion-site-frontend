@@ -21,7 +21,6 @@ export default async function handle(req, res) {
         let intValue = queryConstraint.value === "off-white" ? queryConstraint.value : queryConstraint.value.replace("-", " ")
         value = new RegExp(intValue, "i")
         combinedQuery[path] = value
-        console.log(combinedQuery)
     }
     
     const getQueryForAllProducts = () => {
@@ -44,7 +43,6 @@ export default async function handle(req, res) {
                     regexFilters.push(new RegExp(filter, "i"))
                 })
                 newQueryFilter[key] = { $in: regexFilters }
-                console.log("newQueryFilter", newQueryFilter)
                 combinedQuery.$or.push(newQueryFilter) 
             } else {
                 filters[key].forEach(size => {
