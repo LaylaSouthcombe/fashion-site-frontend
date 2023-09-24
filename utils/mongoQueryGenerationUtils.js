@@ -3,6 +3,8 @@ const generateQueryWordSplitter = (query) => {
         return "-s-"
     } else if(query.includes("-t-")){
         return "-t-"
+    } else if(query.includes("-b-")){
+        return "-b-"
     }
 }
 
@@ -11,6 +13,8 @@ const generateQueryFieldName = (query) => {
         return "productSubType"
     } else if(query.includes("-t-")){
         return "productType"
+    } else if(query.includes("-b-")){
+        return "brand"
     }
 }
 

@@ -313,6 +313,8 @@ export default function CheckoutPage({featuredProducts}) {
         setPostalCode("07097")
         setCountry("USA")
         setPaymentErrorMessage("Use this card number on next page and random expiry date and security code etc: 4242 4242 4242 4242")
+        ls?.setItem('loggedIn', true)
+        ls?.setItem('accountId', '64ed14b7151a6d204c93f393')
     }
     
     const goToPayment = async () => {

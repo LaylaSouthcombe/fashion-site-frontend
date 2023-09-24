@@ -6,12 +6,12 @@ export default async function handle(req, res) {
         res.json('should be a POST request')
         return
     }
-
+    // console.log(req.body)
     await mongooseConnect();
     const filters = req.body.filters
 
     const queryConstraint = req.body.queryConstraint
-
+    console.log("queryConstraint", queryConstraint)
     let path
     let value
     let combinedQuery = {$or: []}
@@ -62,7 +62,7 @@ export default async function handle(req, res) {
         highestPrice: { $sort : { price : -1 } },
         newIn: { $sort : { _id : -1 } }
     }
-
+    // console.log(combinedQuery)
     const getFilteredProducts = async () => {
         let products = await Product.aggregate(
             [

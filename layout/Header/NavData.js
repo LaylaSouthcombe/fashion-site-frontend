@@ -8,8 +8,8 @@ import watchImage from "../../images/navImages/watch.png"
 const shortNavData = [
     { link: "/brands", label: "Brands", childLinks: [
         {link: "/brands", label: "All brands"}, 
-        {link: "/brand/off-white", label: "Off-White"}, 
-        {link: "/brand/nike", label: "Nike"}
+        {link: "/brand/-b-off-white", label: "Off-White"}, 
+        {link: "/brand/-b-nike", label: "Nike"}
     ]},
     { link: "/clothing/all", label: "Clothing", childLinks: [
         {link: "/clothing/all", label: "All clothing"}, 
@@ -42,13 +42,13 @@ const navData = {
     Brands: { link: "/brands", label: "Brands", childLinks: [
             {listItems: [
                 {link: "/brands", label: "All brands"}, 
-                {link: "/brand/off-white", label: "Off-White"}, 
-                {link: "/brand/nike", label: "Nike"}
+                {link: "/brand/-b-off-white", label: "Off-White"}, 
+                {link: "/brand/-b-nike", label: "Nike"}
             ]},
             {listItems: [
-                {link: "/brand/essentials", label: "Essentials"}, 
-                {link: "/brand/carhartt", label: "Carhartt"}, 
-                {link: "/brand/acne-studios", label: "Acne Studios"}
+                {link: "/brand/-b-essentials", label: "Essentials"}, 
+                {link: "/brand/-b-carhartt", label: "Carhartt"}, 
+                {link: "/brand/-b-acne-studios", label: "Acne Studios"}
             ]}
         ], image: {
             source: brandsImage,

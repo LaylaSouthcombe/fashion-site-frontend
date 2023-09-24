@@ -38,7 +38,7 @@ export async function getServerSideProps(context){
         addFormattedQueryToQueryConstraint(query, queryConstraint)
     }
 
-    
+    console.log(queryConstraint)
     const getProducts = async (url) => {
         let products
         if(url === 'popular'){
