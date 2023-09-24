@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from 'next/router';
 
 const ProductTileContainer = styled.div`
@@ -60,6 +60,10 @@ export default function ProductTile({product:{_id, name, price, brand,  images}}
     const url = `/product/${_id}`
     const router = useRouter();
     const [visibleImage, setVisibleImage] = useState(images[0])
+
+    useEffect(() => {
+        setVisibleImage(images[0])
+    },[images])
 
     const changeVisibleImage = () => {
         if(visibleImage === images[0]){
