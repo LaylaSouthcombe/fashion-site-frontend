@@ -12,7 +12,7 @@ import { CheckoutContext } from "@/components/CheckoutContext"
 import NavAccordion from "@/components/NavAccordion"
 import NavDropDown from "@/layout/Header/NavDropDown"
 
-import Cart from '../../images/icons/cawebp'
+import Cart from '../../images/icons/cart.webp'
 import Account from '../../images/icons/account.webp'
 import MenuBars from '../../images/icons/menuBars.webp'
 import MenuCross from '../../images/icons/menuCross.webp'

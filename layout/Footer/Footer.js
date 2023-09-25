@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Image from "next/image"
 
-import Mastercard from '../../images/logos/mastercawebp'
+import Mastercard from '../../images/logos/mastercard.webp'
 import Paypal from '../../images/logos/paypal.webp'
 import RuneLogoImg from '../../images/logos/runeLogo.webp'
 import Visa from '../../images/logos/visa.webp'
