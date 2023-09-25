@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import Image from "next/image"
 
-import Mastercard from '../../images/logos/mastercard.png'
-import Paypal from '../../images/logos/paypal.png'
-import RuneLogoImg from '../../images/logos/runeLogo.png'
-import Visa from '../../images/logos/visa.png'
+import Mastercard from '../../images/logos/mastercawebp'
+import Paypal from '../../images/logos/paypal.webp'
+import RuneLogoImg from '../../images/logos/runeLogo.webp'
+import Visa from '../../images/logos/visa.webp'
 
 const FooterOuterContainer = styled.footer`
     position: relative;

@@ -11,8 +11,8 @@ import ProductsCarousel from "@/components/ProductsCarousel/ProductsCarousel"
 import ProductImagesCarousel from "@/components/ProductImagesCarousel"
 import ProductInfoAccordion from "@/components/ProductInfoAccordion"
 
-import MinusSign from "../../images/icons/minus.png"
-import PlusSign from "../../images/icons/plus.png"
+import MinusSign from "../../images/icons/minus.webp"
+import PlusSign from "../../images/icons/plus.webp"
 
 const ProductPathway = styled.p`
     width: 90%;

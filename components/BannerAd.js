@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Image from "next/image"
 
-import BannerAdImage from "@/images/bannerAdImage.jpg"
+import BannerAdImage from "@/images/bannerAdImage.webp"
 
 const BannerAdContainer = styled.div`
     width: 80%;

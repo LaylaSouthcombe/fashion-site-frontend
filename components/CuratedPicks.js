@@ -2,13 +2,11 @@ import styled from "styled-components"
 import Image from "next/image"
 import Link from "next/link"
 
-import casual from '../images/curatedPicks/casual.jpg'
-import sneakers from '../images/curatedPicks/sneakers.jpg'
-
-import men from '../images/curatedPicks/men.jpg'
-import popular from '../images/curatedPicks/popular.jpg'
-import women from '../images/curatedPicks/women.jpg'
-import arrow from '../images/curatedPicks/right-arrow.png'
+import sneakers from '../images/curatedPicks/sneakers.webp'
+import men from '../images/curatedPicks/men.webp'
+import popular from '../images/curatedPicks/popular.webp'
+import women from '../images/curatedPicks/women.webp'
+import arrow from '../images/curatedPicks/right-arrow.webp'
 
 const CuratedContainer = styled.div`
     width: 90%;

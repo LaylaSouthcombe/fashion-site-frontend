@@ -12,11 +12,11 @@ import { CheckoutContext } from "@/components/CheckoutContext"
 import NavAccordion from "@/components/NavAccordion"
 import NavDropDown from "@/layout/Header/NavDropDown"
 
-import Cart from '../../images/icons/cart.png'
-import Account from '../../images/icons/account.png'
-import MenuBars from '../../images/icons/menuBars.png'
-import MenuCross from '../../images/icons/menuCross.png'
-import RuneLogo from '../../images/logos/runeLogo.png'
+import Cart from '../../images/icons/cawebp'
+import Account from '../../images/icons/account.webp'
+import MenuBars from '../../images/icons/menuBars.webp'
+import MenuCross from '../../images/icons/menuCross.webp'
+import RuneLogo from '../../images/logos/runeLogo.webp'
 
 const MainHeader = styled.header`
   background-color: white;

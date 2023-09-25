@@ -2,7 +2,7 @@ import { useState } from "react"
 import styled from "styled-components"
 import Image from "next/image"
 
-import emailIcon from '../images/icons/mail.png'
+import emailIcon from '../images/icons/mail.webp'
 
 const SubscribeContainer = styled.div`
     width: 65%;

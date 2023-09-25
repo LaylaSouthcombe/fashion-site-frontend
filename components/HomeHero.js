@@ -2,11 +2,10 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import Arrow from '../images/curatedPicks/right-arrow.png'
-
-import Model1 from '../images/heroImages/model-1.png'
-import Model2 from '../images/heroImages/model-2.png'
-import Model3 from '../images/heroImages/model-3.png'
+import Arrow from '../images/curatedPicks/right-arrow.webp'
+import Model1 from '../images/heroImages/model-1.webp'
+import Model2 from '../images/heroImages/model-2.webp'
+import Model3 from '../images/heroImages/model-3.webp'
 
 const HeroImageDiv = styled.div`
     position: relative;

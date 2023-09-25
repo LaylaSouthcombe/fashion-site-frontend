@@ -9,7 +9,7 @@ import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
 import OrderTile from "@/components/OrderTile"
 
-import BannerAdImage from "@/images/bannerAdImage.jpg"
+import BannerAdImage from "@/images/bannerAdImage.webp"
 import Link from "next/link"
 import Image from "next/image"
 import FeaturedProducts from "@/components/FeaturedProducts"

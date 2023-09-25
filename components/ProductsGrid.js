@@ -6,7 +6,7 @@ import Image from "next/image"
 import ProductTile from "./ProductsCarousel/ProductTile"
 import FilterSideBar from "./FilterSideBar"
 import SkeletonProductTile from "./ProductsCarousel/SkeletonProductTile"
-import downArrow from "../images/icons/down-arrow.png"
+import downArrow from "../images/icons/down-arrow.webp"
 
 const ProductsGridOuterContainer = styled.section`
     width: 80%;

@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import Image from "next/image"
 
-import badge from '../images/experienceIcons/badge.png'
-import deliveryTruck from '../images/experienceIcons/delivery-truck.png'
-import order from '../images/experienceIcons/order.png'
-import priceTag from '../images/experienceIcons/price-tag.png'
+import badge from '../images/experienceIcons/badge.webp'
+import deliveryTruck from '../images/experienceIcons/delivery-truck.webp'
+import order from '../images/experienceIcons/order.webp'
+import priceTag from '../images/experienceIcons/price-tag.webp'
 
 const ExperienceContainer = styled.div`
     width: 90%;

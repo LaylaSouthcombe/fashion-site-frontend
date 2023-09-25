@@ -11,9 +11,9 @@ import Footer from "@/layout/Footer/Footer"
 import Header from "@/layout/Header/Header"
 import Input from "@/components/Input"
 
-import MinusSign from "../images/icons/minus.png"
-import PlusSign from "../images/icons/plus.png"
-import BannerAdImage from "@/images/bannerAdImage.jpg"
+import MinusSign from "../images/icons/minus.webp"
+import PlusSign from "../images/icons/plus.webp"
+import BannerAdImage from "@/images/bannerAdImage.webp"
 import FeaturedProducts from "@/components/FeaturedProducts"
 import Link from "next/link"
 

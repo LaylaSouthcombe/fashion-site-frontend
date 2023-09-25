@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import Image from 'next/image'
 
-import adidas from '../images/brandIcons/adidas.png'
-import nike from '../images/brandIcons/nike.png'
-import gucci from '../images/brandIcons/gucci.png'
-import essentials from '../images/brandIcons/essentials.png'
-import offwhite from '../images/brandIcons/offwhite.png'
-import northFace from '../images/brandIcons/northFace.png'
-import carhartt from '../images/brandIcons/carhartt.png'
-import acnestudios from '../images/brandIcons/acneStudios.png'
+import adidas from '../images/brandIcons/adidas.webp'
+import nike from '../images/brandIcons/nike.webp'
+import gucci from '../images/brandIcons/gucci.webp'
+import essentials from '../images/brandIcons/essentials.webp'
+import offwhite from '../images/brandIcons/offwhite.webp'
+import northFace from '../images/brandIcons/northFace.webp'
+import carhartt from '../images/brandIcons/carhartt.webp'
+import acnestudios from '../images/brandIcons/acneStudios.webp'
 
 const BrandsContainer = styled.div`
     width: 90%;
