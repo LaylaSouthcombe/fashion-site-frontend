@@ -128,13 +128,13 @@ export default function HomeHero() {
     return (
         <HeroImageDiv>
             <HeroImage mobile={true}>
-                <Image src={Model1} alt="Female clothing model"/>
+                <Image src={Model1} priority alt="Female clothing model"/>
             </HeroImage>
             <HeroImage mobile={false}>
-                <Image src={Model3} alt="Female clothing model"/>
+                <Image src={Model3} priority alt="Female clothing model"/>
             </HeroImage>
             <HeroImage mobile={true}>
-                <Image src={Model2} alt="Male clothing model"/>
+                <Image src={Model2} priority alt="Male clothing model"/>
             </HeroImage>
             <HeroInfo>
                 <HeroText>Level up your style with out summer collections</HeroText>
