@@ -1,9 +1,9 @@
-import bagImage from "../../images/navImages/bags.jpg"
-import brandsImage from "../../images/navImages/brands.png"
-import clothingImage from "../../images/navImages/clothing.png"
-import hatImage from "../../images/navImages/hat.png"
-import shoeImage from "../../images/navImages/shoes.png"
-import watchImage from "../../images/navImages/watch.png"
+import bagImage from "../../images/navImages/bags.webp"
+import brandsImage from "../../images/navImages/brands.webp"
+import clothingImage from "../../images/navImages/clothing.webp"
+import hatImage from "../../images/navImages/hat.webp"
+import shoeImage from "../../images/navImages/shoes.webp"
+import watchImage from "../../images/navImages/watch.webp"
 
 const shortNavData = [
     { link: "/brands", label: "Brands", childLinks: [
