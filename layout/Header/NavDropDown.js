@@ -88,7 +88,7 @@ export default function NavDropDown({section}) {
                         )
                     })}
                     <ColumnImage>
-                        <Image src={navData[section].image.source} alt={navData[section].image.alt}/>
+                        <Image src={navData[section].image.source} priority alt={navData[section].image.alt}/>
                         <div></div>
                     </ColumnImage>
                 </DropdownContainer>
