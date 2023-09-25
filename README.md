@@ -1,38 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rune - eCommerce Fashion Site
+## Overview
+Rune is an eCommerce fashion site designed to provide an exceptional shopping experience for fashion enthusiasts. It is built using Next.js, incorporating features such as user authentication using bcrypt and seamless payment processing via Stripe integration. Products, user accounts, and order details are securely stored in a MongoDB database.
 
-## Getting Started
+## Demo
+To explore a live demo of Rune, visit Rune [here](https://main--rune-store.netlify.app/).
 
-First, run the development server:
+## Screenshots
+![Home page screenshot](./images/readmeImages/homePage.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+![Products list page screenshot](./images/readmeImages/productListPage.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Product page screenshot](./images/readmeImages/productPage.png)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Technologies Used
+Front-end:
+- Next.js
+- Styled Components
+- Stripe API for payment processing
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Back-end:
+- Node.js
+- MongoDB for data storage
+- bcrypt for user authentication
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
+User authentication and account creation with secure password hashing.
+Browse and filter for fashion products.
+Add products to your cart for a seamless shopping experience.
+Securely complete orders with Stripe payment integration.
+View and track your order history.
 
-## Learn More
+## Usage
+Sign up for an account or log in using an existing test user (sign in information provided).
+Browse the product catalog and add items to your cart.
+Proceed to checkout and complete your order securely with Stripe payment.
+View your order history in your account dashboard.
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
+Rune is deployed on Netlify, with the database hosted on MongoDB.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+This project is licensed under the MIT License. See the [LICENSE](https://chat.openai.com/c/LICENSE) file for details.
